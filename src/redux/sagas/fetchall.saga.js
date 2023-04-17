@@ -8,8 +8,8 @@ function* fetchAllAgain() {
     console.log('incoming items:', allItems.data);
 
     yield put({
-      type: "SET_SHELF",
-      payload: shelfItems.data,
+      type: "SET_ALL_ITEMS",
+      payload: allItems.data,
     });
   } catch (err) {
     console.log("error getting items", err);
