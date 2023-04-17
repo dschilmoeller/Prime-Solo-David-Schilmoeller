@@ -5,7 +5,7 @@ function* fetchAllAgain() {
   try {
     // console.log(`Fetching All Items. Manually`);
     const allItems = yield axios.get("/api/fetchAllItems");
-    console.log('incoming items:', allItems.data);
+    // console.log('incoming items:', allItems.data);
 
     yield put({
       type: "SET_ALL_ITEMS",

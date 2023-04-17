@@ -7,26 +7,38 @@ import './AllItems.css'
 
 function AllItems(props) {
     const allItemsFromStore = useSelector((store) => store.allItems);
-    const [heading, setHeading] = useState('Functional Component');
+    const [allItemsState, setAllItemsState] = useState([]);
+
+    const searchFunction = (searchParam) => {
+        console.log(`In search`);
+    }
 
     const dispatch = useDispatch();
-    // fetch items from server (GET)
-    // render array of items as a map.
-    // dispatch - fetchAllItems. -> Move to local state (searchability) -> render
-    // run dispatch on page load. Set to IF in order to only run if store is empty?
+    
+    // dispatch - fetchAllItems. -> Move to local state (searchability) -> re-render
+    // run dispatch on page load. Not important atm due to localized speed.
+    // figure out search through local state and render depending on whether search is used?
+    // spike Search bars/applicable methods e.g. Filter.
+    
+    // switch to list view -> look up T/F assignment with simple switch.
+    // Each has to move to individual details page - look up movie assigment for that bit.
 
-    //   useEffect(() => {
-    //     dispatch({ type: "FETCH_ALL_ITEMS" });
-    //   }, []);
+    useEffect(() => {
+        dispatch({ type: "FETCH_ALL_ITEMS" })
+    }, []);
 
     const manualPull = () => {
-        console.log(`Dispatching`);
+        // console.log(`Dispatching`);
         dispatch({ type: "FETCH_ALL_ITEMS" })
-        console.log(`store.allItems:`, allItemsFromStore);
+        // console.log(`store.allItems:`, allItemsFromStore);
+        setAllItemsState(allItemsFromStore)
+        // Figure out how to make this work.
+        // console.log(`all items from state:`, allItemsState);
     }
 
     return (
         <div>
+            {/* Dump this into a modal or something and get to edge of page */}
             <form>Add an Item
                 <input defaultValue={'part name'} />
                 <input defaultValue={'part number'} />
@@ -36,29 +48,29 @@ function AllItems(props) {
                 <input defaultValue={'Item description'} />
                 <button className='btn'>Submit</button>
             </form>
+
+            <h3>Search Item Name<input></input></h3>
+            <button onClick={searchFunction}>Search</button>
             <h2>Import some data?</h2>
 
             <button onClick={manualPull}>Manual Data Pull</button>
 
-<div className='itemContainer'>
-            {allItemsFromStore.length &&
-                allItemsFromStore.map((item) => {
-                    console.log(`Item data:`, item);
-                    return (
-                        <>
-                            <Card sx={{ minWidth: 400 }}>
-                                <div key={item.id} className='itemCard'>
-                                    <h3>item name: {item.part_name}</h3>
-                                    <h3>part# {item.part_number}</h3>
-                                    <h4>item lead time: {item.lead_time_weeks}</h4>
-                                    <h4>mean time to failure: {item.mttf_months}</h4>
-                                    <h4>Object type: {item.object_type}</h4>
+            <div className='itemContainer'>
+                {allItemsFromStore.length &&
+                    allItemsFromStore.map((item) => {
+                        return (
+                                <div className='itemCard' key={item.id}>
+                                    <Card sx={{ minWidth: 400 }} >
+                                        <h3>item name: {item.part_name}</h3>
+                                        <h3>part# {item.part_number}</h3>
+                                        <h4>item lead time: {item.lead_time_weeks}</h4>
+                                        <h4>mean time to failure: {item.mttf_months}</h4>
+                                        <h4>Object type: {item.object_type}</h4>
+                                    </Card>
                                 </div>
-                            </Card>
-                        </>
-                    )
-                })}
-</div>
+                        )})}
+                        {/* end Map */}
+            </div>
         </div>
     );
 }
