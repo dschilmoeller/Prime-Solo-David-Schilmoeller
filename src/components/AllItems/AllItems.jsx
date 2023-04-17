@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import Card from '@mui/material/Card'
 
+import './AllItems.css'
+
 function AllItems(props) {
     const allItemsFromStore = useSelector((store) => store.allItems);
     const [heading, setHeading] = useState('Functional Component');
@@ -37,23 +39,14 @@ function AllItems(props) {
             <h2>Import some data?</h2>
 
             <button onClick={manualPull}>Manual Data Pull</button>
-            <table>
-                <thead>
-                <tr>
-                    <th>Item Name</th>
-                    <th>Part Number</th>
-                    <th>Part Lead Time</th>
-                    <th>Part MTTF</th>
-                    <th>Description</th>
-                </tr>
-                </thead>
 
-                {allItemsFromStore.length &&
-                    allItemsFromStore.map((item) => {
-                        console.log(`Item data:`, item);
-                        return (                            
-                            <>    
-                            <Card sx={{ minWidth: 400}}>
+<div className='itemContainer'>
+            {allItemsFromStore.length &&
+                allItemsFromStore.map((item) => {
+                    console.log(`Item data:`, item);
+                    return (
+                        <>
+                            <Card sx={{ minWidth: 400 }}>
                                 <div key={item.id} className='itemCard'>
                                     <h3>item name: {item.part_name}</h3>
                                     <h3>part# {item.part_number}</h3>
@@ -61,12 +54,11 @@ function AllItems(props) {
                                     <h4>mean time to failure: {item.mttf_months}</h4>
                                     <h4>Object type: {item.object_type}</h4>
                                 </div>
-                                </Card>                        
-                            </>
-                        )
-                    })}
-                    
-            </table>
+                            </Card>
+                        </>
+                    )
+                })}
+</div>
         </div>
     );
 }
