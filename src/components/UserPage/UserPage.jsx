@@ -11,7 +11,7 @@ function UserPage() {
   return (
     <div className="container">
       {/* Modal buttons - convert when time allows */}
-      <button className="btn" onClick={()=> {history.push('/info')}}>My Stock</button>
+      <button className="btn" onClick={()=> {history.push('/mystock')}}>My Stock</button>
       <button className="btn" onClick={()=> {history.push('/allitems')}}>All Items</button>
       <button className="btn" onClick={()=> {history.push('/')}}>Suppliers</button>
       <button className="btn" onClick={()=> {history.push('/')}}>Profile Details</button>

@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import AllItems from '../AllItems/AllItems';
+import MyStock from '../MyStock/MyStock';
 
 import './App.css';
 
@@ -69,11 +70,12 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
-          <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/allitems"
-          >
+          <ProtectedRoute exact path="/mystock">
+            <MyStock />
+          </ProtectedRoute>
+
+
+          <ProtectedRoute exact path="/allitems">
             <AllItems />
           </ProtectedRoute>
 
