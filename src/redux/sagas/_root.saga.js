@@ -4,6 +4,7 @@ import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import fetchAll from './fetchall.saga'
 import fetchmystock from './fetchmystock.saga'
+import fetchSuppliers from './fetchsuppliers.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -19,6 +20,7 @@ export default function* rootSaga() {
     userSaga(),
     fetchAll(),
     fetchmystock(),
+    fetchSuppliers(),
 
   ]);
 }

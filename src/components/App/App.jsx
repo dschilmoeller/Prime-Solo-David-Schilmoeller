@@ -19,8 +19,9 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import AllItems from '../AllItems/AllItems';
-import MyStock from '../MyStock/MyStock';
+import AllItems from '../AllItems/AllItems.jsx';
+import MyStock from '../MyStock/MyStock.jsx';
+import Suppliers from '../Suppliers/Suppliers.jsx';
 
 import './App.css';
 
@@ -79,6 +80,10 @@ function App() {
             <AllItems />
           </ProtectedRoute>
 
+          <ProtectedRoute exact path="/suppliers">
+            <Suppliers />
+          </ProtectedRoute>
+          
           <Route
             exact
             path="/login"

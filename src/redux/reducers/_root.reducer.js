@@ -3,6 +3,7 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import allItems from './allItems.reducer';
 import myStock from './myStock.reducer';
+import suppliers from './suppliers.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
   allItems, // contains complete list of items.
-  myStock, // complains list of items relevant to user.  
+  myStock, // contains list of items relevant to user. 
+  suppliers, // holds list of suppliers
 });
 
 export default rootReducer;
