@@ -20,6 +20,9 @@ Container
 
 .container {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* --------------------------------------------------------------------------------
@@ -27,12 +30,13 @@ Button
 -------------------------------------------------------------------------------- */
 
 .btn {
-  display: inline-block;
+  display: block;
   padding: 10px 20px;
+  width: 20rem;
   border-color: #014041;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #00acb0;
+  background-color: #0ac2c5;
   color: #f8f8f8;
   font-size: 1.1rem;
   outline: 0;
