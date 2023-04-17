@@ -14,7 +14,7 @@ function UserPage() {
       <button className="btn" onClick={()=> {history.push('/mystock')}}>My Stock</button>
       <button className="btn" onClick={()=> {history.push('/allitems')}}>All Items</button>
       <button className="btn" onClick={()=> {history.push('/suppliers')}}>Suppliers</button>
-      <button className="btn" onClick={()=> {history.push('/')}}>Profile Details</button>
+      <button className="btn" onClick={()=> {history.push('/profile')}}>Profile Details</button>
       <LogOutButton className="btn" />
     </div>
   );

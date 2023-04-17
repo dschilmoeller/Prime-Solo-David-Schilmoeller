@@ -38,7 +38,7 @@ router.get("/fetchmystock", (req, res) => {
 });
 
 router.get("/fetchsuppliers", (req, res) => {
-    console.log(`In fetchsuppliers`);
+    // console.log(`In fetchsuppliers`);
     const sqlText = `SELECT * FROM "suppliers"`
     pool
         .query(sqlText)
@@ -51,4 +51,18 @@ router.get("/fetchsuppliers", (req, res) => {
             res.sendStatus(500);
         });
 });
+
+router.get ('/fetchProfile', (req, res) => { 
+    const sqlText = `SELECT first_name, last_name, user_email, user_type FROM "user"`
+    pool
+        .query(sqlText)
+        .then((result) => {
+            res.send(result.rows);
+            // console.log(result.rows);
+        })
+        .catch((err) => {
+            console.log("error getting suppliers:", err);
+            res.sendStatus(500);
+        });
+})
 module.exports = router

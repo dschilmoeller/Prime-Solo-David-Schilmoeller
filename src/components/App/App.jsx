@@ -22,6 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import AllItems from '../AllItems/AllItems.jsx';
 import MyStock from '../MyStock/MyStock.jsx';
 import Suppliers from '../Suppliers/Suppliers.jsx';
+import Profile from '../Profile/Profile';
 
 import './App.css';
 
@@ -75,13 +76,16 @@ function App() {
             <MyStock />
           </ProtectedRoute>
 
-
           <ProtectedRoute exact path="/allitems">
             <AllItems />
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/suppliers">
             <Suppliers />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/profile">
+            <Profile />
           </ProtectedRoute>
           
           <Route
