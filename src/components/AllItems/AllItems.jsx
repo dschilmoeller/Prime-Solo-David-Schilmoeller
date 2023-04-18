@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Card from '@mui/material/Card'
+import { useHistory } from 'react-router-dom';
 
 import './AllItems.css'
 
@@ -13,14 +14,23 @@ function AllItems(props) {
     }
 
     const dispatch = useDispatch();
-    
+    const history = useHistory();
+
     // dispatch - fetchAllItems. -> Move to local state (searchability) -> re-render
     // run dispatch on page load. Not important atm due to localized speed.
     // figure out search through local state and render depending on whether search is used?
     // spike Search bars/applicable methods e.g. Filter.
-    
+
     // switch to list view -> look up T/F assignment with simple switch.
     // Each has to move to individual details page - look up movie assigment for that bit.
+
+    const clickItemDetail = (event) => {
+
+        dispatch({ type: 'GET_ITEM_DETAIL', payload: event.target.id })
+        // Create this page, also lots of conditional rendering between
+        // item is owned vs. not.
+        history.push('/itemDetail')
+    }
 
     useEffect(() => {
         dispatch({ type: "FETCH_ALL_ITEMS" })
@@ -58,17 +68,18 @@ function AllItems(props) {
                 {allItemsFromStore.length &&
                     allItemsFromStore.map((item) => {
                         return (
-                                <div className='itemCard' key={item.id}>
-                                    <Card sx={{ minWidth: 400 }} >
-                                        <h3>item name: {item.part_name}</h3>
-                                        <h3>part# {item.part_number}</h3>
-                                        <h4>item lead time: {item.lead_time_weeks}</h4>
-                                        <h4>mean time to failure: {item.mttf_months}</h4>
-                                        <h4>Object type: {item.object_type}</h4>
-                                    </Card>
-                                </div>
-                        )})}
-                        {/* end Map */}
+                            <div className='itemCard' key={item.id}>
+                                <Card sx={{ minWidth: 400 }} id={item.id} onClick={clickItemDetail} >
+                                    <h3>item name: {item.part_name}</h3>
+                                    <h3>part# {item.part_number}</h3>
+                                    <h4>item lead time: {item.lead_time_weeks}</h4>
+                                    <h4>mean time to failure: {item.mttf_months}</h4>
+                                    <h4>Object type: {item.object_type}</h4>
+                                </Card>
+                            </div>
+                        )
+                    })}
+                {/* end Map */}
             </div>
         </div>
     );
