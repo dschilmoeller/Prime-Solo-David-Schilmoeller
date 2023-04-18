@@ -24,6 +24,7 @@ import MyStock from '../MyStock/MyStock.jsx';
 import Suppliers from '../Suppliers/Suppliers.jsx';
 import Profile from '../Profile/Profile';
 import ItemDetail from '../ItemDetail/ItemDetail';
+import StockItemDetail from '../StockItemDetail/StockItemDetail';
 
 import './App.css';
 
@@ -81,9 +82,14 @@ function App() {
             <AllItems />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/itemDetail">
+          <ProtectedRoute exact path="/itemDetail/:id">
             <ItemDetail />
           </ProtectedRoute>
+
+          <ProtectedRoute exact path="/stockItemDetail/:id">
+            <StockItemDetail />
+          </ProtectedRoute>
+
 
           <ProtectedRoute exact path="/suppliers">
             <Suppliers />

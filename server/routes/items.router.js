@@ -66,4 +66,31 @@ router.get ('/fetchProfile', (req, res) => {
         });
 })
 
+router.get('/:id', (req, res) => {
+    const sqlText = `SELECT * from object WHERE id=$1;`
+    
+    const sqlParams = [Number(req.params.id)]
+
+    console.log(`query:`, sqlText, sqlParams);
+    pool.query(sqlText, sqlParams)
+    .then((result) => {
+        res.send(result.rows)
+        console.log(`result:`, result.rows);
+    })
+})
+
+router.get('/mystock/:id', (req, res) => {
+    const sqlText = `SELECT * from my_objects_table 
+                        JOIN object ON object.id = my_objects_table.object_id
+                        WHERE mot_id=$1`
+    
+    const sqlParams = [Number(req.params.id)]
+
+    console.log(`query:`, sqlText, sqlParams);
+    pool.query(sqlText, sqlParams)
+    .then((result) => {
+        res.send(result.rows)
+        console.log(`result:`, result.rows);
+    })
+})
 module.exports = router

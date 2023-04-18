@@ -20,25 +20,25 @@
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-function ItemDetail() {
+function StockItemDetail() {
     const history = useHistory();
-    const itemDetail = useSelector(store => store.itemDetail[0])
+    const stockItemDetail = useSelector(store => store.stockItemDetails)
 
-    console.log(`item details:`, itemDetail);    // this will be conditional depending on the same criteria 
+    console.log(`item details:`, stockItemDetail);    // this will be conditional depending on the same criteria 
     // that renders this page differently based on whether the item appears in the user's list of sprockets.
 
     // this will be from the allitem list.
     // TODO : create dispatch WITHIN this page, not the allItems page - this will ensure data is rendered
     // correctly according to the ID of the page we have gone to.
     const headBack = () => {
-        history.push('/allitems')
+        history.push('/mystock')
     }
 
-    if (itemDetail) {
+    if (stockItemDetail) {
         return (
             <div>
                 <h1>Words.</h1>
-                <h3>{itemDetail.id}</h3>
+                <h3>{stockItemDetail.id} ??</h3>
                 <button onClick={headBack}>Back</button>
             </div>
         )
@@ -51,4 +51,4 @@ function ItemDetail() {
     }
 }
 
-export default ItemDetail
+export default StockItemDetail

@@ -24,12 +24,15 @@ function AllItems(props) {
     // switch to list view -> look up T/F assignment with simple switch.
     // Each has to move to individual details page - look up movie assigment for that bit.
 
-    const clickItemDetail = (event) => {
+    const clickItemDetail = (id) => {
 
-        dispatch({ type: 'GET_ITEM_DETAIL', payload: event.target.id })
+        dispatch({ type: 'GET_ITEM_DETAIL', payload: id })
+        
+        history.push(`/itemDetail/${id}`)
         // Create this page, also lots of conditional rendering between
-        // item is owned vs. not.
-        history.push('/itemDetail')
+        // item is owned vs. not. Also need to wait to move and render until 
+        // new data is put into details.
+        
     }
 
     useEffect(() => {
@@ -69,7 +72,7 @@ function AllItems(props) {
                     allItemsFromStore.map((item) => {
                         return (
                             <div className='itemCard' key={item.id}>
-                                <Card sx={{ minWidth: 400 }} id={item.id} onClick={clickItemDetail} >
+                                <Card sx={{ minWidth: 400 }} id={item.id} onClick={() => clickItemDetail(item.id)} >
                                     <h3>item name: {item.part_name}</h3>
                                     <h3>part# {item.part_number}</h3>
                                     <h4>item lead time: {item.lead_time_weeks}</h4>
