@@ -1,3 +1,9 @@
+// ToDo re: suppliers - 
+// rework so that user.jsx dumps here with blank search string? some method of pulling up all suppliers.
+// links from individual objects go straight to relevant details page.
+
+
+
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Card } from '@mui/material';
@@ -36,9 +42,10 @@ function Suppliers(props) {
             <div className='supplierContainer'>
                 {suppliers.length &&
                     suppliers.map((supplier) => {
-                        let supplierURL = supplier.supplier_url
-                        let mailAddress = `mailto:${supplier.primary_contact_email}`
-                        let supplierID = supplier.id
+                        let supplierURL = supplier.supplier_url;
+                        let mailAddress = `mailto:${supplier.primary_contact_email}`;
+                        let supplierID = supplier.id;
+                        
                         return (
                             <div className='itemCard' key={supplier.id}>
                                 <Card sx={{ minWidth: 400 }} >

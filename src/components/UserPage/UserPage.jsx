@@ -12,9 +12,9 @@ function UserPage() {
     <div className="container">
       {/* Modal buttons - convert when time allows */}
       <button className="btn" onClick={()=> {history.push('/mystock')}}>My Stock</button>
-      <button className="btn" onClick={()=> {history.push('/allitems')}}>All Items</button>
-      <button className="btn" onClick={()=> {history.push('/suppliers')}}>Suppliers</button>
-      <button className="btn" onClick={()=> {history.push('/profile')}}>Profile Details</button>
+      <button className="btn" onClick={()=> {history.push('/allitems/')}}>All Items</button>
+      <button className="btn" onClick={()=> {history.push('/suppliers/0')}}>Suppliers</button>
+      <button className="btn" onClick={()=> {history.push('/profile/')}}>Profile Details</button>
       <LogOutButton className="btn" />
     </div>
   );

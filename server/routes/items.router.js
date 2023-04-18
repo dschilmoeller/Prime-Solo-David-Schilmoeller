@@ -98,4 +98,6 @@ router.get('/mystock/:id', (req, res) => {
         console.log(`result:`, result.rows);
     })
 })
+
+
 module.exports = router

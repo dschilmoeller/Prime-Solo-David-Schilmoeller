@@ -74,11 +74,11 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/mystock">
+          <ProtectedRoute exact path="/mystock/">
             <MyStock />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/allitems">
+          <ProtectedRoute exact path="/allitems/">
             <AllItems />
           </ProtectedRoute>
 

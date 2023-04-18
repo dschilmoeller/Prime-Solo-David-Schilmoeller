@@ -45,10 +45,7 @@ function ItemDetail() {
                 <div>{itemDetail.description}</div>
                 <div>Estimated Lead Time: {itemDetail.lead_time_weeks} weeks</div>
                 <div>Estimated Mean Time To Failure: {itemDetail.mttf_months} months</div>
-                <div>Supplier: <a href={supplierID}>{itemDetail.supplier_name}</a></div>
-                <br />
-                <button onClick={headBack}>Back</button>
-                
+                <div>Supplier: <a href={supplierID}>{itemDetail.supplier_name}</a></div>                
 
                 <br />
                 <button onClick={headBack}>Back</button>

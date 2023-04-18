@@ -38,6 +38,7 @@ function StockItemDetail() {
 
     console.log(`stockItemDetail:`, stockDetail);
     if (stockDetail) {
+        let supplierID = `/#/suppliers/${stockDetail.supplier_id}`
         return (
             <div>
                 <h1>{stockDetail.part_name}</h1>
@@ -50,7 +51,7 @@ function StockItemDetail() {
                 <p>Recommended Quantity on Hand: !!!</p>
                 <div>Stock Override <button>Yes</button><button>No</button></div>
                 <div>Stock Override Quantity: {stockDetail.stock_override_qty}</div>
-                <div>Supplier: {stockDetail.supplier_name}</div>
+                <div>Supplier: <a href={supplierID}>{stockDetail.supplier_name}</a></div>
                 <br />
                 <button onClick={headBack}>Back</button>
             </div>
