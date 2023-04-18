@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const style = {
   position: 'absolute',
@@ -19,13 +19,15 @@ const style = {
 
 export default function EditStockItem() {
   const stockDetail = useSelector(store => store.stockItemDetails[0])
-
   console.log(`StockDetail:`, stockDetail);
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-const submitEdits = () => {console.log(`!!`), setOpen(false);}
+  // 
+
+  const submitEdits = () => { console.log(`!!`), setOpen(false); }
 
   return (
     <div>
@@ -42,10 +44,10 @@ const submitEdits = () => {console.log(`!!`), setOpen(false);}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <form onSubmit={submitEdits}>
-            <div>Quantity in Field<input placeholder='Quantity installed' /></div>
-            <div>Quantity in Stock<input placeholder='Quantity in stock' /></div>
-            <div>Stock Override Quantity<input placeholder='Part Name' /></div>
-            <button type='submit'>Submit</button>
+              <div>Quantity in Field<input placeholder='Quantity installed' /></div>
+              <div>Quantity in Stock<input placeholder='Quantity in stock' /></div>
+              <div>Stock Override Quantity<input placeholder='Part Name' /></div>
+              <button type='submit'>Submit</button>
             </form>
           </Typography>
         </Box>
