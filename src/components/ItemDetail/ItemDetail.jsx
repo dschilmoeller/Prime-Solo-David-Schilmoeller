@@ -17,12 +17,15 @@
 
 // array.includes()
 
-import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
+import { useEffect } from 'react'
 
 function ItemDetail() {
     const history = useHistory();
+    const dispatch = useDispatch();
     const itemDetail = useSelector(store => store.itemDetail[0])
+    const { id } = useParams()
 
     console.log(`item details:`, itemDetail);    // this will be conditional depending on the same criteria 
     // that renders this page differently based on whether the item appears in the user's list of sprockets.
@@ -34,7 +37,9 @@ function ItemDetail() {
         history.push('/allitems')
     }
 
-    
+    useEffect(() => {
+        dispatch({ type: "GET_ITEM_DETAIL", payload: id });
+    }, []);
 
     if (itemDetail) {
         let supplierID = `/#/suppliers/${itemDetail.supplier_id}`

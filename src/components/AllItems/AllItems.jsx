@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Card from '@mui/material/Card'
 import { useHistory } from 'react-router-dom';
@@ -7,13 +7,13 @@ import './AllItems.css'
 
 function AllItems(props) {
     const allItemsFromStore = useSelector((store) => store.allItems);
-    const [allItemsState, setAllItemsState] = useState([]);
+    const stockItems = useSelector((store => store.myStock))
 
     const searchFunction = (searchParam) => {
         console.log(`In search`);
     }
 
-    
+
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -24,11 +24,23 @@ function AllItems(props) {
     // spike Search bars/applicable methods e.g. Filter.
 
     // switch to list view -> look up T/F assignment with simple switch.
-    // Each has to move to individual details page - look up movie assigment for that bit.
 
-    const clickItemDetail = (id) => {
-        dispatch({ type: 'GET_ITEM_DETAIL', payload: id })
-        history.push(`/itemDetail/${id}`)
+
+    const clickItemDetail = (id, stockItems) => {
+        // console.log(`StockItems:`, stockItems);
+        let inStock = false
+        for (let item of stockItems) {
+            if (item.object_id === id) {
+                history.push(`/stockItemDetail/${item.mot_id}`)
+                inStock = true 
+                break;  
+            }   
+        }
+
+        if (inStock === false) {
+            history.push(`/itemDetail/${id}`)
+        }
+        // 
         // TODO : create condition to loop through my objects and compare before sending to appropriate item detail page.
     }
 
@@ -37,12 +49,7 @@ function AllItems(props) {
     }, []);
 
     const manualPull = () => {
-        // console.log(`Dispatching`);
         dispatch({ type: "FETCH_ALL_ITEMS" })
-        // console.log(`store.allItems:`, allItemsFromStore);
-        setAllItemsState(allItemsFromStore)
-        // Figure out how to make this work.
-        // console.log(`all items from state:`, allItemsState);
     }
 
     return (
@@ -69,7 +76,7 @@ function AllItems(props) {
                     allItemsFromStore.map((item) => {
                         return (
                             <div className='itemCard' key={item.id}>
-                                <Card sx={{ minWidth: 400 }} id={item.id} onClick={() => clickItemDetail(item.id)} >
+                                <Card sx={{ minWidth: 400 }} id={item.id} onClick={() => clickItemDetail(item.id, stockItems)} >
                                     <h3>item name: {item.part_name}</h3>
                                     <h3>part# {item.part_number}</h3>
                                     <h4>item lead time: {item.lead_time_weeks}</h4>
