@@ -15,30 +15,43 @@
 // also need to deal with refreshing and hitting back button, if possible. Fix
 // may be the same for both.
 
-// array.includes()
+// array.includes()!!
 
-import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
+import { useEffect } from 'react'
 
 function StockItemDetail() {
+    const dispatch = useDispatch();
     const history = useHistory();
-    const stockItemDetail = useSelector(store => store.stockItemDetails)
+    const { id } = useParams()
 
-    console.log(`item details:`, stockItemDetail);    // this will be conditional depending on the same criteria 
-    // that renders this page differently based on whether the item appears in the user's list of sprockets.
+    const stockDetail = useSelector(store => store.stockItemDetails[0])
 
-    // this will be from the allitem list.
-    // TODO : create dispatch WITHIN this page, not the allItems page - this will ensure data is rendered
-    // correctly according to the ID of the page we have gone to.
+    useEffect(() => {
+        dispatch({ type: "GET_STOCK_ITEM_DETAILS", payload: id });
+    }, []);
+    
     const headBack = () => {
         history.push('/mystock')
     }
 
-    if (stockItemDetail) {
+    console.log(`stockItemDetail:`, stockDetail);
+    if (stockDetail) {
         return (
             <div>
-                <h1>Words.</h1>
-                <h3>{stockItemDetail.id} ??</h3>
+                <h1>{stockDetail.part_name}</h1>
+                <h2>Part Number: {stockDetail.part_number}</h2>
+                <p>{stockDetail.description}</p>
+                <p>Estimated Lead Time: {stockDetail.lead_time_weeks} weeks</p>
+                <p>Estimated Mean Time To Failure: {stockDetail.mttf_months} months</p>
+                <p>Quantity in Field: {stockDetail.quantity_in_field}</p>
+                <p>Quantity on Hand: {stockDetail.quantity_owned}</p>
+                <p>Recommended Quantity on Hand: !!!</p>
+                <div>Stock Override <button>Yes</button><button>No</button></div>
+                <div>Stock Override Quantity: {stockDetail.stock_override_qty}</div>
+                <div>Supplier: {stockDetail.supplier_name}</div>
+                <br />
                 <button onClick={headBack}>Back</button>
             </div>
         )

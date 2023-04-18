@@ -34,11 +34,23 @@ function ItemDetail() {
         history.push('/allitems')
     }
 
+    
+
     if (itemDetail) {
+        let supplierID = `/#/suppliers/${itemDetail.supplier_id}`
         return (
             <div>
-                <h1>Words.</h1>
-                <h3>{itemDetail.id}</h3>
+                <h1>{itemDetail.part_name}</h1>
+                <h2>Part Number: {itemDetail.part_number}</h2>
+                <div>{itemDetail.description}</div>
+                <div>Estimated Lead Time: {itemDetail.lead_time_weeks} weeks</div>
+                <div>Estimated Mean Time To Failure: {itemDetail.mttf_months} months</div>
+                <div>Supplier: <a href={supplierID}>{itemDetail.supplier_name}</a></div>
+                <br />
+                <button onClick={headBack}>Back</button>
+                
+
+                <br />
                 <button onClick={headBack}>Back</button>
             </div>
         )

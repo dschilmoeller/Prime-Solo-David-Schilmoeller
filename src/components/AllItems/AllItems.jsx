@@ -13,6 +13,8 @@ function AllItems(props) {
         console.log(`In search`);
     }
 
+    
+
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -25,14 +27,9 @@ function AllItems(props) {
     // Each has to move to individual details page - look up movie assigment for that bit.
 
     const clickItemDetail = (id) => {
-
         dispatch({ type: 'GET_ITEM_DETAIL', payload: id })
-        
         history.push(`/itemDetail/${id}`)
-        // Create this page, also lots of conditional rendering between
-        // item is owned vs. not. Also need to wait to move and render until 
-        // new data is put into details.
-        
+        // TODO : create condition to loop through my objects and compare before sending to appropriate item detail page.
     }
 
     useEffect(() => {

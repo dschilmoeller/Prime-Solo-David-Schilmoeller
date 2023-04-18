@@ -90,8 +90,7 @@ function App() {
             <StockItemDetail />
           </ProtectedRoute>
 
-
-          <ProtectedRoute exact path="/suppliers">
+          <ProtectedRoute exact path="/suppliers/:id">
             <Suppliers />
           </ProtectedRoute>
 

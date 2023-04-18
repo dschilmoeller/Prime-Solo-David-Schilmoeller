@@ -67,7 +67,10 @@ router.get ('/fetchProfile', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-    const sqlText = `SELECT * from object WHERE id=$1;`
+    const sqlText = `SELECT * from object 
+                        JOIN object_suppliers ON object.id = object_suppliers.object_id
+                        JOIN suppliers ON suppliers.id = object_suppliers.supplier_id
+                        WHERE object.id=$1;`
     
     const sqlParams = [Number(req.params.id)]
 
@@ -82,6 +85,8 @@ router.get('/:id', (req, res) => {
 router.get('/mystock/:id', (req, res) => {
     const sqlText = `SELECT * from my_objects_table 
                         JOIN object ON object.id = my_objects_table.object_id
+                        JOIN object_suppliers ON object.id = object_suppliers.object_id
+                        JOIN suppliers ON suppliers.id = object_suppliers.supplier_id
                         WHERE mot_id=$1`
     
     const sqlParams = [Number(req.params.id)]

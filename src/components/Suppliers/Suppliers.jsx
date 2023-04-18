@@ -38,6 +38,7 @@ function Suppliers(props) {
                     suppliers.map((supplier) => {
                         let supplierURL = supplier.supplier_url
                         let mailAddress = `mailto:${supplier.primary_contact_email}`
+                        let supplierID = supplier.id
                         return (
                             <div className='itemCard' key={supplier.id}>
                                 <Card sx={{ minWidth: 400 }} >
@@ -47,7 +48,7 @@ function Suppliers(props) {
                                     <h4>{supplier.supplier_email}</h4>
                                     <a href={supplierURL} >{supplier.supplier_url}</a>
                                     <p>Primary Contact: {supplier.primary_contact_name} | {formatPhoneNumber(supplier.primary_contact_phone)} |
-                                    <a> </a><a href={mailAddress}>{supplier.primary_contact_email}</a></p>
+                                    <a id={supplierID}> </a><a href={mailAddress}>{supplier.primary_contact_email}</a></p>
                                 </Card>
                             </div>
                         )

@@ -14,7 +14,6 @@ function MyStock(props) {
     }, []);
 
     const clickItemDetail = (id) => {
-        dispatch({ type: 'GET_STOCK_ITEM_DETAILS', payload: id })
         history.push(`/stockItemDetail/${id}`)
     }
 
