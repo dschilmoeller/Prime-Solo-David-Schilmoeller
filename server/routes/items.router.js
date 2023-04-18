@@ -61,7 +61,7 @@ router.get ('/fetchProfile', (req, res) => {
             // console.log(result.rows);
         })
         .catch((err) => {
-            console.log("error getting suppliers:", err);
+            console.log("error getting profile:", err);
             res.sendStatus(500);
         });
 })
@@ -80,6 +80,10 @@ router.get('/:id', (req, res) => {
         res.send(result.rows)
         console.log(`result:`, result.rows);
     })
+    .catch((err) => {
+        console.log("error getting item details:", err);
+        res.sendStatus(500);
+    });
 })
 
 router.get('/mystock/:id', (req, res) => {
@@ -97,6 +101,27 @@ router.get('/mystock/:id', (req, res) => {
         res.send(result.rows)
         console.log(`result:`, result.rows);
     })
+    .catch((err) => {
+        console.log("error getting stock item details:", err);
+        res.sendStatus(500);
+    });
+})
+
+router.put('/mystock/:id', (req, res) => {
+    
+    const sqlText = `UPDATE "my_objects_table"
+    SET "quantity_in_field" = $1, "quantity_owned" = $2, "stock_override_qty" = $3
+    WHERE (mot_id = $4 AND user_id = $5);`
+    const sqlParams = [req.body.qtyInField, req.body.qtyOwned, req.body.stockOverrideQty, req.params.id, req.user.id]
+    
+    pool.query(sqlText, sqlParams)
+    .then((result) => {
+        res.sendStatus(202)
+    })
+    .catch((err) => {
+        console.log("error updating stock item:", err);
+        res.sendStatus(500);
+    });
 })
 
 

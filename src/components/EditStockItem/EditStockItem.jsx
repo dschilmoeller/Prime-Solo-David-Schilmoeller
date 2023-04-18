@@ -1,9 +1,9 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { useState } from 'react'
 
 const style = {
   position: 'absolute',
@@ -21,13 +21,23 @@ export default function EditStockItem() {
   const stockDetail = useSelector(store => store.stockItemDetails[0])
   // console.log(`StockDetail:`, stockDetail);
 
-  const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch();
+
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  // 
+  // state - default should be relevant stockItemDetails
+  const [qtyInField, setQtyInField] = useState(stockDetail.quantity_in_field)
+  const [qtyOwned, setQtyOwned] = useState(stockDetail.quantity_owned)
+  const [stockOverrideQty, setStockOverrideQty] = useState(stockDetail.stock_override_qty)
 
-  const submitEdits = () => { console.log(`!!`), setOpen(false); }
+  const submitEdits = () => {
+    // set up defaults.
+    let updatedItemData = { qtyInField, qtyOwned, stockOverrideQty, mot_id: stockDetail.mot_id }
+    dispatch({ type: 'UPDATE_MY_STOCK_ITEM', payload: updatedItemData })
+    setOpen(false)
+  }
 
   return (
     <div>
@@ -43,12 +53,18 @@ export default function EditStockItem() {
             Edit Item
           </Typography>
           {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}> */}
-            <form onSubmit={submitEdits}>
-              <div>Quantity in Field<input placeholder='Quantity installed' /></div>
-              <div>Quantity in Stock<input placeholder='Quantity in stock' /></div>
-              <div>Stock Override Quantity<input placeholder='Part Name' /></div>
-              <button type='submit'>Submit</button>
-            </form>
+          <form onSubmit={submitEdits}>
+            <div>Quantity in Field
+              <input placeholder='Quantity installed' value={qtyInField} onChange={(e) => setQtyInField(e.target.value)} />
+            </div>
+            <div>Quantity in Stock
+              <input placeholder='Quantity in stock' value={qtyOwned} onChange={(e) => setQtyOwned(e.target.value)} />
+            </div>
+            <div>Stock Override Quantity
+              <input placeholder='Override Qty' value={stockOverrideQty} onChange={(e) => setStockOverrideQty(e.target.value)}/>
+            </div>
+            <button type='submit'>Submit</button>
+          </form>
           {/* </Typography> */}
         </Box>
       </Modal>
