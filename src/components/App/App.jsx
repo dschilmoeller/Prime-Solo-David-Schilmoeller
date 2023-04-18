@@ -23,6 +23,7 @@ import AllItems from '../AllItems/AllItems.jsx';
 import MyStock from '../MyStock/MyStock.jsx';
 import Suppliers from '../Suppliers/Suppliers.jsx';
 import Profile from '../Profile/Profile';
+import ItemDetail from '../ItemDetail/ItemDetail';
 
 import './App.css';
 
@@ -78,6 +79,10 @@ function App() {
 
           <ProtectedRoute exact path="/allitems">
             <AllItems />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/itemDetail">
+            <ItemDetail />
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/suppliers">

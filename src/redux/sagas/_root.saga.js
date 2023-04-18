@@ -6,6 +6,7 @@ import fetchAll from './fetchall.saga'
 import fetchmystock from './fetchmystock.saga'
 import fetchSuppliers from './fetchsuppliers.saga';
 import fetchProfile from './profile.saga';
+import fetchItemDetails from './fetchitemdetail.saga';
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -22,6 +23,7 @@ export default function* rootSaga() {
     fetchmystock(),
     fetchSuppliers(),
     fetchProfile(),
-
+    fetchItemDetails(),
+    
   ]);
 }
