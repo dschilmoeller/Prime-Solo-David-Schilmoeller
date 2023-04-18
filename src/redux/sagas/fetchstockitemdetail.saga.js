@@ -3,7 +3,7 @@ import axios from 'axios'
 
 function* fetchStockItemDetailsAgain(action) {
     try {
-        console.log(`action.payload:`, action.payload);
+        // console.log(`action.payload:`, action.payload);
         const details = yield axios.get(`/api/items/mystock/${action.payload}`)
         
         yield put({ type: 'SET_STOCK_ITEM_DETAILS', payload: details.data })

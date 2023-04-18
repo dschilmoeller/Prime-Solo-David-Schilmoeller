@@ -8,3 +8,7 @@
 .itemCard {
     padding: 1rem;
 }
+
+.itemCard:hover {
+    background-color: black;
+}

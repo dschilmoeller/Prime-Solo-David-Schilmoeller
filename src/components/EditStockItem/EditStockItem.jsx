@@ -19,7 +19,7 @@ const style = {
 
 export default function EditStockItem() {
   const stockDetail = useSelector(store => store.stockItemDetails[0])
-  console.log(`StockDetail:`, stockDetail);
+  // console.log(`StockDetail:`, stockDetail);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -42,14 +42,14 @@ export default function EditStockItem() {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Edit Item
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}> */}
             <form onSubmit={submitEdits}>
               <div>Quantity in Field<input placeholder='Quantity installed' /></div>
               <div>Quantity in Stock<input placeholder='Quantity in stock' /></div>
               <div>Stock Override Quantity<input placeholder='Part Name' /></div>
               <button type='submit'>Submit</button>
             </form>
-          </Typography>
+          {/* </Typography> */}
         </Box>
       </Modal>
     </div>

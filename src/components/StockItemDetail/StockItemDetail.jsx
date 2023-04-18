@@ -59,7 +59,8 @@ function StockItemDetail() {
         }
     }
 
-    console.log(`stockItemDetail:`, stockDetail);
+    // console.log(`stockItemDetail:`, stockDetail);
+
     if (stockDetail) {
         let supplierID = `/#/suppliers/${stockDetail.supplier_id}`
         
@@ -69,12 +70,12 @@ function StockItemDetail() {
             {<EditStockItem />}
                 <h1>{stockDetail.part_name}</h1>
                 <h2>Part Number: {stockDetail.part_number}</h2>
-                <p>{stockDetail.description}</p>
-                <p>Estimated Lead Time: {stockDetail.lead_time_weeks} weeks</p>
-                <p>Estimated Mean Time To Failure: {stockDetail.mttf_months} months</p>
-                <p>Quantity in Field: {stockDetail.quantity_in_field}</p>
-                <p>Quantity on Hand: {stockDetail.quantity_owned}</p>
-                <p>Recommended Quantity on Hand: {returnedQuant}</p>
+                <div>{stockDetail.description}</div>
+                <div>Estimated Lead Time: {stockDetail.lead_time_weeks} weeks</div>
+                <div>Estimated Mean Time To Failure: {stockDetail.mttf_months} months</div>
+                <div>Quantity in Field: {stockDetail.quantity_in_field}</div>
+                <div>Quantity on Hand: {stockDetail.quantity_owned}</div>
+                <div>Recommended Quantity on Hand: {returnedQuant}</div>
                 <div>Stock Override <button>Yes</button><button>No</button></div>
                 <div>Stock Override Quantity: {stockDetail.stock_override_qty}</div>
                 <div>Supplier: <a href={supplierID}>{stockDetail.supplier_name}</a></div>
