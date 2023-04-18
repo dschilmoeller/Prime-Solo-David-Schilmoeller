@@ -16,13 +16,17 @@ function MyStock(props) {
     const clickItemDetail = (id) => {
         history.push(`/stockItemDetail/${id}`)
     }
+    
+    const clickAllItems = () => {
+        history.push('/allitems')
+    }
 
     return (
         <div>
             <h2>DS</h2>
             {/* TO DO */}
             <button>Toggle List View</button>
-            <button>See All Items</button>
+            <button onClick={clickAllItems}>See All Items</button>
 
             {/* TO DO */}
             <div>
