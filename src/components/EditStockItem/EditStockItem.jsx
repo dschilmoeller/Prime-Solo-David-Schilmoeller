@@ -46,10 +46,20 @@ export default function EditStockItem() {
   const submitEdits = () => {
     event.preventDefault();
     // set up defaults.
-    let updatedItemData = { qtyInField, qtyOwned, stockOverrideQty, mot_id: stockDetail.mot_id }
+    let updatedItemData = { qtyInField, qtyOwned, stockOverride, stockOverrideQty, mot_id: stockDetail.mot_id }
     dispatch({ type: 'UPDATE_MY_STOCK_ITEM', payload: updatedItemData })
     setOpen(false)
     dispatch({ type: 'GET_STOCK_ITEM_DETAILS', payload: stockDetail.mot_id})
+  }
+  
+  const toggleOverrideOn = () => {
+    console.log(`override toggledon`);
+    setStockOverride(true)
+  }
+
+  const toggleOverrideOff = () => {
+    console.log(`override toggled off`);
+    setStockOverride(false)
   }
 
   return (
@@ -76,11 +86,18 @@ export default function EditStockItem() {
             <div>
 
             </div>
+            
             {stockOverride ? 
+            <>
+            <div>
+              <button onClick={toggleOverrideOff} type="button">Turn off Override</button>
+            </div>
             <div>Stock Override Quantity
               <input placeholder='Override Qty' value={stockOverrideQty} onChange={(e) => setStockOverrideQty(e.target.value)} />
             </div> 
-            : null}
+            </>
+            : <button onClick={toggleOverrideOn} type="button">Activate Stock Override</button> }
+            <br /><br />
             <button type='submit'>Submit</button>
           </form>
           {/* </Typography> */}

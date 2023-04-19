@@ -110,9 +110,9 @@ router.get('/mystock/:id', (req, res) => {
 router.put('/mystock/:id', (req, res) => {
     
     const sqlText = `UPDATE "my_objects_table"
-    SET "quantity_in_field" = $1, "quantity_owned" = $2, "stock_override_qty" = $3
-    WHERE (mot_id = $4 AND user_id = $5);`
-    const sqlParams = [req.body.qtyInField, req.body.qtyOwned, req.body.stockOverrideQty, req.params.id, req.user.id]
+    SET "quantity_in_field" = $1, "quantity_owned" = $2, "stock_override" = $3, "stock_override_qty" = $4
+    WHERE (mot_id = $5 AND user_id = $6);`
+    const sqlParams = [req.body.qtyInField, req.body.qtyOwned, req.body.stockOverride, req.body.stockOverrideQty, req.params.id, req.user.id]
     
     pool.query(sqlText, sqlParams)
     .then((result) => {
