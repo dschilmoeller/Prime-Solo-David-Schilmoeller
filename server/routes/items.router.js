@@ -124,5 +124,44 @@ router.put('/mystock/:id', (req, res) => {
     });
 })
 
+router.put('/allitems/:id', (req, res) => {
+    let b = req.body
+    console.log(`in allitems`);
+    
+    const sqlText = `
+    UPDATE "object"
+    SET "part_name" = $1, "part_number" = $2, "description" = $3, "lead_time_weeks" = $4, "mttf_months" = $5
+    WHERE "id" = $6;`
+    
+    const sqlParams = [b.partName, b.partNumber, b.description, b.estLeadTime, b.estMTTF, b.itemID.id]
+    
+    const sqlText2 = `
+    UPDATE "object_suppliers" 
+    SET "supplier_id" = $1
+    WHERE "object_id" = $2;
+    `
+
+    const sqlParams2 = [b.supplierID, b.itemID.id]
+    
+    pool.query(sqlText, sqlParams)
+    .then((result) => {
+        res.sendStatus(202)
+    })
+    .catch((err) => {
+        console.log(`Error updating object table in allitems put`, err);
+        res.sendStatus(500)
+    })
+
+    pool.query(sqlText2, sqlParams2)
+    .then((result) => {
+        // res.sendStatus(202)
+    })
+    .catch((err => {
+        console.log(`Error updating object_suppliers table in allitems put`, err);
+        // res.sendStatus(500)
+    }))
+    
+})
+
 
 module.exports = router

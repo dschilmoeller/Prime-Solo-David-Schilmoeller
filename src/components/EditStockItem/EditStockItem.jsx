@@ -5,6 +5,9 @@ import Modal from '@mui/material/Modal';
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
 
+// TO DO : set up 'admin mode' allowing signficantly more modifications directly from this page.
+// Currently they can only edit items they do not have in stock.
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -37,6 +40,7 @@ export default function EditStockItem() {
   const [stockOverrideQty, setStockOverrideQty] = useState(stockDetail.stock_override_qty)
 
   const submitEdits = () => {
+    event.preventDefault();
     // set up defaults.
     let updatedItemData = { qtyInField, qtyOwned, stockOverrideQty, mot_id: stockDetail.mot_id }
     dispatch({ type: 'UPDATE_MY_STOCK_ITEM', payload: updatedItemData })
