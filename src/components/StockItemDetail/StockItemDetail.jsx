@@ -29,7 +29,15 @@ function StockItemDetail() {
     const { id } = useParams()
     let returnedQuant = 0
 
+    
+
     const stockDetail = useSelector(store => store.stockItemDetails[0])
+
+    const [stockoverride, setStockOverride] = useState(false)
+    console.log(`stockDetail:`, stockDetail);
+    
+    // 
+    
 
     useEffect(() => {
         dispatch({ type: "GET_STOCK_ITEM_DETAILS", payload: id });
@@ -76,8 +84,8 @@ function StockItemDetail() {
                 <div>Quantity in Field: {stockDetail.quantity_in_field}</div>
                 <div>Quantity on Hand: {stockDetail.quantity_owned}</div>
                 <div>Recommended Quantity on Hand: {returnedQuant}</div>
-                <div>Stock Override <button>Yes</button><button>No</button></div>
-                <div>Stock Override Quantity: {stockDetail.stock_override_qty}</div>
+                {stockDetail.stock_override ? <div>Stock Override Active</div> : null}
+                {stockDetail.stock_override ? <div>Stock Override Quantity: {stockDetail.stock_override_qty}</div> : null}
                 <div>Supplier: <a href={supplierID}>{stockDetail.supplier_name}</a></div>
                 <br />
                 <button onClick={headBack}>Back</button>

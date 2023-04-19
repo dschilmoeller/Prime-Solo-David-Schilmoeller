@@ -22,7 +22,7 @@ const style = {
 
 export default function EditStockItem() {
   const stockDetail = useSelector(store => store.stockItemDetails[0])
-  console.log(`StockDetail:`, stockDetail);
+  // console.log(`StockDetail:`, stockDetail);
 
   const dispatch = useDispatch();
 
@@ -31,12 +31,16 @@ export default function EditStockItem() {
   const handleOpen = () => {
     setOpen(true);
     dispatch({ type: 'GET_STOCK_ITEM_DETAILS', payload: stockDetail.mot_id})
+    setStockOverride(stockDetail.stock_override)
+    setStockOverrideQty(stockDetail.stock_override_qty)
   }
+
   const handleClose = () => setOpen(false);
 
   // state - default should be relevant stockItemDetails
   const [qtyInField, setQtyInField] = useState(stockDetail.quantity_in_field)
   const [qtyOwned, setQtyOwned] = useState(stockDetail.quantity_owned)
+  const [stockOverride, setStockOverride] = useState(stockDetail.stock_override)
   const [stockOverrideQty, setStockOverrideQty] = useState(stockDetail.stock_override_qty)
 
   const submitEdits = () => {
@@ -69,9 +73,14 @@ export default function EditStockItem() {
             <div>Quantity in Stock
               <input placeholder='Quantity in stock' value={qtyOwned} onChange={(e) => setQtyOwned(e.target.value)} />
             </div>
+            <div>
+
+            </div>
+            {stockOverride ? 
             <div>Stock Override Quantity
               <input placeholder='Override Qty' value={stockOverrideQty} onChange={(e) => setStockOverrideQty(e.target.value)} />
-            </div>
+            </div> 
+            : null}
             <button type='submit'>Submit</button>
           </form>
           {/* </Typography> */}
