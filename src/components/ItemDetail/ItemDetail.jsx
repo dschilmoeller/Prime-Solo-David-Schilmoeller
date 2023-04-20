@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useEffect } from 'react'
 import EditAllItems from "../EditAllItems/EditAllItems";
 import AddItemToStock from "../AddItemToStock/AddItemToStock";
-
+import DeleteItemFromAllItems from "../DeleteFromAllItems/DeleteFromAllItems";
 function ItemDetail() {
     const history = useHistory();
     const dispatch = useDispatch();
@@ -29,6 +29,7 @@ function ItemDetail() {
             <>
                 {/* Needs to be admin only */}
                 {user === 1 ? <EditAllItems /> : null}
+                {user === 1 ? <DeleteItemFromAllItems /> : null}
                 <div>
                     <h1>{itemDetail.part_name}</h1>
                     <h2>Part Number: {itemDetail.part_number}</h2>

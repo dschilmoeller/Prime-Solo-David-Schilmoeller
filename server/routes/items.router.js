@@ -207,4 +207,17 @@ router.delete('/deletefrommystock/:id', (req, res) => {
         console.log(`Error deleting item from my stock:`, error);
     })
 })
+
+router.delete('/deleteitemfromallitems/:id', (req, res) => {
+    let sqlText = `DELETE FROM "object" WHERE (id=$1)`
+    let sqlParams = [req.params.id]
+    pool.query(sqlText, sqlParams)
+    .then(result => {
+        res.sendStatus(200)
+    })
+    .catch(error => {
+        res.sendStatus(500)
+        console.log(`Error deleting item from my stock:`, error);
+    })
+})
 module.exports = router
