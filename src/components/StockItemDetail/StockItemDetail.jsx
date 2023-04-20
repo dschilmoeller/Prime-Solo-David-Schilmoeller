@@ -23,6 +23,7 @@ import { useEffect, useState } from 'react'
 
 import EditStockItem from "../EditStockItem/EditStockItem";
 import DeleteItemFromStock from "../DeleteItemFromStock/DeleteItemFromStock";
+import DeleteItemFromAllItems from "../DeleteFromAllItems/DeleteFromAllItems";
 
 function StockItemDetail() {
     const dispatch = useDispatch();
@@ -30,8 +31,7 @@ function StockItemDetail() {
     const { id } = useParams()
     let returnedQuant = 0
 
-    
-
+    const user = useSelector(store => store.user.id)
     const stockDetail = useSelector(store => store.stockItemDetails[0])
 
     const [stockoverride, setStockOverride] = useState(false)
@@ -77,7 +77,9 @@ function StockItemDetail() {
             <>
             <div>
             {<EditStockItem />}{<DeleteItemFromStock />}
-            {/* Delete item from my stock modal (confirmation dialogue) */}
+            <div>
+            {user === 1 ? <DeleteItemFromAllItems /> : null}
+            </div>
                 <h1>{stockDetail.part_name}</h1>
                 <h2>Part Number: {stockDetail.part_number}</h2>
                 <div>{stockDetail.description}</div>

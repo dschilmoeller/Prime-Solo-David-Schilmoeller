@@ -37,7 +37,7 @@ export default function DeleteItemFromStock() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Delete Item</Button>
+      <Button onClick={handleOpen}>Delete Item From Stock</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -46,7 +46,7 @@ export default function DeleteItemFromStock() {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Delete Item
+            Delete Item From Stock
           </Typography>
           {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}> */}
           <form onSubmit={ConfirmDelete}>

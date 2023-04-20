@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import EditAllItems from "../EditAllItems/EditAllItems";
 import AddItemToStock from "../AddItemToStock/AddItemToStock";
 import DeleteItemFromAllItems from "../DeleteFromAllItems/DeleteFromAllItems";
+
 function ItemDetail() {
     const history = useHistory();
     const dispatch = useDispatch();
