@@ -9,6 +9,7 @@ import fetchProfile from './profile.saga';
 import fetchItemDetails from './fetchitemdetail.saga';
 import fetchStockItemDetails from './fetchstockitemdetail.saga';
 import fetchSupplierDetail from './fetchsupplierdetail.saga';
+import fetchItemsBySupplier from './fetchitemsbysupplier.saga';
 import editMyStockItem from './editmystockitem.saga';
 import editItem from './edititem.saga';
 import addItemToStock from './additemtostock.saga';
@@ -43,7 +44,8 @@ export default function* rootSaga() {
     addItemToAllItems(),
     deleteItemFromStock(),
     deleteItemFromAllItems(),
-    
+    fetchItemsBySupplier(),
+
     
   ]);
 }
