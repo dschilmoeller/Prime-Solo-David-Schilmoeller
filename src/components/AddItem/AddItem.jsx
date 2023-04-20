@@ -46,8 +46,8 @@ export default function AddItemToMasterList() {
     let itemTypes = useSelector(store => store.itemTypes)
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_SUPPLIERS'})
-        dispatch({ type: 'FETCH_ITEM_TYPES'})
+        dispatch({ type: 'FETCH_SUPPLIERS' })
+        dispatch({ type: 'FETCH_ITEM_TYPES' })
     }, []);
 
     const handleAddItemToMaster = () => {
@@ -62,9 +62,12 @@ export default function AddItemToMasterList() {
 
     }
 
-    
+
     const handleSupplier = (e) => {
         setSupplierID(e.target.value)
+    }
+    const handleItemTypeChange = (e) => {
+        setObjectTypeID(e.target.value)
     }
 
     return (
@@ -94,6 +97,16 @@ export default function AddItemToMasterList() {
                             <input placeholder='Part Description' value={partDescription} onChange={(e) => setPartDescription(e.target.value)} />
                         </div>
                         {/* Object type - pull and map option list. */}
+                        <label htmlFor='itemType'>Item Type</label>
+                        <select name='itemType' defaultValue={itemTypes} onChange={handleItemTypeChange}>
+                            {itemTypes.map(type => {
+                                console.log(`details:`, type);
+                                return (
+                                        <option key={type.id} value={type.id}>{type.object_type}</option>
+                                )
+                            })}
+                        </select>
+
                         <div>
                             Part Lead Time - Weeks
                             <input placeholder='Lead Time in weeks' value={leadTimeWeeks} onChange={(e) => setLeadTimeWeeks(e.target.value)} />
@@ -102,15 +115,15 @@ export default function AddItemToMasterList() {
                             Mean Time To Failure - Months
                             <input placeholder='MTTF in Months' value={mttfMonths} onChange={(e) => setmttfMonths(e.target.value)} />
                         </div>
-                        
+
                         <label htmlFor='suppliers'>Supplier</label>
-                            <select name='suppliers' defaultValue={supplierID} onChange={handleSupplier}>
-                                {suppliers.map(supplier => {
-                                    return (
+                        <select name='suppliers' defaultValue={supplierID} onChange={handleSupplier}>
+                            {suppliers.map(supplier => {
+                                return (
                                     <option key={supplier.id} value={supplier.id}>{supplier.supplier_name}</option>
-                                    )
-                                })}
-                            </select>
+                                )
+                            })}
+                        </select>
 
                         <br /><br />
                         <button type='submit'>Submit</button>

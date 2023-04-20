@@ -38,7 +38,7 @@ router.get("/fetchmystock", (req, res) => {
 });
 
 router.get("/fetchsuppliers", (req, res) => {
-    console.log(`In fetchsuppliers`);
+    // console.log(`In fetchsuppliers`);
     const sqlText = `SELECT * FROM "suppliers"`
     pool
         .query(sqlText)
@@ -110,7 +110,17 @@ router.get('/mystock/:id', (req, res) => {
 
 
 router.get('/get/fetchitemtypes/', (req, res) => {
-    console.log(`in fetch item Types`);
+    const sqlText = `SELECT * FROM "object_type_table"`
+    pool
+        .query(sqlText)
+        .then((result) => {
+            res.send(result.rows);
+            console.log(result.rows);
+        })
+        .catch((err) => {
+            console.log("error getting suppliers:", err);
+            res.sendStatus(500);
+        });
 })
 
 
