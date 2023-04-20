@@ -134,11 +134,14 @@ router.get('/supplierdetails/:id', (req, res) => {
 })
 
 router.get('/fetchitemsbysupplier/:id', (req, res) => {
-    const sqlText = `SELECT * FROM "object" WHERE "supplier_id" = $1`
+    const sqlText = `SELECT * FROM "object"
+    
+    WHERE "supplier_id" = $1`
     const sqlParams = [req.params.id]
 
     pool.query(sqlText, sqlParams)
     .then((result) => {
+        console.log(`results`, result.rows);
         res.send(result.rows)
     })
     .catch(error => {

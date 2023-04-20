@@ -14,6 +14,7 @@ function AllItems(props) {
 
     useEffect(() => {
         dispatch({ type: "FETCH_ALL_ITEMS" })
+        
     }, []);
 
     const allItemsFromStore = useSelector((store) => store.allItems);
@@ -32,6 +33,7 @@ function AllItems(props) {
     const clickMyStock = () => {
         history.push('/mystock')
     }
+
     const clickItemDetail = (id, stockItems) => {
         console.log(`StockItems:`, stockItems);
         let inStock = false

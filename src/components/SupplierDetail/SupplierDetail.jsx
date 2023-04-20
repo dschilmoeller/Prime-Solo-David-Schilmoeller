@@ -2,13 +2,16 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from 'react'
+import { Button } from "@mui/material";
 
 function SupplierDetail() {
     const history = useHistory();
     const dispatch = useDispatch();
     const supDet = useSelector(store => store.supplierdetail);
     const itemsbysupplier = useSelector(store => store.itemsbysupplier)
+    const stockItems = useSelector((store => store.myStock))
     const { id } = useParams()
+    const user = useSelector(store => store.user.id)
 
     const headBack = () => {
         history.push('/suppliers/0')
@@ -19,7 +22,7 @@ function SupplierDetail() {
         dispatch({ type: "FETCH_ITEMS_BY_SUPPLIER", payload: id })
     }, []);
 
-    console.log(`items by from this supplier:`, itemsbysupplier);
+    
     // courtesy of Stack Overflow:
     // https://stackoverflow.com/questions/8358084/regular-expression-to-reformat-a-us-phone-number-in-javascript
     function formatPhoneNumber(phoneNumberString) {
@@ -32,10 +35,27 @@ function SupplierDetail() {
         return null;
     }
 
+    // something hinky needs to be done with sql to only get MOT where userID is right
+    const clickItemDetail = (id, stockItems) => {
+        let inStock = false
+        
+        for (let item of stockItems) {
+            if (item.object_id === id) {
+                history.push(`/stockItemDetail/${item.mot_id}`)
+                inStock = true
+                break;
+            }
+        }
+        if (inStock === false) {
+            history.push(`/itemDetail/${id}`)
+        }
+    }
+
     return (
         <>
             <div>
-                <div>Supplier Details</div>
+                <Button>Edit Supplier</Button>
+                {user === 1 ? <Button>Delete Supplier</Button> : null}
                 {supDet &&
                     supDet.map((supplier) => {
                         let mailAddressSales = `mailto:${supplier.supplier_email}`;
@@ -55,19 +75,23 @@ function SupplierDetail() {
                                 <a href={mailAddressPrimary}>{supplier.primary_contact_email}</a>
                                 <div>{formatPhoneNumber(supplier.primary_contact_phone)}</div>
                                 <br /> <br />
-                                <button onClick={headBack}>Back</button>
+                                <Button onClick={headBack}>Back</Button>
                             </div>
                         )
                     })
                 }
             </div>
 
+<br /><br />
             <div>Items Carried:</div>
             <ul>
                 {itemsbysupplier &&
                     itemsbysupplier.map((item) => {
+                        const id = item.id
                         return (
-                            <li>{item.part_name}</li>
+                            <div key={id} id={id} onClick={() => clickItemDetail(id, stockItems)}>
+                            <li>{item.part_name} / Part #: {item.part_number}</li>
+                            </div>
                         )
                     })}
             </ul>
