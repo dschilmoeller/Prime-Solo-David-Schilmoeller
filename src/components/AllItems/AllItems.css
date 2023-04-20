@@ -1,14 +1,23 @@
-.itemContainer {
-    display : flex;
+.stockContainer {
+    display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     padding: 1rem;
 }
+
 
 .itemCard {
     padding: 1rem;
 }
 
 .itemCard:hover {
-    background-color: black;
+    background-color: aquamarine;
+}
+
+.listItem:hover {
+    background-color: aquamarine;
+}
+
+.listItem { 
+    padding: .25rem;
 }
