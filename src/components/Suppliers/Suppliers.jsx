@@ -7,12 +7,15 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Card } from '@mui/material';
+import { useHistory } from 'react-router-dom';
 import './Suppliers.css'
 
 function Suppliers(props) {
-    const suppliers = useSelector((store) => store.suppliers);
+    const history = useHistory();
     const dispatch = useDispatch();
 
+    const suppliers = useSelector((store) => store.suppliers);
+    
     useEffect(() => {
         dispatch({ type: "FETCH_SUPPLIERS" })
     }, []);
@@ -27,6 +30,10 @@ function Suppliers(props) {
           return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('');
         }
         return null;
+      }
+
+      const clickSupplierDetail = (id) => {
+        history.push(`/supplierdetail/${id}`)
       }
 
     return (
@@ -48,7 +55,7 @@ function Suppliers(props) {
                         
                         return (
                             <div className='itemCard' key={supplier.id}>
-                                <Card sx={{ minWidth: 400 }} >
+                                <Card sx={{ minWidth: 400 }} onClick={()=> clickSupplierDetail(supplier.id)}>
                                     <h3>{supplier.supplier_name}</h3>
                                     <h3>{formatPhoneNumber(supplier.supplier_phone)}</h3>
                                     <h4>{supplier.supplier_address}</h4>

@@ -118,6 +118,21 @@ router.get('/get/fetchitemtypes/', (req, res) => {
         });
 })
 
+router.get('/supplierdetails/:id', (req, res) => {
+    const sqlText = `SELECT * from "suppliers" WHERE id=$1`
+    const sqlParams = [req.params.id]
+
+    pool.query(sqlText, sqlParams)
+    .then(result => {
+        res.send(result.rows)
+    })
+    .catch(error => {
+      res.sendStatus(500)  
+      console.log(`Error fetching supplier details`, error);
+    })
+    
+})
+
 router.put('/mystock/:id', (req, res) => {
     
     const sqlText = `UPDATE "my_objects_table"

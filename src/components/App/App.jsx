@@ -25,6 +25,7 @@ import Suppliers from '../Suppliers/Suppliers.jsx';
 import Profile from '../Profile/Profile';
 import ItemDetail from '../ItemDetail/ItemDetail';
 import StockItemDetail from '../StockItemDetail/StockItemDetail';
+import SupplierDetail from '../SupplierDetail/SupplierDetail';
 
 import './App.css';
 
@@ -93,6 +94,10 @@ function App() {
 
           <ProtectedRoute exact path="/suppliers/:id">
             <Suppliers />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/supplierdetail/:id">
+            <SupplierDetail />
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/profile">
