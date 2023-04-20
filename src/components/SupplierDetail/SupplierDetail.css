@@ -1,0 +1,9 @@
+.supplierItem:hover {
+    background-color: aquamarine;
+    cursor: pointer;
+}
+
+.supplierItem { 
+    color: blue;
+    text-decoration: underline;
+}

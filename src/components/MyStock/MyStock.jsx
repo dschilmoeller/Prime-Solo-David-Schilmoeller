@@ -35,7 +35,7 @@ function MyStock() {
 
     return (
         <div>
-            <h3>Search Item Name<input></input><button onClick={searchFunction}>Search</button></h3>
+            <h3>Search My Stock By Name<input></input><button onClick={searchFunction}>Search</button></h3>
             {listView ? <Button onClick={toggleListView}>See Box View</Button> : <Button onClick={toggleListView}>See List View</Button>}
             <Button onClick={clickAllItems}>See All Items</Button>
 
@@ -62,8 +62,7 @@ function MyStock() {
                         return (
                         <div className='listItem' key={stockItem.mot_id}>
                         <li id={stockItem.mot_id} onClick={() => clickItemDetail(stockItem.mot_id)} >
-                            <li>Item name: {stockItem.part_name}</li>
-                            <li>Part# {stockItem.part_number}</li>
+                            Item name: {stockItem.part_name} / Part # {stockItem.part_number}
                         </li>
                         
                     </div>

@@ -64,7 +64,7 @@ function AllItems(props) {
             {/* Dump this into a modal or something and get to edge of page */}
 
 
-            <h3>Search Item Name<input></input><button onClick={searchFunction}>Search</button></h3>
+            <h3>Search All Items By Name<input></input><button onClick={searchFunction}>Search</button></h3>
             {listView ? <Button onClick={toggleListView}>See Box View</Button> : <Button onClick={toggleListView}>See List View</Button>}
             <Button onClick={clickMyStock}>See My Stock</Button>
             
@@ -95,9 +95,9 @@ function AllItems(props) {
                     {allItemsFromStore.map((item) => {
                         return (
                             <div className='listItem' key={item.id}>
-                                <li id={item.id} onClick={() => clickItemDetail(item.id, stockItems)} >
-                                    <li>Item Name: {item.part_name}</li>
-                                    <li>Part# {item.part_number}</li>
+                                <li id={item.id} 
+                                onClick={() => clickItemDetail(item.id, stockItems)} >
+                                    Item Name: {item.part_name} / Part # {item.part_number}
                                     
                                 </li>
                             </div>

@@ -4,6 +4,8 @@ import { useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from 'react'
 import { Button } from "@mui/material";
 
+import './SupplierDetail.css'
+
 function SupplierDetail() {
     const history = useHistory();
     const dispatch = useDispatch();
@@ -89,7 +91,10 @@ function SupplierDetail() {
                     itemsbysupplier.map((item) => {
                         const id = item.id
                         return (
-                            <div key={id} id={id} onClick={() => clickItemDetail(id, stockItems)}>
+                            <div key={id} id={id} 
+                            onClick={() => clickItemDetail(id, stockItems)}
+                            className="supplierItem"
+                            >
                             <li>{item.part_name} / Part #: {item.part_number}</li>
                             </div>
                         )
