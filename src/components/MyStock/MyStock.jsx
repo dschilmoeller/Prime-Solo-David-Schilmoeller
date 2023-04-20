@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Card } from '@mui/material';
 import './MyStock.css'
 
-function MyStock(props) {
+function MyStock() {
     const myStock = useSelector((store) => store.myStock);
     const dispatch = useDispatch();
     const history = useHistory();

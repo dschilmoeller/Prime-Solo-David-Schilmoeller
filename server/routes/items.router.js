@@ -195,4 +195,16 @@ router.post('/additemtomasterlist/', (req, res) => {
     }))
 })
 
+router.delete('/deletefrommystock/:id', (req, res) => {
+    let sqlText = `DELETE FROM "my_objects_table" WHERE (mot_id=$1 AND user_id=$2)`
+    let sqlParams = [req.params.id, req.user.id]
+    pool.query(sqlText, sqlParams)
+    .then(result => {
+        res.sendStatus(200)
+    })
+    .catch(error => {
+        res.sendStatus(500)
+        console.log(`Error deleting item from my stock:`, error);
+    })
+})
 module.exports = router

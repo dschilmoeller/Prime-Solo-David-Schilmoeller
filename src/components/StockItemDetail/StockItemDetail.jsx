@@ -22,6 +22,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from 'react'
 
 import EditStockItem from "../EditStockItem/EditStockItem";
+import DeleteItemFromStock from "../DeleteItemFromStock/DeleteItemFromStock";
 
 function StockItemDetail() {
     const dispatch = useDispatch();
@@ -34,7 +35,7 @@ function StockItemDetail() {
     const stockDetail = useSelector(store => store.stockItemDetails[0])
 
     const [stockoverride, setStockOverride] = useState(false)
-    console.log(`stockDetail:`, stockDetail);
+    // console.log(`stockDetail:`, stockDetail);
     
     // 
     
@@ -75,7 +76,8 @@ function StockItemDetail() {
         return (
             <>
             <div>
-            {<EditStockItem />}
+            {<EditStockItem />}{<DeleteItemFromStock />}
+            {/* Delete item from my stock modal (confirmation dialogue) */}
                 <h1>{stockDetail.part_name}</h1>
                 <h2>Part Number: {stockDetail.part_number}</h2>
                 <div>{stockDetail.description}</div>
