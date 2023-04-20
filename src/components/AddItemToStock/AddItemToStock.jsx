@@ -22,6 +22,7 @@ const style = {
 
 export default function AddItemToStock() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const { id } = useParams()
 
 
@@ -41,17 +42,14 @@ export default function AddItemToStock() {
     }, []);
 
 
+// Add boolean search for the relevant item upon add? some other way to push back the mot_id here? Response from server?
 
-    const handleAddItem = () => {
-        console.log(`In handleadditem, details:`, itemDetail);
+    const handleAddItem = (e) => {
+        e.preventDefault();
         let object_id = itemDetail.id
         let addItemDetail = {object_id, qtyInField, qtyOwned, stockOverride, stockOverrideQty}
-        console.log(`details of item to be added to my_object_table:`, addItemDetail);
-
         dispatch({ type: "ADD_ITEM_TO_STOCK", payload: addItemDetail})
-        // write saga
-        // write route
-
+        history.push(`/mystock`)
     }
 
 

@@ -26,8 +26,8 @@ export default function DeleteItemFromAllItems() {
   const handleOpen = () => {setOpen(true)}
   const handleClose = () => setOpen(false);
 
-  const ConfirmDelete = () => {
-    event.preventDefault();
+  const ConfirmDelete = (e) => {
+    e.preventDefault();
     dispatch({ type: 'DELETE_ITEM_FROM_ALL_ITEMS', payload: itemDetail.id})
     setOpen(false)
     history.push('/allitems')

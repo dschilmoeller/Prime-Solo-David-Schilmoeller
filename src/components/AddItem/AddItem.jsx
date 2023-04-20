@@ -50,16 +50,10 @@ export default function AddItemToMasterList() {
         dispatch({ type: 'FETCH_ITEM_TYPES' })
     }, []);
 
-    const handleAddItemToMaster = () => {
-        // console.log(`In handleadditemtomaster`);
-
+    const handleAddItemToMaster = (e) => {
+        e.preventDefault();
         let addItemDetail = { partName, partNumber, partDescription, objectTypeID, mttfMonths, leadTimeWeeks, supplierID }
-        // console.log(`details of item to be added to my_object_table:`, addItemDetail);
-
         dispatch({ type: "ADD_ITEM_TO_ALL_ITEMS", payload: addItemDetail })
-        // write saga
-        // write route
-
     }
 
 
