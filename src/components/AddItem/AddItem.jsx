@@ -37,7 +37,7 @@ export default function AddItemToMasterList() {
     const [partName, setPartName] = useState('')
     const [partNumber, setPartNumber] = useState('')
     const [partDescription, setPartDescription] = useState('')
-    const [objectTypeID, setObjectTypeID] = useState(0)
+    const [objectTypeID, setObjectTypeID] = useState(1)
     const [mttfMonths, setmttfMonths] = useState(0)
     const [leadTimeWeeks, setLeadTimeWeeks] = useState(0)
     const [supplierID, setSupplierID] = useState(1)
@@ -51,10 +51,10 @@ export default function AddItemToMasterList() {
     }, []);
 
     const handleAddItemToMaster = () => {
-        console.log(`In handleadditemtomaster`);
+        // console.log(`In handleadditemtomaster`);
 
         let addItemDetail = { partName, partNumber, partDescription, objectTypeID, mttfMonths, leadTimeWeeks, supplierID }
-        console.log(`details of item to be added to my_object_table:`, addItemDetail);
+        // console.log(`details of item to be added to my_object_table:`, addItemDetail);
 
         dispatch({ type: "ADD_ITEM_TO_ALL_ITEMS", payload: addItemDetail })
         // write saga
@@ -96,11 +96,9 @@ export default function AddItemToMasterList() {
                             Part Description
                             <input placeholder='Part Description' value={partDescription} onChange={(e) => setPartDescription(e.target.value)} />
                         </div>
-                        {/* Object type - pull and map option list. */}
                         <label htmlFor='itemType'>Item Type</label>
-                        <select name='itemType' defaultValue={itemTypes} onChange={handleItemTypeChange}>
+                        <select name='itemType' defaultValue={objectTypeID} onChange={handleItemTypeChange}>
                             {itemTypes.map(type => {
-                                console.log(`details:`, type);
                                 return (
                                         <option key={type.id} value={type.id}>{type.object_type}</option>
                                 )

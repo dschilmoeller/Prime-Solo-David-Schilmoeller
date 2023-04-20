@@ -52,7 +52,6 @@ router.get("/fetchsuppliers", (req, res) => {
         });
 });
 
-
 router.get ('/fetchProfile', (req, res) => { 
     const sqlText = `SELECT first_name, last_name, user_email, user_type FROM "user"`
     pool
@@ -68,9 +67,8 @@ router.get ('/fetchProfile', (req, res) => {
 })
 
 router.get('/fetchdetail/:id', (req, res) => {
-    const sqlText = `SELECT * from object 
-                        JOIN object_suppliers ON object.id = object_suppliers.object_id
-                        JOIN suppliers ON suppliers.id = object_suppliers.supplier_id
+    const sqlText = `SELECT "object"."id", "part_name", "part_number", "description", "object_type_id", "mttf_months", "lead_time_weeks", "supplier_id", "supplier_name" from object 
+                        JOIN suppliers ON suppliers.id = object.supplier_id
                         WHERE object.id=$1;`
     
     const sqlParams = [Number(req.params.id)]
@@ -90,8 +88,7 @@ router.get('/fetchdetail/:id', (req, res) => {
 router.get('/mystock/:id', (req, res) => {
     const sqlText = `SELECT * from my_objects_table 
                         JOIN object ON object.id = my_objects_table.object_id
-                        JOIN object_suppliers ON object.id = object_suppliers.object_id
-                        JOIN suppliers ON suppliers.id = object_suppliers.supplier_id
+                        JOIN suppliers ON suppliers.id = object.supplier_id
                         WHERE mot_id=$1`
     
     const sqlParams = [Number(req.params.id)]
@@ -100,7 +97,6 @@ router.get('/mystock/:id', (req, res) => {
     pool.query(sqlText, sqlParams)
     .then((result) => {
         res.send(result.rows)
-        console.log(`result:`, result.rows);
     })
     .catch((err) => {
         console.log("error getting stock item details:", err);
@@ -108,21 +104,19 @@ router.get('/mystock/:id', (req, res) => {
     });
 })
 
-
 router.get('/get/fetchitemtypes/', (req, res) => {
     const sqlText = `SELECT * FROM "object_type_table"`
     pool
         .query(sqlText)
         .then((result) => {
             res.send(result.rows);
-            console.log(result.rows);
+            // console.log(result.rows);
         })
         .catch((err) => {
             console.log("error getting suppliers:", err);
             res.sendStatus(500);
         });
 })
-
 
 router.put('/mystock/:id', (req, res) => {
     
@@ -147,18 +141,10 @@ router.put('/allitems/:id', (req, res) => {
     
     const sqlText = `
     UPDATE "object"
-    SET "part_name" = $1, "part_number" = $2, "description" = $3, "lead_time_weeks" = $4, "mttf_months" = $5
-    WHERE "id" = $6;`
+    SET "part_name" = $1, "part_number" = $2, "description" = $3, "lead_time_weeks" = $4, "mttf_months" = $5, "supplier_id" = $6
+    WHERE "id" = $7;`
     
-    const sqlParams = [b.partName, b.partNumber, b.description, b.estLeadTime, b.estMTTF, b.itemID.id]
-    
-    const sqlText2 = `
-    UPDATE "object_suppliers" 
-    SET "supplier_id" = $1
-    WHERE "object_id" = $2;
-    `
-
-    const sqlParams2 = [b.supplierID, b.itemID.id]
+    const sqlParams = [b.partName, b.partNumber, b.description, b.estLeadTime, b.estMTTF, b.supplierID, b.itemID.id]
     
     pool.query(sqlText, sqlParams)
     .then((result) => {
@@ -168,19 +154,9 @@ router.put('/allitems/:id', (req, res) => {
         console.log(`Error updating object table in allitems put`, err);
         res.sendStatus(500)
     })
-
-    pool.query(sqlText2, sqlParams2)
-    .then((result) => {
-        // res.sendStatus(202)
-    })
-    .catch((err => {
-        console.log(`Error updating object_suppliers table in allitems put`, err);
-        // res.sendStatus(500)
-    }))
-    
 })
 
-router.post('/addtostock/:id', (req, res) => {
+router.post('/addtostock/', (req, res) => {
     const sqlText = `INSERT INTO "my_objects_table" 
     ("user_id", "object_id", "quantity_in_field", "quantity_owned", "stock_override", "stock_override_qty") 
     VALUES ($1, $2, $3, $4, $5, $6)`
@@ -196,5 +172,27 @@ router.post('/addtostock/:id', (req, res) => {
     })
 })
 
+// don't forget to make this check user type for admin status
+// not just logged in or not
+// {Adding items to master list}
+router.post('/additemtomasterlist/', (req, res) => {
+    console.log(`In additem to master list`);
+    let b = req.body
+    
+    let sqlParams = [b.partName, b.partNumber, b.partDescription, b.objectTypeID, b.mttfMonths, b.leadTimeWeeks, b.supplierID]
+    
+    let sqlText = `
+    INSERT INTO "object" ("part_name", "part_number", "description", "object_type_id", "mttf_months", "lead_time_weeks", "supplier_id")
+    VALUES ($1, $2, $3, $4, $5, $6, $7);
+    `
+    pool.query(sqlText, sqlParams)
+    .then((result) => {
+        res.sendStatus(200)
+    })
+    .catch((err => {
+        console.log(`Error adding item to "object": `, err);
+        res.sendStatus(500)
+    }))
+})
 
 module.exports = router

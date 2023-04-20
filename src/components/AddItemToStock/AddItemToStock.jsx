@@ -44,7 +44,7 @@ export default function AddItemToStock() {
 
     const handleAddItem = () => {
         console.log(`In handleadditem, details:`, itemDetail);
-        let object_id = itemDetail.object_id
+        let object_id = itemDetail.id
         let addItemDetail = {object_id, qtyInField, qtyOwned, stockOverride, stockOverrideQty}
         console.log(`details of item to be added to my_object_table:`, addItemDetail);
 

@@ -3,7 +3,8 @@ import { put, takeEvery } from "redux-saga/effects";
 
 function* addItemToStockAgain(action) {
     try {
-        yield axios.post(`/api/items/addtostock/${action.payload.object_id}`, action.payload);
+        console.log(`payload:`, action.payload);
+        yield axios.post(`/api/items/addtostock/`, action.payload);
         
         // yield put({ type: 'SET_STOCK_ITEM_DETAILS', payload: setID })
     } catch (err) {
