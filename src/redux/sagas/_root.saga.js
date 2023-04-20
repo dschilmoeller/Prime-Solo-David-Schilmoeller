@@ -10,6 +10,8 @@ import fetchItemDetails from './fetchitemdetail.saga';
 import fetchStockItemDetails from './fetchstockitemdetail.saga';
 import editMyStockItem from './editmystockitem.saga';
 import editItem from './edititem.saga';
+import addItemToStock from './additemtostock.saga';
+import fetchItemTypes from './fetchitemtypes.saga';
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -30,7 +32,8 @@ export default function* rootSaga() {
     fetchStockItemDetails(),
     editMyStockItem(),
     editItem(),
-    
+    addItemToStock(),
+    fetchItemTypes(),
     
   ]);
 }

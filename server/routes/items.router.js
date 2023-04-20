@@ -38,7 +38,7 @@ router.get("/fetchmystock", (req, res) => {
 });
 
 router.get("/fetchsuppliers", (req, res) => {
-    // console.log(`In fetchsuppliers`);
+    console.log(`In fetchsuppliers`);
     const sqlText = `SELECT * FROM "suppliers"`
     pool
         .query(sqlText)
@@ -51,6 +51,7 @@ router.get("/fetchsuppliers", (req, res) => {
             res.sendStatus(500);
         });
 });
+
 
 router.get ('/fetchProfile', (req, res) => { 
     const sqlText = `SELECT first_name, last_name, user_email, user_type FROM "user"`
@@ -66,7 +67,7 @@ router.get ('/fetchProfile', (req, res) => {
         });
 })
 
-router.get('/:id', (req, res) => {
+router.get('/fetchdetail/:id', (req, res) => {
     const sqlText = `SELECT * from object 
                         JOIN object_suppliers ON object.id = object_suppliers.object_id
                         JOIN suppliers ON suppliers.id = object_suppliers.supplier_id
@@ -74,11 +75,11 @@ router.get('/:id', (req, res) => {
     
     const sqlParams = [Number(req.params.id)]
 
-    console.log(`query:`, sqlText, sqlParams);
+    // console.log(`query:`, sqlText, sqlParams);
     pool.query(sqlText, sqlParams)
     .then((result) => {
         res.send(result.rows)
-        console.log(`result:`, result.rows);
+        // console.log(`result:`, result.rows);
     })
     .catch((err) => {
         console.log("error getting item details:", err);
@@ -95,7 +96,7 @@ router.get('/mystock/:id', (req, res) => {
     
     const sqlParams = [Number(req.params.id)]
 
-    console.log(`query:`, sqlText, sqlParams);
+    // console.log(`query:`, sqlText, sqlParams);
     pool.query(sqlText, sqlParams)
     .then((result) => {
         res.send(result.rows)
@@ -106,6 +107,12 @@ router.get('/mystock/:id', (req, res) => {
         res.sendStatus(500);
     });
 })
+
+
+router.get('/get/fetchitemtypes/', (req, res) => {
+    console.log(`in fetch item Types`);
+})
+
 
 router.put('/mystock/:id', (req, res) => {
     
@@ -126,7 +133,7 @@ router.put('/mystock/:id', (req, res) => {
 
 router.put('/allitems/:id', (req, res) => {
     let b = req.body
-    console.log(`in allitems`);
+    // console.log(`in allitems`);
     
     const sqlText = `
     UPDATE "object"
@@ -161,6 +168,22 @@ router.put('/allitems/:id', (req, res) => {
         // res.sendStatus(500)
     }))
     
+})
+
+router.post('/addtostock/:id', (req, res) => {
+    const sqlText = `INSERT INTO "my_objects_table" 
+    ("user_id", "object_id", "quantity_in_field", "quantity_owned", "stock_override", "stock_override_qty") 
+    VALUES ($1, $2, $3, $4, $5, $6)`
+    const sqlParams = [req.user.id, req.body.object_id, req.body.qtyInField, req.body.qtyOwned, req.body.stockOverride, req.body.stockOverrideQty]
+
+    pool.query(sqlText, sqlParams)
+    .then((result) => {
+        res.sendStatus(201)
+    })
+    .catch((err) => {
+        console.log(`error adding item to stock`, err);
+        res.sendStatus(500)
+    })
 })
 
 

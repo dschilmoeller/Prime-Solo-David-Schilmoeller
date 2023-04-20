@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Card from '@mui/material/Card'
 import { useHistory } from 'react-router-dom';
-
+import AddItemToMasterList from '../AddItem/AddItem';
 import './AllItems.css'
 
 
@@ -52,20 +52,14 @@ function AllItems(props) {
     return (
         <div>
             {/* Dump this into a modal or something and get to edge of page */}
-            <form>Add an Item
-                <input defaultValue={'part name'} />
-                <input defaultValue={'part number'} />
-                {/* Option drop down with fetched state of all part types */}
-                <input defaultValue={'Item Lead Time'} />
-                <input defaultValue={'Mean time to item failures in months'} />
-                <input defaultValue={'Item description'} />
-                <button className='btn'>Submit</button>
-            </form>
+
 
             <h3>Search Item Name<input></input></h3>
             <button onClick={searchFunction}>Search</button>
-            <h2>Import some data?</h2>
 
+            <AddItemToMasterList />
+
+            <h2>Import some data?</h2>
             <button onClick={manualPull}>Manual Data Pull</button>
 
             <div className='itemContainer'>

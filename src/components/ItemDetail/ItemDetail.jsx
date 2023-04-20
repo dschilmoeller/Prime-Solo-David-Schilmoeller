@@ -2,21 +2,19 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { useEffect } from 'react'
 import EditAllItems from "../EditAllItems/EditAllItems";
+import AddItemToStock from "../AddItemToStock/AddItemToStock";
 
 function ItemDetail() {
     const history = useHistory();
     const dispatch = useDispatch();
     const itemDetail = useSelector(store => store.itemDetail[0])
     const { id } = useParams()
-    
+
     // console.log(`user details`, user); // shows id of user logged in.
     // used to render edit button or not. NOT SECURE -> implement on backend.
     const user = useSelector(store => store.user.id)
 
-    
-    // console.log(`item details:`, itemDetail);    // this will be conditional depending on the same criteria 
-    // that renders this page differently based on whether the item appears in the user's list of sprockets.
-    
+
     const headBack = () => {
         history.push('/allitems')
     }
@@ -29,19 +27,20 @@ function ItemDetail() {
         let supplierID = `/#/suppliers/${itemDetail.supplier_id}`
         return (
             <>
-            {/* Needs to be admin only */}
-            {user === 1 ? <EditAllItems /> : null}
-            <div>
-                <h1>{itemDetail.part_name}</h1>
-                <h2>Part Number: {itemDetail.part_number}</h2>
-                <div>{itemDetail.description}</div>
-                <div>Estimated Lead Time: {itemDetail.lead_time_weeks} weeks</div>
-                <div>Estimated Mean Time To Failure: {itemDetail.mttf_months} months</div>
-                <div>Supplier: <a href={supplierID}>{itemDetail.supplier_name}</a></div>                
-
-                <br />
-                <button onClick={headBack}>Back</button>
-            </div>
+                {/* Needs to be admin only */}
+                {user === 1 ? <EditAllItems /> : null}
+                <div>
+                    <h1>{itemDetail.part_name}</h1>
+                    <h2>Part Number: {itemDetail.part_number}</h2>
+                    <div>{itemDetail.description}</div>
+                    <div>Estimated Lead Time: {itemDetail.lead_time_weeks} weeks</div>
+                    <div>Estimated Mean Time To Failure: {itemDetail.mttf_months} months</div>
+                    <div>Supplier: <a href={supplierID}>{itemDetail.supplier_name}</a></div>
+                    <br />
+                    <AddItemToStock />
+                    <br />
+                    <button onClick={headBack}>Back</button>
+                </div>
             </>
         )
     } else {
