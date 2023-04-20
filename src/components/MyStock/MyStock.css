@@ -1,5 +1,5 @@
 .stockContainer {
-    display : flex;
+    display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     padding: 1rem;
@@ -7,4 +7,8 @@
 
 .itemCard {
     padding: 1rem;
+}
+
+.listItem:hover {
+    background-color: aquamarine;
 }

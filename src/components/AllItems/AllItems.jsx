@@ -4,6 +4,7 @@ import Card from '@mui/material/Card'
 import { useHistory } from 'react-router-dom';
 import AddItemToMasterList from '../AddItem/AddItem';
 import './AllItems.css'
+import { Button } from '@mui/material';
 
 
 function AllItems(props) {
@@ -27,6 +28,9 @@ function AllItems(props) {
 
     // switch to list view -> just link to a diff page for now.
 
+    const clickMyStock = () => {
+        history.push('/mystock')
+    }
     const clickItemDetail = (id, stockItems) => {
         console.log(`StockItems:`, stockItems);
         let inStock = false
@@ -54,9 +58,9 @@ function AllItems(props) {
             {/* Dump this into a modal or something and get to edge of page */}
 
 
-            <h3>Search Item Name<input></input></h3>
-            <button onClick={searchFunction}>Search</button>
-
+            <h3>Search Item Name<input></input><button onClick={searchFunction}>Search</button></h3>
+            
+            <Button onClick={clickMyStock}>See My Stock</Button>
             <AddItemToMasterList />
 
             <h2>Import some data?</h2>
