@@ -22,7 +22,7 @@ const style = {
 
 export default function EditStockItem() {
   const stockDetail = useSelector(store => store.stockItemDetails[0])
-  // console.log(`StockDetail:`, stockDetail);
+  console.log(`StockDetail:`, stockDetail);
 
   const dispatch = useDispatch();
 

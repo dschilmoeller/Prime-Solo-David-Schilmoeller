@@ -121,7 +121,7 @@ router.get('/get/fetchitemtypes/', (req, res) => {
 router.get('/supplierdetails/:id', (req, res) => {
     const sqlText = `SELECT * from "suppliers" WHERE id=$1`
     const sqlParams = [req.params.id]
-
+console.log(`in supplierdetails.`);
     pool.query(sqlText, sqlParams)
     .then(result => {
         res.send(result.rows)
@@ -141,7 +141,7 @@ router.get('/fetchitemsbysupplier/:id', (req, res) => {
 
     pool.query(sqlText, sqlParams)
     .then((result) => {
-        console.log(`results`, result.rows);
+        
         res.send(result.rows)
     })
     .catch(error => {

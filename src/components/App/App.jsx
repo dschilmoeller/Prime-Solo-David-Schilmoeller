@@ -36,7 +36,7 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
-    dispatch({ type: 'FETCH_MY_STOCK'})
+    dispatch({ type: 'FETCH_MY_STOCK'});
   }, [dispatch]);
 
   return (
