@@ -48,7 +48,6 @@ export default function EditSupplier() {
     const [primary_contact_email, setPrimaryContactEmail] = useState(supplierDetail.primary_contact_email)
     const [updateSupplierID, setSupplierID] = useState(supplierID.id)
 
-
     // const handleSupplier = (e) => {
     //     setSupplierID(e.target.value)
     // }

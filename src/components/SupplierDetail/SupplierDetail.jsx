@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from 'react'
 import { Button } from "@mui/material";
 import EditSupplier from "../EditSupplier/EditSupplier";
+import DeleteSupplier from "../DeleteSupplier/DeleteSupplier";
 
 import './SupplierDetail.css'
 
@@ -71,6 +72,8 @@ function SupplierDetail() {
                             
                             <div key={supplier.id}>
                                 < EditSupplier />
+                                < DeleteSupplier />
+
                                 <h1>{supplier.supplier_name}</h1>
                                 <h2>{supplier.supplier_address}</h2>
                                 <div><a href={supplier.supplier_url}>{supplier.supplier_url}</a></div>

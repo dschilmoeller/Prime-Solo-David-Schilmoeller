@@ -269,4 +269,18 @@ router.delete('/deleteitemfromallitems/:id', (req, res) => {
     })
 })
 
+router.delete('/deletesupplier/:id', (req, res) => {
+    const sqlText = `DELETE FROM "suppliers" WHERE (id=$1)`
+    const sqlParams = [req.params.id]
+
+    pool.query(sqlText, sqlParams)
+    .then(result => {
+        res.sendStatus(200)
+    })
+    .catch(error => {
+        res.sendStatus(500)
+        console.log(`Error deleting supplier:`, error);
+    })
+})
+
 module.exports = router
