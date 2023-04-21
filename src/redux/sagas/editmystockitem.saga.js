@@ -2,12 +2,13 @@ import axios from "axios";
 import { put, takeEvery } from "redux-saga/effects";
 
 function* editMyStockItemAgain(action) {
-    console.log(`Sending to server:`, action.payload);
+    
     let setID = action.payload.mot_id
+    
     try {
         yield axios.put(`/api/items/mystock/${action.payload.mot_id}`, action.payload);
         
-        yield put({ type: 'SET_STOCK_ITEM_DETAILS', payload: setID })
+        yield put({ type: 'GET_ITEM_DETAIL', payload: setID })
     } catch (err) {
         console.log("error changing my stock item", err);
     }

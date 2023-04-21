@@ -31,9 +31,6 @@ function SupplierDetail() {
         console.log(`In clickdeletesupplier`);
     }
 
-    const clickEditSupplier = () => {
-        console.log(`In clickeditsupplier`);
-    }
     // courtesy of Stack Overflow:
     // https://stackoverflow.com/questions/8358084/regular-expression-to-reformat-a-us-phone-number-in-javascript
     function formatPhoneNumber(phoneNumberString) {

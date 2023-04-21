@@ -23,9 +23,9 @@ export default function EditSupplier() {
     const supplierID = useParams();
     const supplierDetail = useSelector(store => store.supplierdetail[0])
     // console.log(`supplier Details:`, supplierDetail);
-    
+
     // let suppliers = useSelector(store => store.suppliers)
-    
+
 
     // useEffect(() => {
     //     dispatch({ type: "GET_SUPPLIER_DETAILS", payload: Number(supplierID.id)  });
@@ -40,29 +40,30 @@ export default function EditSupplier() {
 
     const [supplier_name, setSupplierName] = useState(supplierDetail.supplier_name)
     const [supplier_address, setSupplierAddress] = useState(supplierDetail.supplier_address)
-    const [supplier_email, setSupplierEmail] = useState(supplierDetail.supplier_email)
     const [supplier_phone, setSupplierPhone] = useState(supplierDetail.supplier_phone)
+    const [supplier_email, setSupplierEmail] = useState(supplierDetail.supplier_email)
     const [supplier_url, setSupplierURL] = useState(supplierDetail.supplier_url)
     const [primary_contact_name, setPrimaryContactName] = useState(supplierDetail.primary_contact_name)
     const [primary_contact_phone, setPrimaryContactPhone] = useState(supplierDetail.primary_contact_phone)
     const [primary_contact_email, setPrimaryContactEmail] = useState(supplierDetail.primary_contact_email)
-    
-    
+    const [updateSupplierID, setSupplierID] = useState(supplierID.id)
 
-// const handleSupplier = (e) => {
-//     setSupplierID(e.target.value)
-// }
+
+    // const handleSupplier = (e) => {
+    //     setSupplierID(e.target.value)
+    // }
 
     const submitEdits = () => {
         event.preventDefault();
         // set up defaults.
-        // let updatedItemData = { itemID: supplierID, partName, partNumber, description, estLeadTime, estMTTF, supplierID }
-        // console.log(`updated Item Data:`, updatedItemData);
-        // dispatch({ type: 'UPDATE_INV_ITEM_DETAILS', payload: updatedItemData })
-        
-        // setOpen(false)
+
+        let updatedSupplierData = { updateSupplierID, supplier_name, supplier_address, supplier_email, supplier_phone, supplier_url, primary_contact_name, primary_contact_phone, primary_contact_email }
+        console.log(`In submit Edit`, updatedSupplierData);
+        dispatch({ type: 'UPDATE_SUPPLIER_DETAILS', payload: updatedSupplierData })
+
+        setOpen(false)
         // console.log(`itemID`, supplierID.id);
-        // dispatch({ type: 'GET_ITEM_DETAIL', payload: Number(supplierID.id )})
+        dispatch({ type: 'GET_ITEM_DETAIL', payload: Number(updateSupplierID) })
     }
 
     return (
@@ -79,33 +80,33 @@ export default function EditSupplier() {
                         Edit Supplier
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }} component={'div'}>
-                    {supplierDetail ? <form onSubmit={submitEdits}>
-                        <div>Supplier Name
-                            <input placeholder='supplier name' width="40" value={supplier_name} onChange={(e) => setSupplierName(e.target.value)} />
-                        </div>
-                        <div>Supplier Address
-                            <input placeholder='supplier name' width="40" value={supplier_address} onChange={(e) => setSupplierAddress(e.target.value)} />
-                        </div>
-                        <div>Supplier Email
-                            <input placeholder='supplier name' width="40" value={supplier_email} onChange={(e) => setSupplierEmail(e.target.value)} />
-                        </div>
-                        <div>Supplier Phone
-                            <input placeholder='supplier name' width="40" value={supplier_phone} onChange={(e) => setSupplierPhone(e.target.value)} />
-                        </div>
-                        <div>Supplier Website
-                            <input placeholder='supplier name' width="40" value={supplier_url} onChange={(e) => setSupplierURL(e.target.value)} />
-                        </div>
-                        <div>Primary Contact Name
-                            <input placeholder='supplier name' width="40" value={primary_contact_name} onChange={(e) => setPrimaryContactName(e.target.value)} />
-                        </div>
-                        <div>Primary Contact Phone
-                            <input placeholder='supplier name' width="40" value={primary_contact_phone} onChange={(e) => setPrimaryContactPhone(e.target.value)} />
-                        </div>
-                        <div>Primary Contact Email
-                            <input placeholder='supplier name' width="40" value={primary_contact_email} onChange={(e) => setPrimaryContactEmail(e.target.value)} />
-                        </div>
-                        
-                        {/*
+                        {supplierDetail ? <form onSubmit={submitEdits}>
+                            <div>Supplier Name
+                                <input placeholder='supplier name' size="47" value={supplier_name} onChange={(e) => setSupplierName(e.target.value)} />
+                            </div>
+                            <div>Supplier Address
+                                <input placeholder='supplier name' size="45" value={supplier_address} onChange={(e) => setSupplierAddress(e.target.value)} />
+                            </div>
+                            <div>Supplier Phone
+                                <input placeholder='supplier name' size="47" value={supplier_phone} onChange={(e) => setSupplierPhone(e.target.value)} />
+                            </div>
+                            <div>Supplier Email
+                                <input placeholder='supplier name' size="48" value={supplier_email} onChange={(e) => setSupplierEmail(e.target.value)} />
+                            </div>
+                            <div>Supplier Website
+                                <input placeholder='supplier name' size="46" value={supplier_url} onChange={(e) => setSupplierURL(e.target.value)} />
+                            </div>
+                            <div>Primary Contact Name
+                                <input placeholder='supplier name' size="40" value={primary_contact_name} onChange={(e) => setPrimaryContactName(e.target.value)} />
+                            </div>
+                            <div>Primary Contact Phone
+                                <input placeholder='supplier name' size="39" value={primary_contact_phone} onChange={(e) => setPrimaryContactPhone(e.target.value)} />
+                            </div>
+                            <div>Primary Contact Email
+                                <input placeholder='supplier name' size="40" value={primary_contact_email} onChange={(e) => setPrimaryContactEmail(e.target.value)} />
+                            </div>
+
+                            {/*
                         <div>Part Number
                             <input placeholder='part number' value={partNumber} onChange={(e) => setPartNumber(e.target.value)} />
                         </div>
@@ -118,9 +119,9 @@ export default function EditSupplier() {
                         <div>Estimated MTTF
                             <input placeholder='est mttf' value={estMTTF} onChange={(e) => setEstMTFF(e.target.value)} selected />
                         </div> */}
-                        
-                        <button type='submit'>Submit</button>
-                    </form> : null }
+
+                            <button type='submit'>Submit</button>
+                        </form> : null}
                     </Typography>
                 </Box>
             </Modal>

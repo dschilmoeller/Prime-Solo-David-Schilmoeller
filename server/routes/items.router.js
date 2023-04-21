@@ -39,7 +39,7 @@ router.get("/fetchmystock", (req, res) => {
 
 router.get("/fetchsuppliers", (req, res) => {
     // console.log(`In fetchsuppliers`);
-    const sqlText = `SELECT * FROM "suppliers"`
+    const sqlText = `SELECT * FROM "suppliers" ORDER BY supplier_name ASC`
     pool
         .query(sqlText)
         .then((result) => {
@@ -121,7 +121,6 @@ router.get('/get/fetchitemtypes/', (req, res) => {
 router.get('/supplierdetails/:id', (req, res) => {
     const sqlText = `SELECT * from "suppliers" WHERE id=$1`
     const sqlParams = [req.params.id]
-console.log(`in supplierdetails.`);
     pool.query(sqlText, sqlParams)
     .then(result => {
         res.send(result.rows)
@@ -150,8 +149,7 @@ router.get('/fetchitemsbysupplier/:id', (req, res) => {
     })
 })
 
-router.put('/mystock/:id', (req, res) => {
-    
+router.put('/mystock/:id', (req, res) => { 
     const sqlText = `UPDATE "my_objects_table"
     SET "quantity_in_field" = $1, "quantity_owned" = $2, "stock_override" = $3, "stock_override_qty" = $4
     WHERE (mot_id = $5 AND user_id = $6);`
@@ -184,6 +182,24 @@ router.put('/allitems/:id', (req, res) => {
     })
     .catch((err) => {
         console.log(`Error updating object table in allitems put`, err);
+        res.sendStatus(500)
+    })
+})
+
+router.put('/setsupplierdetails/:id', (req, res) => {
+
+    let b = req.body
+    const sqlText = `
+    UPDATE "suppliers"
+    SET "supplier_name" = $1, "supplier_address" = $2, "supplier_email" = $3, "supplier_phone" = $4,"supplier_url" = $5, "primary_contact_name" = $6, "primary_contact_phone" = $7, "primary_contact_email" = $8
+    WHERE "id" = $9;`
+    const sqlParams = [b.supplier_name, b.supplier_address, b.supplier_email, b.supplier_phone, b.supplier_url, b.primary_contact_name, b.primary_contact_phone, b.primary_contact_email, b.updateSupplierID]
+    pool.query(sqlText, sqlParams)
+    .then((result) => {
+        res.sendStatus(202)
+    })
+    .catch((err) => {
+        console.log(`error updating supplier details:`, err);
         res.sendStatus(500)
     })
 })
@@ -252,4 +268,5 @@ router.delete('/deleteitemfromallitems/:id', (req, res) => {
         console.log(`Error deleting item from my stock:`, error);
     })
 })
+
 module.exports = router
