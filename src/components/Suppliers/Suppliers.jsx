@@ -8,6 +8,8 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Card } from '@mui/material';
 import { useHistory } from 'react-router-dom';
+import AddSupplier from '../AddSupplier/AddSupplier';
+
 import './Suppliers.css'
 
 function Suppliers(props) {
@@ -44,6 +46,8 @@ function Suppliers(props) {
             <div>
                 <input></input><button>Search</button>
             </div>
+
+            <AddSupplier />
 
             {/* Set up to click on a card and go to supplier details page. */}
             <div className='supplierContainer'>

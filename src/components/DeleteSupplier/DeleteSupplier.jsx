@@ -53,7 +53,7 @@ export default function DeleteSupplier() {
           <form onSubmit={ConfirmDelete}>
             <div>Are you sure you'd like to delete this supplier?</div>
             <div>THIS WILL DELETE ALL ITEMS ASSOCIATED WITH THE SUPPLIER</div>
-            <button type='submit'>Submit</button><button>Cancel</button>
+            <button type='submit'>Submit</button><button type="button" onClick={()=> setOpen(false)}>Cancel</button>
           </form>
           {/* </Typography> */}
         </Box>

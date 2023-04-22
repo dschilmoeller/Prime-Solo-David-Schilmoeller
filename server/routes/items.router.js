@@ -224,7 +224,6 @@ router.post('/addtostock/', (req, res) => {
 // not just logged in or not
 // {Adding items to master list}
 router.post('/additemtomasterlist/', (req, res) => {
-    console.log(`In additem to master list`);
     let b = req.body
     
     let sqlParams = [b.partName, b.partNumber, b.partDescription, b.objectTypeID, b.mttfMonths, b.leadTimeWeeks, b.supplierID]
@@ -241,6 +240,31 @@ router.post('/additemtomasterlist/', (req, res) => {
         console.log(`Error adding item to "object": `, err);
         res.sendStatus(500)
     }))
+})
+
+// check for user type for admin status
+// {adding supplier to supplier list}
+router.post('/addsupplier', (req, res) => {
+    let b = req.body
+
+    let sqlText = `
+    INSERT INTO suppliers (supplier_name, supplier_address, supplier_email, supplier_phone, supplier_url, primary_contact_name, primary_contact_phone, primary_contact_email)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+    `
+    let sqlParams = [b.supplier_name, b.supplier_address, b.supplier_email, 
+        b.supplier_phone, b.supplier_url, b.primary_contact_name, 
+        b.primary_contact_phone, b.primary_contact_email]
+
+    pool.query(sqlText, sqlParams)
+    .then((result) => {
+        res.sendStatus(201)
+    })
+    .catch(err => {
+        res.sendStatus(500)
+        console.log(`Error adding supplier:`, err);
+    })
+    
+    
 })
 
 router.delete('/deletefrommystock/:id', (req, res) => {
