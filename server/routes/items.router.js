@@ -169,6 +169,18 @@ router.get('/fetchallusers', (req, res) => {
     }
 })
 
+router.get('/fetchusertypes', (req, res) => {
+    const sqlText = `SELECT user_type_name FROM user_types_table`
+    pool.query(sqlText)
+    .then((result) => {
+        res.send(result.rows)
+    })
+    .catch(error => {
+        res.sendStatus(500)
+        console.log(`Error fetching user types`, error);
+    })
+
+})
 router.put('/mystock/:id', (req, res) => {
     const sqlText = `UPDATE "my_objects_table"
     SET "quantity_in_field" = $1, "quantity_owned" = $2, "stock_override" = $3, "stock_override_qty" = $4

@@ -20,19 +20,9 @@ const style = {
 
 export default function EditProfile() {
     const dispatch = useDispatch();
-    // const supplierID = useParams();
     const user = useSelector(store => store.user)
-    console.log(`userDetail: `, user);
-
-    // let suppliers = useSelector(store => store.suppliers)
-
-
-    // useEffect(() => {
-    //     dispatch({ type: "GET_SUPPLIER_DETAILS", payload: Number(supplierID.id)  });
-    // }, []);
 
     const [open, setOpen] = useState(false);
-
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -50,8 +40,11 @@ export default function EditProfile() {
     const submitEdits = () => {
         event.preventDefault();
 
-        let updatedProfile = { first_name, last_name, user_email, username, user_type, supplier_name, supplier_address, supplier_phone, supplier_url, supplier_email }
-        console.log(`In submit Edit`, updatedProfile);
+        let updatedProfile = { first_name, last_name, user_email, 
+            username, user_type, supplier_name, 
+            supplier_address, supplier_phone, supplier_url, 
+            supplier_email }
+
         dispatch({ type: 'UPDATE_USER_PROFILE', payload: updatedProfile })
         setOpen(false)
     }

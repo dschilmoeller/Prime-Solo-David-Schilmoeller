@@ -4,9 +4,13 @@ import EditProfile from '../EditProfile/EditProfile';
 import { Button } from '@mui/material';
 
 function Profile() {
+    const dispatch = useDispatch();
+
     const profile = useSelector(state => state.user)
     const allUsers = useSelector(state => state.allusers)
-    const dispatch = useDispatch();
+    const userTypes = useSelector(state => state.usertypes)
+    
+    console.log(`User types: `, userTypes);
 
     useEffect(() => {
         dispatch({ type: "FETCH_PROFILE" })
@@ -31,6 +35,10 @@ function Profile() {
             return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('');
         }
         return null;
+    }
+
+    const handleTypeChange = (e) => {
+        console.log(`Handling type change to value:`, e.target.value );
     }
 
     return (
@@ -59,15 +67,23 @@ function Profile() {
                     
                     <ul>
                     <h2>All Users:</h2>
-                        {allUsers.map(item => { 
+                        {allUsers.map((item, i) => { 
                             return (
-                            <>
-                            <div>
+                            <div key={i}>
                             <li>Username: {item.username}</li>
                             <li> <a href={item.user_email}>{item.user_email}</a></li>
-                            <li>{item.user_type_name}</li>
-                            </div><br />
-                            </>
+                            <li>
+                                <label htmlFor='user_types'>User Type: </label>
+                                    <select name='user_type' defaultValue={item.user_type} onChange={handleTypeChange}>
+                                {userTypes.map((type, i) => {
+                                    return (
+                                        <option key={i} value={type.user_type_name}>{type.user_type_name}</option>
+                                    )
+                            })}
+                            </select>
+                            </li>
+                            <br />
+                            </div>
                         )
                         })}
                         
