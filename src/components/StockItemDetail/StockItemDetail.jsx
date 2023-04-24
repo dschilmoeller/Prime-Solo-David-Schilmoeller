@@ -20,6 +20,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from 'react'
+import { Button } from "@mui/material";
 
 import EditStockItem from "../EditStockItem/EditStockItem";
 import DeleteItemFromStock from "../DeleteItemFromStock/DeleteItemFromStock";
@@ -96,7 +97,7 @@ function StockItemDetail() {
                 {stockDetail.stock_override ? <div>Stock Override Quantity: {stockDetail.stock_override_qty}</div> : null}
                 <div>Supplier: <a href={supplierID}>{stockDetail.supplier_name}</a></div>
                 <br />
-                <Button onClick={backToMyStock}>Back to My Stock</Button><Button onClick={backToAll}>Back to All Items</Button>
+                <Button variant="outlined" onClick={backToMyStock}>Back to My Stock</Button><Button variant="outlined" onClick={backToAll}>Back to All Items</Button>
             </div>
             </>
         )

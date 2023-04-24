@@ -37,7 +37,7 @@ export default function DeleteItemFromStock() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Delete Item From Stock</Button>
+      <Button onClick={handleOpen} color="error">Delete Item From Stock</Button>
       <Modal
         open={open}
         onClose={handleClose}

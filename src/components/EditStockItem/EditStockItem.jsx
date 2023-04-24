@@ -54,7 +54,7 @@ export default function EditStockItem() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Edit Item</Button>
+      <Button color="secondary" onClick={handleOpen}>Edit Item</Button>
       <Modal
         open={open}
         onClose={handleClose}
