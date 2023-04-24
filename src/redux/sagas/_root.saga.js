@@ -21,6 +21,7 @@ import editSupplierDetails from './editsupplierdetails.saga';
 import deleteSupplier from './deletesupplier.saga';
 import addSupplier from './addsupplier.saga';
 import editProfile from './editprofile.saga';
+import fetchAllUsers from './fetchAllUsers.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -53,6 +54,7 @@ export default function* rootSaga() {
     deleteSupplier(),
     addSupplier(),
     editProfile(),
+    fetchAllUsers(),
     
 
   ]);

@@ -45,8 +45,12 @@ function StockItemDetail() {
         onHandQuant()
     }, []);
 
-    const headBack = () => {
+    const backToMyStock = () => {
         history.push('/mystock');
+    }
+
+    const backToAll = () => {
+        history.push('/allitems')
     }
 
     // testing - MUI modal.
@@ -92,7 +96,7 @@ function StockItemDetail() {
                 {stockDetail.stock_override ? <div>Stock Override Quantity: {stockDetail.stock_override_qty}</div> : null}
                 <div>Supplier: <a href={supplierID}>{stockDetail.supplier_name}</a></div>
                 <br />
-                <button onClick={headBack}>Back</button>
+                <button onClick={backToMyStock}>Back to My Stock</button><button onClick={backToAll}>Back to All Items</button>
             </div>
             </>
         )

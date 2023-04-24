@@ -10,6 +10,7 @@ import stockItemDetails from './stockitemdetails.reducer';
 import itemTypes from './itemtypes.reducer';
 import supplierdetail from './supplierdetail.reducer';
 import itemsbysupplier from './itemsbysupplier.reducer';
+import allusers from './allusers.reducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -28,6 +29,8 @@ const rootReducer = combineReducers({
   itemTypes, // holds different item type options eg. camera, sound
   supplierdetail, // holds details of a given supplier
   itemsbysupplier, // holds items pulled sorted by supplier
+  allusers, // holds list of all users and types.
+
 });
 
 export default rootReducer;

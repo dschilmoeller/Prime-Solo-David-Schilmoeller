@@ -27,7 +27,7 @@ router.get("/fetchmystock", (req, res) => {
     ORDER BY part_name ASC;`;
 
 
-    const sqlParams =  Number(req.user.user_type)
+    const sqlParams = Number(req.user.user_type)
     pool
         .query(sqlText, [sqlParams])
         .then((result) => {
@@ -55,7 +55,7 @@ router.get("/fetchsuppliers", (req, res) => {
         });
 });
 
-router.get ('/fetchProfile', (req, res) => { 
+router.get('/fetchProfile', (req, res) => {
     const sqlText = `SELECT first_name, last_name, user_email, user_type FROM "user"`
     pool
         .query(sqlText)
@@ -73,19 +73,19 @@ router.get('/fetchdetail/:id', (req, res) => {
     const sqlText = `SELECT "object"."id", "part_name", "part_number", "description", "object_type_id", "mttf_months", "lead_time_weeks", "supplier_id", "supplier_name" from object 
                         JOIN suppliers ON suppliers.id = object.supplier_id
                         WHERE object.id=$1;`
-    
+
     const sqlParams = [Number(req.params.id)]
 
     // console.log(`query:`, sqlText, sqlParams);
     pool.query(sqlText, sqlParams)
-    .then((result) => {
-        res.send(result.rows)
-        // console.log(`result:`, result.rows);
-    })
-    .catch((err) => {
-        console.log("error getting item details:", err);
-        res.sendStatus(500);
-    });
+        .then((result) => {
+            res.send(result.rows)
+            // console.log(`result:`, result.rows);
+        })
+        .catch((err) => {
+            console.log("error getting item details:", err);
+            res.sendStatus(500);
+        });
 })
 
 router.get('/mystock/:id', (req, res) => {
@@ -93,18 +93,18 @@ router.get('/mystock/:id', (req, res) => {
                         JOIN object ON object.id = my_objects_table.object_id
                         JOIN suppliers ON suppliers.id = object.supplier_id
                         WHERE mot_id=$1`
-    
+
     const sqlParams = [Number(req.params.id)]
 
     // console.log(`query:`, sqlText, sqlParams);
     pool.query(sqlText, sqlParams)
-    .then((result) => {
-        res.send(result.rows)
-    })
-    .catch((err) => {
-        console.log("error getting stock item details:", err);
-        res.sendStatus(500);
-    });
+        .then((result) => {
+            res.send(result.rows)
+        })
+        .catch((err) => {
+            console.log("error getting stock item details:", err);
+            res.sendStatus(500);
+        });
 })
 
 router.get('/get/fetchitemtypes/', (req, res) => {
@@ -125,14 +125,14 @@ router.get('/supplierdetails/:id', (req, res) => {
     const sqlText = `SELECT * from "suppliers" WHERE id=$1`
     const sqlParams = [req.params.id]
     pool.query(sqlText, sqlParams)
-    .then(result => {
-        res.send(result.rows)
-    })
-    .catch(error => {
-      res.sendStatus(500)  
-      console.log(`Error fetching supplier details`, error);
-    })
-    
+        .then(result => {
+            res.send(result.rows)
+        })
+        .catch(error => {
+            res.sendStatus(500)
+            console.log(`Error fetching supplier details`, error);
+        })
+
 })
 
 router.get('/fetchitemsbysupplier/:id', (req, res) => {
@@ -142,51 +142,68 @@ router.get('/fetchitemsbysupplier/:id', (req, res) => {
     const sqlParams = [req.params.id]
 
     pool.query(sqlText, sqlParams)
-    .then((result) => {
-        
-        res.send(result.rows)
-    })
-    .catch(error => {
-        res.sendStatus(500)
-        console.log(`Error fetching items by supplier:`, error);
-    })
+        .then((result) => {
+
+            res.send(result.rows)
+        })
+        .catch(error => {
+            res.sendStatus(500)
+            console.log(`Error fetching items by supplier:`, error);
+        })
 })
 
-router.put('/mystock/:id', (req, res) => { 
+router.get('/fetchallusers', (req, res) => {
+    if (req.user.user_type === 1) {
+        let sqlText = `select username, user_email, user_type_name FROM "user"
+        JOIN user_types_table ON user_types_table.id = "user".user_type`
+        pool.query(sqlText)
+            .then((result) => {
+                res.send(result.rows)
+            })
+            .catch(error => {
+                res.sendStatus(500)
+                console.log(`Error fetching all users`, error);
+            })
+    } else {
+        res.sendStatus(403)
+    }
+})
+
+router.put('/mystock/:id', (req, res) => {
     const sqlText = `UPDATE "my_objects_table"
     SET "quantity_in_field" = $1, "quantity_owned" = $2, "stock_override" = $3, "stock_override_qty" = $4
     WHERE (mot_id = $5 AND user_id = $6);`
     const sqlParams = [req.body.qtyInField, req.body.qtyOwned, req.body.stockOverride, req.body.stockOverrideQty, req.params.id, req.user.id]
-    
+
     pool.query(sqlText, sqlParams)
-    .then((result) => {
-        res.sendStatus(202)
-    })
-    .catch((err) => {
-        console.log("error updating stock item:", err);
-        res.sendStatus(500);
-    });
+        .then((result) => {
+            res.sendStatus(202)
+        })
+        .catch((err) => {
+            console.log("error updating stock item:", err);
+            res.sendStatus(500);
+        });
 })
 
 router.put('/allitems/:id', (req, res) => {
     let b = req.body
     // console.log(`in allitems`);
-    
+
     const sqlText = `
     UPDATE "object"
     SET "part_name" = $1, "part_number" = $2, "description" = $3, "lead_time_weeks" = $4, "mttf_months" = $5, "supplier_id" = $6
     WHERE "id" = $7;`
-    
+
     const sqlParams = [b.partName, b.partNumber, b.description, b.estLeadTime, b.estMTTF, b.supplierID, b.itemID.id]
-    
+
     pool.query(sqlText, sqlParams)
-    .then((result) => {
-        res.sendStatus(202)
-    })
-    .catch((err) => {
-        console.log(`Error updating object table in allitems put`, err);
-        res.sendStatus(500)
-    })
+        .then((result) => {
+            res.sendStatus(202)
+        })
+        .catch((err) => {
+            console.log(`Error updating object table in allitems put`, err);
+            res.sendStatus(500)
+        })
 })
 
 router.put('/setsupplierdetails/:id', (req, res) => {
@@ -198,16 +215,16 @@ router.put('/setsupplierdetails/:id', (req, res) => {
     WHERE "id" = $9;`
     const sqlParams = [b.supplier_name, b.supplier_address, b.supplier_email, b.supplier_phone, b.supplier_url, b.primary_contact_name, b.primary_contact_phone, b.primary_contact_email, b.updateSupplierID]
     pool.query(sqlText, sqlParams)
-    .then((result) => {
-        res.sendStatus(202)
-    })
-    .catch((err) => {
-        console.log(`error updating supplier details:`, err);
-        res.sendStatus(500)
-    })
+        .then((result) => {
+            res.sendStatus(202)
+        })
+        .catch((err) => {
+            console.log(`error updating supplier details:`, err);
+            res.sendStatus(500)
+        })
 })
 
-router.put('/setprofiledetails', (req,res) => {
+router.put('/setprofiledetails', (req, res) => {
     let b = req.body
     const sqlText = `UPDATE "user" 
     set username =$1, first_name = $2, last_name = $3, 
@@ -215,11 +232,11 @@ router.put('/setprofiledetails', (req,res) => {
         supplier_company_address = $7, supplier_email = $8, supplier_company_phone = $9, 
         supplier_company_url = $10
         WHERE id = ${req.user.id}`
-    const sqlParams = [b.username, b.first_name, b.last_name, 
-        b.user_email, b.user_type, b.supplier_name, 
-        b.supplier_address, b.supplier_email, b.supplier_phone, 
-        b.supplier_url]
-        pool.query(sqlText, sqlParams)
+    const sqlParams = [b.username, b.first_name, b.last_name,
+    b.user_email, b.user_type, b.supplier_name,
+    b.supplier_address, b.supplier_email, b.supplier_phone,
+    b.supplier_url]
+    pool.query(sqlText, sqlParams)
         .then((response) => {
             res.sendStatus(200)
         })
@@ -236,13 +253,13 @@ router.post('/addtostock/', (req, res) => {
     const sqlParams = [req.user.id, req.body.object_id, req.body.qtyInField, req.body.qtyOwned, req.body.stockOverride, req.body.stockOverrideQty]
 
     pool.query(sqlText, sqlParams)
-    .then((result) => {
-        res.sendStatus(201)
-    })
-    .catch((err) => {
-        console.log(`error adding item to stock`, err);
-        res.sendStatus(500)
-    })
+        .then((result) => {
+            res.sendStatus(201)
+        })
+        .catch((err) => {
+            console.log(`error adding item to stock`, err);
+            res.sendStatus(500)
+        })
 })
 
 // don't forget to make this check user type for admin status
@@ -250,21 +267,21 @@ router.post('/addtostock/', (req, res) => {
 // {Adding items to master list}
 router.post('/additemtomasterlist/', (req, res) => {
     let b = req.body
-    
+
     let sqlParams = [b.partName, b.partNumber, b.partDescription, b.objectTypeID, b.mttfMonths, b.leadTimeWeeks, b.supplierID]
-    
+
     let sqlText = `
     INSERT INTO "object" ("part_name", "part_number", "description", "object_type_id", "mttf_months", "lead_time_weeks", "supplier_id")
     VALUES ($1, $2, $3, $4, $5, $6, $7);
     `
     pool.query(sqlText, sqlParams)
-    .then((result) => {
-        res.sendStatus(200)
-    })
-    .catch((err => {
-        console.log(`Error adding item to "object": `, err);
-        res.sendStatus(500)
-    }))
+        .then((result) => {
+            res.sendStatus(200)
+        })
+        .catch((err => {
+            console.log(`Error adding item to "object": `, err);
+            res.sendStatus(500)
+        }))
 })
 
 // check for user type for admin status
@@ -276,46 +293,46 @@ router.post('/addsupplier', (req, res) => {
     INSERT INTO suppliers (supplier_name, supplier_address, supplier_email, supplier_phone, supplier_url, primary_contact_name, primary_contact_phone, primary_contact_email)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
     `
-    let sqlParams = [b.supplier_name, b.supplier_address, b.supplier_email, 
-        b.supplier_phone, b.supplier_url, b.primary_contact_name, 
-        b.primary_contact_phone, b.primary_contact_email]
+    let sqlParams = [b.supplier_name, b.supplier_address, b.supplier_email,
+    b.supplier_phone, b.supplier_url, b.primary_contact_name,
+    b.primary_contact_phone, b.primary_contact_email]
 
     pool.query(sqlText, sqlParams)
-    .then((result) => {
-        res.sendStatus(201)
-    })
-    .catch(err => {
-        res.sendStatus(500)
-        console.log(`Error adding supplier:`, err);
-    })
-    
-    
+        .then((result) => {
+            res.sendStatus(201)
+        })
+        .catch(err => {
+            res.sendStatus(500)
+            console.log(`Error adding supplier:`, err);
+        })
+
+
 })
 
 router.delete('/deletefrommystock/:id', (req, res) => {
     let sqlText = `DELETE FROM "my_objects_table" WHERE (mot_id=$1 AND user_id=$2)`
     let sqlParams = [req.params.id, req.user.id]
     pool.query(sqlText, sqlParams)
-    .then(result => {
-        res.sendStatus(200)
-    })
-    .catch(error => {
-        res.sendStatus(500)
-        console.log(`Error deleting item from my stock:`, error);
-    })
+        .then(result => {
+            res.sendStatus(200)
+        })
+        .catch(error => {
+            res.sendStatus(500)
+            console.log(`Error deleting item from my stock:`, error);
+        })
 })
 
 router.delete('/deleteitemfromallitems/:id', (req, res) => {
     let sqlText = `DELETE FROM "object" WHERE (id=$1)`
     let sqlParams = [req.params.id]
     pool.query(sqlText, sqlParams)
-    .then(result => {
-        res.sendStatus(200)
-    })
-    .catch(error => {
-        res.sendStatus(500)
-        console.log(`Error deleting item from my stock:`, error);
-    })
+        .then(result => {
+            res.sendStatus(200)
+        })
+        .catch(error => {
+            res.sendStatus(500)
+            console.log(`Error deleting item from my stock:`, error);
+        })
 })
 
 router.delete('/deletesupplier/:id', (req, res) => {
@@ -323,13 +340,13 @@ router.delete('/deletesupplier/:id', (req, res) => {
     const sqlParams = [req.params.id]
 
     pool.query(sqlText, sqlParams)
-    .then(result => {
-        res.sendStatus(200)
-    })
-    .catch(error => {
-        res.sendStatus(500)
-        console.log(`Error deleting supplier:`, error);
-    })
+        .then(result => {
+            res.sendStatus(200)
+        })
+        .catch(error => {
+            res.sendStatus(500)
+            console.log(`Error deleting supplier:`, error);
+        })
 })
 
 module.exports = router
