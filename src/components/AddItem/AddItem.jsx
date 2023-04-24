@@ -54,6 +54,8 @@ export default function AddItemToMasterList() {
         e.preventDefault();
         let addItemDetail = { partName, partNumber, partDescription, objectTypeID, mttfMonths, leadTimeWeeks, supplierID }
         dispatch({ type: "ADD_ITEM_TO_ALL_ITEMS", payload: addItemDetail })
+        dispatch({ type: "FETCH_ALL_ITEMS" })
+        setOpen(false)
     }
 
 
@@ -62,6 +64,11 @@ export default function AddItemToMasterList() {
     }
     const handleItemTypeChange = (e) => {
         setObjectTypeID(e.target.value)
+    }
+
+    const handleCancel = () => {
+        console.log(`In handlecancle`);
+        setOpen(false)
     }
 
     return (
@@ -94,7 +101,7 @@ export default function AddItemToMasterList() {
                         <select name='itemType' defaultValue={objectTypeID} onChange={handleItemTypeChange}>
                             {itemTypes.map(type => {
                                 return (
-                                        <option key={type.id} value={type.id}>{type.object_type}</option>
+                                    <option key={type.id} value={type.id}>{type.object_type}</option>
                                 )
                             })}
                         </select>
@@ -118,7 +125,7 @@ export default function AddItemToMasterList() {
                         </select>
 
                         <br /><br />
-                        <button type='submit'>Submit</button>
+                        <button type='submit'>Submit</button><button type='button' onClick={handleCancel}>Cancel</button>
                     </form>
                 </Box>
             </Modal>

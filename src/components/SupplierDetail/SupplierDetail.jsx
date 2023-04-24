@@ -62,8 +62,6 @@ function SupplierDetail() {
     return (
         <>
             <div>
-                {user === 1 ? <Button onClick={clickDeleteSupplier}>Delete Supplier</Button> : null}
-                
                 {supDet &&
                     supDet.map((supplier) => {
                         let mailAddressSales = `mailto:${supplier.supplier_email}`;

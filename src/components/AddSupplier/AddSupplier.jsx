@@ -50,6 +50,8 @@ export default function AddSupplier() {
         }
 
         dispatch({ type: "ADD_SUPPLIER", payload: addSupplierDetails })
+        dispatch({ type: "FETCH_SUPPLIERS"})
+        setOpen(false)
 
         // this won't work. May have to useEffect on dispatch?
         // history.push('/suppliers/0')

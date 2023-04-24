@@ -68,7 +68,7 @@ function AllItems(props) {
             {listView ? <Button onClick={toggleListView}>See Box View</Button> : <Button onClick={toggleListView}>See List View</Button>}
             <Button onClick={clickMyStock}>See My Stock</Button>
             
-            {user === 2 ? <AddItemToMasterList /> : null}
+            {user === 1 ? <AddItemToMasterList /> : null}
 
             {/* <h2>Import some data?</h2>
             <button onClick={manualPull}>Manual Data Pull</button> */}
