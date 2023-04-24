@@ -154,7 +154,7 @@ router.get('/fetchitemsbysupplier/:id', (req, res) => {
 
 router.get('/fetchallusers', (req, res) => {
     if (req.user.user_type === 1) {
-        let sqlText = `select username, user_email, user_type_name FROM "user"
+        let sqlText = `select "user".id, username, user_email, user_type_name FROM "user"
         JOIN user_types_table ON user_types_table.id = "user".user_type`
         pool.query(sqlText)
             .then((result) => {
@@ -170,15 +170,15 @@ router.get('/fetchallusers', (req, res) => {
 })
 
 router.get('/fetchusertypes', (req, res) => {
-    const sqlText = `SELECT user_type_name FROM user_types_table`
+    const sqlText = `SELECT * FROM user_types_table`
     pool.query(sqlText)
-    .then((result) => {
-        res.send(result.rows)
-    })
-    .catch(error => {
-        res.sendStatus(500)
-        console.log(`Error fetching user types`, error);
-    })
+        .then((result) => {
+            res.send(result.rows)
+        })
+        .catch(error => {
+            res.sendStatus(500)
+            console.log(`Error fetching user types`, error);
+        })
 
 })
 router.put('/mystock/:id', (req, res) => {
@@ -256,6 +256,29 @@ router.put('/setprofiledetails', (req, res) => {
             console.log(`Error updating profile details:`, err);
         })
 
+})
+
+router.put('/setusertype/', (req, res) => {
+    if (req.user.user_type === 1) {
+        let sqlParams = []
+        if (req.body.type === 'Master Admin') {
+            sqlParams = [1, req.body.target]
+        } else if (req.body.type === 'Supplier Admin') {
+            sqlParams = [2, req.body.target]
+        } else if (req.body.type === 'Supplier') {
+            sqlParams = [3, req.body.target]
+        } else if (req.body.type === 'User') {
+            sqlParams = [4, req.body.target]
+        }
+        const sqlText = `UPDATE "user" set "user_type" = $1 WHERE id = $2`
+        pool.query(sqlText, sqlParams)
+            .then((response) => {
+                res.sendStatus(200)
+            })
+            .catch(err => {
+                console.log(`Error updating user type:`, err);
+            })
+    }
 })
 
 router.post('/addtostock/', (req, res) => {

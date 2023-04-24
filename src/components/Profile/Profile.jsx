@@ -9,21 +9,19 @@ function Profile() {
     const profile = useSelector(state => state.user)
     const allUsers = useSelector(state => state.allusers)
     const userTypes = useSelector(state => state.usertypes)
-    
-    console.log(`User types: `, userTypes);
 
     useEffect(() => {
         dispatch({ type: "FETCH_PROFILE" })
         if (profile.user_type === 1) {
-            dispatch({ type: 'FETCH_ALL_USERS' })   
-            dispatch({ type: 'FETCH_USER_TYPES'})
+            dispatch({ type: 'FETCH_ALL_USERS' })
+            dispatch({ type: 'FETCH_USER_TYPES' })
         }
     }, []);
 
     // allUsers.map(item => {
     //     console.log(`Item:`, item.username);
     // })
-    
+
     let mailToProfile = `mailto: ${profile.user_email}`
     let mailToCompany = `mailto: ${profile.supplier_email}`
 
@@ -38,7 +36,8 @@ function Profile() {
     }
 
     const handleTypeChange = (e) => {
-        console.log(`Handling type change to value:`, e.target.value );
+        console.log(`Handling type change to value:`, e.target.id);
+        dispatch({ type: 'EDIT_USER_TYPE', payload: {type : e.target.value, target: e.target.id} })
     }
 
     return (
@@ -64,29 +63,31 @@ function Profile() {
 
             {profile.user_type === 1 ? (
                 <div>
-                    
+
                     <ul>
-                    <h2>All Users:</h2>
-                        {allUsers.map((item, i) => { 
-                            return (
-                            <div key={i}>
-                            <li>Username: {item.username}</li>
-                            <li> <a href={item.user_email}>{item.user_email}</a></li>
-                            <li>
-                                <label htmlFor='user_types'>User Type: </label>
-                                    <select name='user_type' defaultValue={item.user_type} onChange={handleTypeChange}>
-                                {userTypes.map((type, i) => {
-                                    return (
-                                        <option key={i} value={type.user_type_name}>{type.user_type_name}</option>
-                                    )
-                            })}
-                            </select>
-                            </li>
-                            <br />
-                            </div>
-                        )
+                        <h2>All Users:</h2>
+                        {allUsers.map(item => {
+                            if (item.username != profile.username) {
+                                return (
+                                    <div key={item.id}>
+                                        <li>Username: {item.username}</li>
+                                        <li> <a href={item.user_email}>{item.user_email}</a></li>
+                                        <li>
+                                            <label htmlFor='user_types'>User Type: </label>
+                                            <select name='user_type' defaultValue={item.user_type_name} id={item.id} onChange={handleTypeChange}>
+                                                {userTypes.map(type => {
+                                                    return (
+                                                        <option key={type.id} value={type.user_type_name}>{type.user_type_name}</option>
+                                                    )
+                                                })}
+                                            </select>
+                                        </li>
+                                        <br />
+                                    </div>
+                                )
+                            }
                         })}
-                        
+
                     </ul>
 
                 </div>

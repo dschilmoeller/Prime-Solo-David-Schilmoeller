@@ -1,9 +1,7 @@
 import axios from "axios";
 import { put, takeEvery } from "redux-saga/effects";
 
-function* editSupplierDetailsAgain(action) {
-    console.log(`Sending to server:`, action.payload);
-    
+function* editSupplierDetailsAgain(action) {    
     try {
         yield axios.put(`/api/items/setsupplierdetails/${action.payload.updateSupplierID}`, action.payload);
         
