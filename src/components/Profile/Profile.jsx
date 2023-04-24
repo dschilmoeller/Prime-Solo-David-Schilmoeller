@@ -18,10 +18,6 @@ function Profile() {
         }
     }, []);
 
-    // allUsers.map(item => {
-    //     console.log(`Item:`, item.username);
-    // })
-
     let mailToProfile = `mailto: ${profile.user_email}`
     let mailToCompany = `mailto: ${profile.supplier_email}`
 
@@ -36,8 +32,7 @@ function Profile() {
     }
 
     const handleTypeChange = (e) => {
-        console.log(`Handling type change to value:`, e.target.id);
-        dispatch({ type: 'EDIT_USER_TYPE', payload: {type : e.target.value, target: e.target.id} })
+        dispatch({ type: 'EDIT_USER_TYPE', payload: { type: e.target.value, target: e.target.id } })
     }
 
     return (
@@ -83,13 +78,10 @@ function Profile() {
                                             </select>
                                         </li>
                                         <br />
-                                    </div>
-                                )
+                                    </div>)
                             }
                         })}
-
                     </ul>
-
                 </div>
             ) : null}
 

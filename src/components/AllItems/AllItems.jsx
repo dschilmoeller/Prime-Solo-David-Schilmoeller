@@ -4,7 +4,7 @@ import Card from '@mui/material/Card'
 import { useHistory } from 'react-router-dom';
 import AddItemToMasterList from '../AddItem/AddItem';
 import './AllItems.css'
-import { Button } from '@mui/material';
+import { Button, TextField, Autocomplete } from '@mui/material';
 
 
 function AllItems(props) {
@@ -14,15 +14,13 @@ function AllItems(props) {
 
     useEffect(() => {
         dispatch({ type: "FETCH_ALL_ITEMS" })
-        
+
     }, []);
 
     const allItemsFromStore = useSelector((store) => store.allItems);
     const stockItems = useSelector((store => store.myStock))
 
-    const searchFunction = (searchParam) => {
-        console.log(`In search`);
-    }
+    
     // dispatch - fetchAllItems. -> Move to local state (searchability) -> re-render
     // run dispatch on page load. Not important atm due to localized speed.
     // figure out search through local state and render depending on whether search is used?
@@ -51,62 +49,73 @@ function AllItems(props) {
             history.push(`/itemDetail/${id}`)
         }
     }
-    
+
     const [listView, setListView] = useState(false)
     const toggleListView = () => { setListView(!listView) }
-
-    // const manualPull = () => {
-    //     dispatch({ type: "FETCH_ALL_ITEMS" })
-    // }
-
+    
+    // search functionality
+    const [searchParam, setSearchParam] = useState('')
+    
     return (
         <div>
-            {/* Dump this into a modal or something and get to edge of page */}
-
-
-            <h3>Search All Items By Name<input></input><button onClick={searchFunction}>Search</button></h3>
+            <h3>Search All Items By Name<input placeholder='Part Description' value={searchParam} onChange={(e) => setSearchParam(e.target.value)} /></h3>
+            
             {listView ? <Button onClick={toggleListView}>See Box View</Button> : <Button onClick={toggleListView}>See List View</Button>}
             <Button onClick={clickMyStock}>See My Stock</Button>
-            
+
             {user === 1 ? <AddItemToMasterList /> : null}
 
             {/* <h2>Import some data?</h2>
             <button onClick={manualPull}>Manual Data Pull</button> */}
 
-            
-                {listView === false ? (
-                    <div className='stockContainer'>
+
+            {listView === false ? (
+                <div className='stockContainer'>
                     {allItemsFromStore.map((item) => {
+                        if (searchParam != ''){
+                        if (item.part_name === searchParam) {
                         return (
                             <div className='itemCard' key={item.id}>
-                                <Card sx={{ minWidth: 400 }} id={item.id} onClick={() => clickItemDetail(item.id, stockItems)} >
+                                <Card sx={{ minWidth: 300 }} id={item.id} onClick={() => clickItemDetail(item.id, stockItems)} >
                                     <h3>Item name: {item.part_name}</h3>
                                     <h3>Part# {item.part_number}</h3>
-                                    <h4>Item Lead Time: {item.lead_time_weeks}</h4>
-                                    <h4>Mean Time To Failure: {item.mttf_months}</h4>
+                                    <h4>Item Lead Time: {item.lead_time_weeks} weeks</h4>
+                                    <h4>Mean Time To Failure: {item.mttf_months} months</h4>
                                     <h4>Object type: {item.object_type}</h4>
                                 </Card>
                             </div>
-                        )
-                    })} 
-                   </div> )
-                   : (
-                        <ul>
-                    {allItemsFromStore.map((item) => {
+                        )}
+                    } else {
                         return (
-                            <div className='listItem' key={item.id}>
-                                <li id={item.id} 
-                                onClick={() => clickItemDetail(item.id, stockItems)} >
-                                    Item Name: {item.part_name} / Part # {item.part_number}
-                                    
-                                </li>
+                            <div className='itemCard' key={item.id}>
+                                <Card sx={{ minWidth: 300 }} id={item.id} onClick={() => clickItemDetail(item.id, stockItems)} >
+                                    <h3>Item name: {item.part_name}</h3>
+                                    <h3>Part# {item.part_number}</h3>
+                                    <h4>Item Lead Time: {item.lead_time_weeks} weeks</h4>
+                                    <h4>Mean Time To Failure: {item.mttf_months} months</h4>
+                                    <h4>Object type: {item.object_type}</h4>
+                                </Card>
                             </div>
-                        )
-                    })} 
-                 </ul> ) }
-                {/* end Map */}
-            </div>
-        
+                        ) 
+                    }})}
+                </div>)
+                : (
+                    <ul>
+                        {allItemsFromStore.map((item) => {
+                            return (
+                                <div className='listItem' key={item.id}>
+                                    <li id={item.id}
+                                        onClick={() => clickItemDetail(item.id, stockItems)} >
+                                        Item Name: {item.part_name} / Part # {item.part_number}
+
+                                    </li>
+                                </div>
+                            )
+                        })}
+                    </ul>)}
+            {/* end Map */}
+        </div>
+
     );
 }
 

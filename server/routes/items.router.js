@@ -25,9 +25,7 @@ router.get("/fetchmystock", (req, res) => {
     JOIN "object_type_table" ON object_type_table.id = object.object_type_id
     WHERE user_id = $1
     ORDER BY part_name ASC;`;
-
-
-    const sqlParams = Number(req.user.user_type)
+    const sqlParams = Number(req.user.id)
     pool
         .query(sqlText, [sqlParams])
         .then((result) => {
@@ -155,7 +153,8 @@ router.get('/fetchitemsbysupplier/:id', (req, res) => {
 router.get('/fetchallusers', (req, res) => {
     if (req.user.user_type === 1) {
         let sqlText = `select "user".id, username, user_email, user_type_name FROM "user"
-        JOIN user_types_table ON user_types_table.id = "user".user_type`
+        JOIN user_types_table ON user_types_table.id = "user".user_type
+        ORDER BY username ASC`
         pool.query(sqlText)
             .then((result) => {
                 res.send(result.rows)
