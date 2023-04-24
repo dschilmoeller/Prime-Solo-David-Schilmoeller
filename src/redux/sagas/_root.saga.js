@@ -20,6 +20,7 @@ import deleteItemFromAllItems from './deleteitemfromallitems.saga';
 import editSupplierDetails from './editsupplierdetails.saga';
 import deleteSupplier from './deletesupplier.saga';
 import addSupplier from './addsupplier.saga';
+import editProfile from './editprofile.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -51,7 +52,8 @@ export default function* rootSaga() {
     editSupplierDetails(),
     deleteSupplier(),
     addSupplier(),
-
+    editProfile(),
+    
 
   ]);
 }

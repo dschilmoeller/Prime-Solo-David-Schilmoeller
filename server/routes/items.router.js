@@ -20,14 +20,13 @@ router.get("/fetchallitems", (req, res) => {
 });
 
 router.get("/fetchmystock", (req, res) => {
-    console.log(`In fetchmystock`);
     const sqlText = `SELECT * FROM "my_objects_table"
     JOIN "object" ON object.id = my_objects_table.object_id
     JOIN "object_type_table" ON object_type_table.id = object.object_type_id
     WHERE user_id = $1
     ORDER BY part_name ASC;`;
 
-    console.log(`user info:`, Number(req.user.user_type));
+
     const sqlParams =  Number(req.user.user_type)
     pool
         .query(sqlText, [sqlParams])
@@ -206,6 +205,29 @@ router.put('/setsupplierdetails/:id', (req, res) => {
         console.log(`error updating supplier details:`, err);
         res.sendStatus(500)
     })
+})
+
+router.put('/setprofiledetails', (req,res) => {
+    console.log(`req.body:`, req.body);
+    let b = req.body
+    const sqlText = `UPDATE "user" 
+    set username =$1, first_name = $2, last_name = $3, 
+        user_email = $4, user_type = $5, supplier_company_name = $6, 
+        supplier_company_address = $7, supplier_email = $8, supplier_company_phone = $9, 
+        supplier_company_url = $10
+        WHERE id = ${req.user.id}`
+    const sqlParams = [b.username, b.first_name, b.last_name, 
+        b.user_email, b.user_type, b.supplier_name, 
+        b.supplier_address, b.supplier_email, b.supplier_phone, 
+        b.supplier_url]
+        pool.query(sqlText, sqlParams)
+        .then((response) => {
+            res.sendStatus(200)
+        })
+        .catch(err => {
+            console.log(`Error updating profile details:`, err);
+        })
+
 })
 
 router.post('/addtostock/', (req, res) => {

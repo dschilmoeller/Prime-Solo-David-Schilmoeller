@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import EditProfile from '../EditProfile/EditProfile';
 
 function Profile() {
     const profile = useSelector(state => state.user)
@@ -25,6 +26,7 @@ function Profile() {
     return (
         <div>
             <h2>Profile Details</h2>
+            < EditProfile />
             <ul>
             <li>Full Name: {profile.first_name} {profile.last_name}</li>
             <li>Email: <a href={mailToProfile}>{profile.user_email}</a></li>
