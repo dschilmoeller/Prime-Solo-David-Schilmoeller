@@ -57,6 +57,7 @@ function AllItems(props) {
 
     return (
         <div>
+            <h1>All Items</h1>
             <TextField
                 id="search-bar"
                 className="text"

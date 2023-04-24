@@ -3,13 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Card } from '@mui/material';
 import './MyStock.css'
-import { Button } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 
 function MyStock() {
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector(store => store.user.id)
-    
+
     const myStock = useSelector((store) => store.myStock);
 
     const [listView, setListView] = useState(false)
@@ -33,45 +33,91 @@ function MyStock() {
         console.log(`In search`);
     }
 
+    // search functionality
+    const [searchParam, setSearchParam] = useState('')
+    const searchables = myStock.map(item => { return item.part_name })
+
+
+    const filterData = (query, data) => {
+        if (!query) {
+            return data;
+        } else {
+            return data.filter((d) => d.toLowerCase().includes(query));
+        }
+    };
+
+    const dataFiltered = filterData(searchParam, searchables);
+    // end search functionality
+
+
     return (
         <div>
-            <h3>Search My Stock By Name<input></input><button onClick={searchFunction}>Search</button></h3>
-            {listView ? <Button onClick={toggleListView}>See Box View</Button> : <Button onClick={toggleListView}>See List View</Button>}
-            <Button onClick={clickAllItems}>See All Items</Button>
+            <h1>My Stock</h1>
+            <TextField
+                id="search-bar"
+                className="text"
+                onChange={(e) => {
+                    setSearchParam(e.target.value);
+                }}
+                value={searchParam}
+                label="Enter Search Term"
+                variant="outlined"
+                placeholder="Search..."
+                size="small"
+            />
 
+            <div>
+                {listView ? <Button onClick={toggleListView}>See Box View</Button> : <Button onClick={toggleListView}>See List View</Button>}
+                <Button onClick={clickAllItems}>See All Items</Button>
+            </div>
             {/* Set up to click on a card and go to item details page. */}
-            
-                {(listView === false && myStock.length) ? (
-                    <div className='stockContainer'>
-                    {myStock.map((stockItem) => {
-                        return (
-                            <div className='itemCard' key={stockItem.mot_id}>
-                                <Card sx={{ minWidth: 400 }} id={stockItem.mot_id} onClick={() => clickItemDetail(stockItem.mot_id)} >
-                                    <h3>Item name: {stockItem.part_name}</h3>
-                                    <h3>Part# {stockItem.part_number}</h3>
-                                    {stockItem.lead_time_weeks > 4 ? <h4>Item Lead Time: {stockItem.lead_time_weeks / 4} months</h4> : <h4>Item Lead Time: {stockItem.lead_time_weeks} weeks</h4>}
-                                    {stockItem.mttf_months > 11 ? <h4>Mean Time To Failure: {stockItem.mttf_months / 12} years</h4> : <h4>Mean Time To Failure: {stockItem.mttf_months} months</h4>}
-                                    <h4>Object type: {stockItem.object_type}</h4>
-                                </Card>
-                            </div>
-                        )
-                    })}
-                    </div>) 
-                    : (<ul>
+
+            {(listView === false && myStock.length) ? (
+                <div className='stockContainer'>
+                    {dataFiltered.map((d, i) => (
+                        <div key={i} >
                             {myStock.map((stockItem) => {
-                        return (
-                        <div className='listItem' key={stockItem.mot_id}>
-                        <li id={stockItem.mot_id} onClick={() => clickItemDetail(stockItem.mot_id)} >
-                            Item name: {stockItem.part_name} / Part # {stockItem.part_number}
-                        </li>
-                        
+                                if (stockItem.part_name === d) {
+                                    return (
+                                        <div className='itemCard' key={stockItem.mot_id}>
+                                            <Card sx={{ minWidth: 300 }} id={stockItem.mot_id} onClick={() => clickItemDetail(stockItem.mot_id)} >
+                                                <h3>Item name: {stockItem.part_name}</h3>
+                                                <h3>Part# {stockItem.part_number}</h3>
+                                                {stockItem.lead_time_weeks > 4 ? <h4>Item Lead Time: {stockItem.lead_time_weeks / 4} months</h4> : <h4>Item Lead Time: {stockItem.lead_time_weeks} weeks</h4>}
+                                                {stockItem.mttf_months > 11 ? <h4>Mean Time To Failure: {stockItem.mttf_months / 12} years</h4> : <h4>Mean Time To Failure: {stockItem.mttf_months} months</h4>}
+                                                <h4>Object type: {stockItem.object_type}</h4>
+                                            </Card>
+                                        </div>
+                                    )
+                                }
+                            })}
+                        </div>
+                    ))}
+                </div>
+            ) : (<ul>
+                {dataFiltered.map((d, i) => (
+                    <div>
+                        {myStock.map((stockItem) => {
+                            if (stockItem.part_name === d) {
+                                return (
+                                    <div className='listItem' key={stockItem.mot_id}>
+                                        <li id={stockItem.mot_id} onClick={() => clickItemDetail(stockItem.mot_id)} >
+                                            Item name: {stockItem.part_name} / Part # {stockItem.part_number}
+                                        </li>
+
+                                    </div>
+                                )
+                            }
+                        })}
                     </div>
-                    )
-                    })} 
-                    </ul>)
-                } </div> ) }
-            
-                
+                ))}
+            </ul>)
+            }
+        </div>
+    )
+}
+
+
 
 
 export default MyStock;
