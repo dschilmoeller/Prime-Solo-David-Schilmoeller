@@ -47,20 +47,13 @@ export default function EditProfile() {
     const [supplier_url, setSupplierURL] = useState(user.supplier_company_url)
     const [supplier_email, setSupplierEmail] = useState(user.supplier_email)
 
-    // const handleSupplier = (e) => {
-    //     setSupplierID(e.target.value)
-    // }
-
     const submitEdits = () => {
         event.preventDefault();
 
         let updatedProfile = { first_name, last_name, user_email, username, user_type, supplier_name, supplier_address, supplier_phone, supplier_url, supplier_email }
         console.log(`In submit Edit`, updatedProfile);
         dispatch({ type: 'UPDATE_USER_PROFILE', payload: updatedProfile })
-
         setOpen(false)
-        // console.log(`itemID`, supplierID.id);
-        // dispatch({ type: 'GET_ITEM_DETAIL', payload: Number(updateSupplierID) })
     }
 
     

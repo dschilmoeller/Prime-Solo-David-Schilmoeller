@@ -208,7 +208,6 @@ router.put('/setsupplierdetails/:id', (req, res) => {
 })
 
 router.put('/setprofiledetails', (req,res) => {
-    console.log(`req.body:`, req.body);
     let b = req.body
     const sqlText = `UPDATE "user" 
     set username =$1, first_name = $2, last_name = $3, 

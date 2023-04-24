@@ -34,7 +34,7 @@ function Profile() {
             <li>Username: {profile.username}</li>
             {profile.supplier_company_name ? ( 
                 <div>
-            <h2>Supplier Status: Supplier</h2>
+            <h2>Account Type: Master Administrator</h2>
             <li>Supplier Corporate Name: {profile.supplier_company_name}</li>
             <li>Supplier Address: {profile.supplier_company_address}</li>
             <li>Supplier Phone: {formatPhoneNumber(profile.supplier_company_phone)}</li>
