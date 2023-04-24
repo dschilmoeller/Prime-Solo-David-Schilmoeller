@@ -20,13 +20,17 @@ router.get("/fetchallitems", (req, res) => {
 });
 
 router.get("/fetchmystock", (req, res) => {
-    // console.log(`In fetchmystock`);
+    console.log(`In fetchmystock`);
     const sqlText = `SELECT * FROM "my_objects_table"
     JOIN "object" ON object.id = my_objects_table.object_id
     JOIN "object_type_table" ON object_type_table.id = object.object_type_id
+    WHERE user_id = $1
     ORDER BY part_name ASC;`;
+
+    console.log(`user info:`, Number(req.user.user_type));
+    const sqlParams =  Number(req.user.user_type)
     pool
-        .query(sqlText)
+        .query(sqlText, [sqlParams])
         .then((result) => {
             res.send(result.rows);
             // console.log(result.rows);

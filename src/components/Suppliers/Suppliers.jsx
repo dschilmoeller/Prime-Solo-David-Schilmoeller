@@ -40,7 +40,7 @@ function Suppliers(props) {
 
     return (
         <div>
-            <h2>DS</h2>
+            <h2>Suppliers</h2>
             
             {/* TO DO */}
             <div>
