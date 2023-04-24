@@ -80,15 +80,15 @@ export default function EditStockItem() {
             {stockOverride ?
               <>
                 <div>
-                  <button onClick={() => { setStockOverride(false) }} type="button">Turn off Override</button>
+                  <Button onClick={() => { setStockOverride(false) }} type="button">Turn off Override</Button>
                 </div>
                 <div>Stock Override Quantity
                   <input placeholder='Override Qty' value={stockOverrideQty} onChange={(e) => setStockOverrideQty(e.target.value)} />
                 </div>
               </>
-              : <button onClick={() => { setStockOverride(true) }} type="button">Activate Stock Override</button>}
+              : <Button onClick={() => { setStockOverride(true) }} type="button">Activate Stock Override</Button>}
             <br /><br />
-            <button type='submit'>Submit</button>
+            <Button type='submit'>Submit</Button>
           </form>
           {/* </Typography> */}
         </Box>

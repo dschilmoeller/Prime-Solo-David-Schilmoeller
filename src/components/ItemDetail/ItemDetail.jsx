@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import EditAllItems from "../EditAllItems/EditAllItems";
 import AddItemToStock from "../AddItemToStock/AddItemToStock";
 import DeleteItemFromAllItems from "../DeleteFromAllItems/DeleteFromAllItems";
+import { Button } from "@mui/material";
 
 function ItemDetail() {
     const history = useHistory();
@@ -41,7 +42,7 @@ function ItemDetail() {
                     <br />
                     <AddItemToStock />
                     <br />
-                    <button onClick={headBack}>Back</button>
+                    <Button onClick={headBack}>Return To All Items</Button>
                 </div>
             </>
         )

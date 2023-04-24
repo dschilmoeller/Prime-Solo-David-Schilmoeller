@@ -119,7 +119,7 @@ export default function EditSupplier() {
                             <input placeholder='est mttf' value={estMTTF} onChange={(e) => setEstMTFF(e.target.value)} selected />
                         </div> */}
 
-                            <button type='submit'>Submit</button>
+                            <Button type='submit'>Submit</Button>
                         </form> : null}
                     </Typography>
                 </Box>

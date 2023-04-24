@@ -100,7 +100,7 @@ export default function EditProfile() {
                             </div>
                             </> ) : null }
 
-                            <button type='submit'>Submit</button><button type='buttton' onClick={()=>{setOpen(false)}}>Cancel</button>
+                            <Button type='submit'>Submit</Button><Button type='buttton' onClick={()=>{setOpen(false)}}>Cancel</Button>
                         </form> : null}
                     </Typography>
                 </Box>

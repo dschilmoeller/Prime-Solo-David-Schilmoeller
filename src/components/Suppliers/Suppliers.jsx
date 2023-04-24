@@ -6,7 +6,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Card } from '@mui/material';
+import { Card, TextField } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import AddSupplier from '../AddSupplier/AddSupplier';
 
@@ -17,7 +17,7 @@ function Suppliers(props) {
     const dispatch = useDispatch();
 
     const suppliers = useSelector((store) => store.suppliers);
-    
+
     useEffect(() => {
         dispatch({ type: "FETCH_SUPPLIERS" })
     }, []);
@@ -28,49 +28,78 @@ function Suppliers(props) {
         var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
         var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
         if (match) {
-          var intlCode = (match[1] ? '+1 ' : '');
-          return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('');
+            var intlCode = (match[1] ? '+1 ' : '');
+            return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('');
         }
         return null;
-      }
+    }
 
-      const clickSupplierDetail = (id) => {
+    const clickSupplierDetail = (id) => {
         history.push(`/supplierdetail/${id}`)
-      }
+    }
+
+    // search functionality
+    const [searchParam, setSearchParam] = useState('')
+    const searchables = suppliers.map(item => { return item.supplier_name })
+
+
+    const filterData = (query, data) => {
+        if (!query) {
+            return data;
+        } else {
+            return data.filter((d) => d.toLowerCase().includes(query));
+        }
+    };
+
+    const dataFiltered = filterData(searchParam, searchables);
+    // end search functionality
 
     return (
         <div>
-            <h2>Suppliers</h2>
-            
-            {/* TO DO */}
-            <div>
-                <input></input><button>Search</button>
-            </div>
+            <h1>Suppliers</h1>
+            <TextField
+                id="search-bar"
+                className="text"
+                onChange={(e) => {
+                    setSearchParam(e.target.value);
+                }}
+                value={searchParam}
+                label="Enter Search Term"
+                variant="outlined"
+                placeholder="Search..."
+                size="small"
+            />
 
             <AddSupplier />
 
             {/* Set up to click on a card and go to supplier details page. */}
             <div className='supplierContainer'>
+                {dataFiltered.map((d, i) => (
+                    <div key={i}>
                 {suppliers.length &&
                     suppliers.map((supplier) => {
+                        if (supplier.supplier_name === d) {
                         let supplierURL = supplier.supplier_url;
                         let mailAddress = `mailto:${supplier.primary_contact_email}`;
                         let supplierID = supplier.id;
-                        
+
                         return (
                             <div className='itemCard' key={supplier.id}>
-                                <Card sx={{ minWidth: 400 }} onClick={()=> clickSupplierDetail(supplier.id)}>
+                                <Card sx={{ minWidth: 400 }} onClick={() => clickSupplierDetail(supplier.id)}>
                                     <h3>{supplier.supplier_name}</h3>
                                     <h3>{formatPhoneNumber(supplier.supplier_phone)}</h3>
                                     <h4>{supplier.supplier_address}</h4>
                                     <h4>{supplier.supplier_email}</h4>
                                     <a href={supplierURL} >{supplier.supplier_url}</a>
                                     <p>Primary Contact: {supplier.primary_contact_name} | {formatPhoneNumber(supplier.primary_contact_phone)} |
-                                    <a id={supplierID}> </a><a href={mailAddress}>{supplier.primary_contact_email}</a></p>
+                                        <a id={supplierID}> </a><a href={mailAddress}>{supplier.primary_contact_email}</a></p>
                                 </Card>
                             </div>
-                        )
-                    })}
+                        )}
+                    })}        
+                    </div>
+                ))}
+                
             </div>
         </div>
     );

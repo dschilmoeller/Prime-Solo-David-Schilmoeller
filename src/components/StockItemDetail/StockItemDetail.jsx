@@ -96,7 +96,7 @@ function StockItemDetail() {
                 {stockDetail.stock_override ? <div>Stock Override Quantity: {stockDetail.stock_override_qty}</div> : null}
                 <div>Supplier: <a href={supplierID}>{stockDetail.supplier_name}</a></div>
                 <br />
-                <button onClick={backToMyStock}>Back to My Stock</button><button onClick={backToAll}>Back to All Items</button>
+                <Button onClick={backToMyStock}>Back to My Stock</Button><Button onClick={backToAll}>Back to All Items</Button>
             </div>
             </>
         )

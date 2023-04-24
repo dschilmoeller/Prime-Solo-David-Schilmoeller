@@ -29,10 +29,6 @@ function MyStock() {
         history.push('/allitems')
     }
 
-    const searchFunction = (searchParam) => {
-        console.log(`In search`);
-    }
-
     // search functionality
     const [searchParam, setSearchParam] = useState('')
     const searchables = myStock.map(item => { return item.part_name })
@@ -91,10 +87,14 @@ function MyStock() {
                                     )
                                 }
                             })}
+                            {/* End of mystock.map */}
                         </div>
                     ))}
+                    {/* End of dataFiltered.map */}
                 </div>
-            ) : (<ul>
+            ) 
+            : // else if listView === true 
+            (<ul>
                 {dataFiltered.map((d, i) => (
                     <div>
                         {myStock.map((stockItem) => {
