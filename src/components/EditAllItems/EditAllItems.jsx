@@ -25,7 +25,7 @@ export default function EditAllItems() {
     // console.log(`itemDetail:`, itemDetail);
     const dispatch = useDispatch();
     let suppliers = useSelector(store => store.suppliers)
-    const itemID = useParams();
+    
 
     useEffect(() => {
         dispatch({ type: 'FETCH_SUPPLIERS' })
@@ -61,16 +61,13 @@ export default function EditAllItems() {
 
     const submitEdits = () => {
         event.preventDefault();
-        // set up defaults.
+        const itemID = itemDetail.id
         let updatedItemData = { itemID, partName, partNumber, description, estLeadTime, estMTTF, supplierID }
-        // console.log(`updated Item Data:`, updatedItemData);
         dispatch({ type: 'UPDATE_INV_ITEM_DETAILS', payload: updatedItemData })
-
         setOpen(false)
-        // console.log(`itemID`, itemID.id);
-        dispatch({ type: 'GET_ITEM_DETAIL', payload: Number(itemID.id) })
     }
 
+    
     return (
         <>
         <div className='btn-container-no-margin'>
@@ -115,7 +112,7 @@ export default function EditAllItems() {
                                 <Button type='submit' variant='contained'>Submit</Button>
                             </div>
                             <div className="btn-container">
-                                <Button type='button' color='secondary' variant='contained'>Cancel</Button>
+                                <Button type='button' color='secondary' onClick={() => setOpen(false)} variant='contained'>Cancel</Button>
                             </div>
                         </form>
                     </Typography>

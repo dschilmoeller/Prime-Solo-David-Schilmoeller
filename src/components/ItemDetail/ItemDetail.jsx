@@ -15,7 +15,7 @@ function ItemDetail() {
 
     // used to render edit button or not. NOT SECURE -> implement on backend.
     const user = useSelector(store => store.user.user_type)
-    console.log(`user details`, user); // shows id of user logged in.
+    // console.log(`user details`, user); // shows id of user logged in.
 
     const headBack = () => {
         history.push('/allitems')

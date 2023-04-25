@@ -3,6 +3,7 @@ import axios from 'axios'
 
 function* fetchItemDetailsAgain(action) {
     try {
+        console.log(`action.payload:`, action);
         const details = yield axios.get(`/api/items/fetchdetail/${action.payload}`)
         
         yield put({ type: 'SET_ITEM_DETAILS', payload: details.data })

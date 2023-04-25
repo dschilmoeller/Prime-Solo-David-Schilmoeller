@@ -69,6 +69,7 @@ router.get('/fetchProfile', (req, res) => {
 })
 
 router.get('/fetchdetail/:id', (req, res) => {
+    console.log(`req.body:`, req.params);
     const sqlText = `SELECT "object"."id", "part_name", "part_number", "description", "object_type_id", "mttf_months", "lead_time_weeks", "supplier_id", "supplier_name" from object 
                         JOIN suppliers ON suppliers.id = object.supplier_id
                         WHERE object.id=$1;`
@@ -201,13 +202,14 @@ router.put('/mystock/:id', (req, res) => {
 router.put('/allitems/:id', (req, res) => {
     let b = req.body
     // console.log(`in allitems`);
+    // console.log(`req.body:`, req.body);
 
     const sqlText = `
     UPDATE "object"
     SET "part_name" = $1, "part_number" = $2, "description" = $3, "lead_time_weeks" = $4, "mttf_months" = $5, "supplier_id" = $6
     WHERE "id" = $7;`
 
-    const sqlParams = [b.partName, b.partNumber, b.description, b.estLeadTime, b.estMTTF, b.supplierID, b.itemID.id]
+    const sqlParams = [b.partName, b.partNumber, b.description, b.estLeadTime, b.estMTTF, b.supplierID, b.itemID]
 
     pool.query(sqlText, sqlParams)
         .then((result) => {
