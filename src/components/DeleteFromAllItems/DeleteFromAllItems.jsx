@@ -46,17 +46,15 @@ export default function DeleteItemFromAllItems() {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Delete Item From All Items
+            Delete Item
           </Typography>
           {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}> */}
           <form onSubmit={ConfirmDelete}>
-            <div>Are you sure you'd like to remove this item from the master list?</div>
-            
-            <Button type='submit' variant='contained'>Submit</Button>
-            
-            
-            <Button type='button' color='secondary' variant='contained' onClick={()=> setOpen(false)}>Cancel</Button>
-            
+            <h3>Are you quite sure you'd like to remove this item from the master list?</h3>
+            <div className='confirmBtn'>
+            <Button sx={{ marginLeft: 2, marginTop: 1 }} type='submit' variant='contained'>Delete</Button>
+            <Button sx={{ marginLeft: 2, marginTop: 1 }} type='button' color='secondary' variant='contained' onClick={()=> setOpen(false)}>Cancel</Button>
+            </div>
           </form>
           {/* </Typography> */}
         </Box>

@@ -73,7 +73,7 @@ export default function AddItemToMasterList() {
 
     return (
         <div>
-            <Button onClick={handleOpen}>Add Item To Master List</Button>
+            <Button variant='contained' sx={{ m: 1 }} onClick={handleOpen}>Add Item To Master List</Button>
             <Modal
                 open={open}
                 onClose={handleClose}

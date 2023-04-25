@@ -53,11 +53,9 @@ export default function DeleteItemFromStock() {
           {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}> */}
           <form onSubmit={ConfirmDelete}>
             <div>Are you sure you'd like to remove this item from your stock?</div>
-            <div className="btn-container">
-            <Button type='submit' variant='contained'>Submit</Button>
-            </div>
-            <div className="btn-container">
-            <Button type='button' color='secondary' variant='contained' onClick={()=> setOpen(false)}>Cancel</Button>
+            <div className='confirmBtn'>
+            <Button sx={{ marginLeft: 2, marginTop: 1 }} type='submit' variant='contained'>Delete</Button>
+            <Button sx={{ marginLeft: 2, marginTop: 1 }} type='button' color='secondary' variant='contained' onClick={()=> setOpen(false)}>Cancel</Button>
             </div>
           </form>
           {/* </Typography> */}

@@ -165,9 +165,18 @@ Container Treatments
   padding-left: 1.5rem;
 }
 
+.supplier-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 1rem;
+  margin: auto;
+}
+
 .stock-container {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   padding: 1rem;
   margin: auto;
   font-size: large;

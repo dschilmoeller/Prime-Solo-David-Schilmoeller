@@ -55,11 +55,11 @@ export default function EditStockItem() {
     dispatch({ type: 'GET_STOCK_ITEM_DETAILS', payload: stockDetail.mot_id })
   }
 
-  
+
   return (
     <div>
       <div className='btn-container-no-margin'>
-      <Button variant='outlined' onClick={handleOpen}>Edit Stock Item</Button>
+        <Button variant='outlined' onClick={handleOpen}>Edit Stock Item</Button>
       </div>
       <Modal
         open={open}
@@ -86,19 +86,16 @@ export default function EditStockItem() {
             {stockOverride ?
               <>
                 <div>
-                  <Button onClick={() => { setStockOverride(false) }} type="button">Turn off Override</Button>
+                  <Button variant='contained' color='secondary' onClick={() => { setStockOverride(false) }} type="button">Turn off Override</Button>
                 </div>
                 <div>Stock Override Quantity
                   <input placeholder='Override Qty' value={stockOverrideQty} onChange={(e) => setStockOverrideQty(e.target.value)} />
                 </div>
               </>
-              : <Button onClick={() => { setStockOverride(true) }} type="button">Activate Stock Override</Button>}
-            <br /><br />
-            <div className="btn-container">
-            <Button type='submit' variant='contained'>Submit</Button>
-            </div>
-            <div className="btn-container">
-            <Button type='button' color='secondary' variant='contained' onClick={()=> setOpen(false)}>Cancel</Button>
+              : <Button variant='contained' onClick={() => { setStockOverride(true) }} type="button">Activate Stock Override</Button>}
+            <div className='confirmBtn'>
+              <Button sx={{ marginLeft: 2, marginTop: 1 }} type='submit' variant='contained'>Submit</Button>
+              <Button sx={{ marginLeft: 2, marginTop: 1 }} type='button' color='secondary' variant='contained' onClick={() => setOpen(false)}>Cancel</Button>
             </div>
           </form>
           {/* </Typography> */}

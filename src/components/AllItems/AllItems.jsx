@@ -60,6 +60,7 @@ function AllItems(props) {
             <div className='general-container'>
             <h1>All Items</h1>
             <TextField
+            autoFocus
                 id="search-bar"
                 className="text"
                 onChange={(e) => {
@@ -72,8 +73,8 @@ function AllItems(props) {
                 size="small"
             />
             <div>
-                {listView ? <Button onClick={toggleListView}>See Box View</Button> : <Button onClick={toggleListView}>See List View</Button>}
-                <Button onClick={clickMyStock}>See My Stock</Button>
+                {listView ? <Button variant='contained' sx={{ m: 1 }} onClick={toggleListView}>See Box View</Button> : <Button variant='contained' sx={{ m: 1 }} onClick={toggleListView}>See List View</Button>}
+                <Button variant='outlined' sx={{ m: 1 }} onClick={clickMyStock}>See My Stock</Button>
             </div>
             <div>
                 {user === 1 ? <AddItemToMasterList /> : null}

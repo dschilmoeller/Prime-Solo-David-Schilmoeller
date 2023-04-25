@@ -60,7 +60,7 @@ export default function AddSupplier() {
 
     return (
         <div>
-            <Button onClick={handleOpen}>Add Supplier</Button>
+            <Button variant='contained' sx={{ m: 1 }} onClick={handleOpen}>Add Supplier</Button>
             <Modal
                 open={open}
                 onClose={handleClose}

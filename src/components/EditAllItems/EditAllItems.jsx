@@ -45,7 +45,7 @@ export default function EditAllItems() {
         setSupplierID(itemDetail.supplier_id)
 
     }
-    
+
     const handleClose = () => setOpen(false);
 
     // state - default should be relevant stockItemDetails
@@ -66,7 +66,7 @@ export default function EditAllItems() {
         const itemID = itemDetail.id
         let updatedItemData = { itemID, partName, partNumber, description, estLeadTime, estMTTF, supplierID }
         dispatch({ type: 'UPDATE_INV_ITEM_DETAILS', payload: updatedItemData })
-        
+
         dispatch({ type: 'GET_ITEM_DETAILS', payload: itemID })
         setOpen(false)
         if (stockItemDetail) {
@@ -74,60 +74,58 @@ export default function EditAllItems() {
         }
     }
 
-if (itemDetail ) {
-    return (
-        <>
-            <div className='btn-container-no-margin'>
-                <Button variant='contained' sx={{ m: 1 }} onClick={handleOpen}>Edit Item Details</Button>
-            </div>
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={{ ...style, border: 'none' }}>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Edit Item
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }} component={'div'}>
-                        <form onSubmit={submitEdits}>
-                            <div>Part Name
-                                <input placeholder='part name' value={partName} onChange={(e) => setPartName(e.target.value)} />
-                            </div>
-                            <div>Part Number
-                                <input placeholder='part number' value={partNumber} onChange={(e) => setPartNumber(e.target.value)} />
-                            </div>
-                            <div>Description
-                                <input placeholder='description' value={description} onChange={(e) => setDescription(e.target.value)} />
-                            </div>
-                            <div>Estimated Lead Time
-                                <input placeholder='est lead time' value={estLeadTime} onChange={(e) => setEstLeadTime(e.target.value)} />
-                            </div>
-                            <div>Estimated MTTF
-                                <input placeholder='est mttf' value={estMTTF} onChange={(e) => setEstMTFF(e.target.value)} selected />
-                            </div>
-                            <label htmlFor='suppliers'>Supplier</label>
-                            <select name='suppliers' defaultValue={supplierID} onChange={handleSupplier}>
-                                {suppliers.map(supplier => {
-                                    return (
-                                        <option key={supplier.id} value={supplier.id} >{supplier.supplier_name}</option>
-                                    )
-                                })}
-                            </select>
-                            <div className="btn-container">
-                                <Button type='submit' variant='contained'>Submit</Button>
-                            </div>
-                            <div className="btn-container">
-                                <Button type='button' color='secondary' onClick={() => setOpen(false)} variant='contained'>Cancel</Button>
-                            </div>
-                        </form>
-                    </Typography>
-                </Box>
-            </Modal>
-        </>
-    );
-                            } else {
-                                return null
-                            }
+    if (itemDetail) {
+        return (
+            <>
+                <div className='btn-container-no-margin'>
+                    <Button variant='contained' sx={{ m: 1 }} onClick={handleOpen}>Edit Item Details</Button>
+                </div>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box sx={{ ...style, border: 'none' }}>
+                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                            Edit Item
+                        </Typography>
+                        <Typography id="modal-modal-description" sx={{ mt: 2 }} component={'div'}>
+                            <form onSubmit={submitEdits}>
+                                <div>Part Name
+                                    <input placeholder='part name' value={partName} onChange={(e) => setPartName(e.target.value)} />
+                                </div>
+                                <div>Part Number
+                                    <input placeholder='part number' value={partNumber} onChange={(e) => setPartNumber(e.target.value)} />
+                                </div>
+                                <div>Description
+                                    <input placeholder='description' value={description} onChange={(e) => setDescription(e.target.value)} />
+                                </div>
+                                <div>Estimated Lead Time
+                                    <input placeholder='est lead time' value={estLeadTime} onChange={(e) => setEstLeadTime(e.target.value)} />
+                                </div>
+                                <div>Estimated MTTF
+                                    <input placeholder='est mttf' value={estMTTF} onChange={(e) => setEstMTFF(e.target.value)} selected />
+                                </div>
+                                <label htmlFor='suppliers'>Supplier</label>
+                                <select name='suppliers' defaultValue={supplierID} onChange={handleSupplier}>
+                                    {suppliers.map(supplier => {
+                                        return (
+                                            <option key={supplier.id} value={supplier.id} >{supplier.supplier_name}</option>
+                                        )
+                                    })}
+                                </select>
+                                <div className='confirmBtn'>
+                                    <Button sx={{ marginLeft: 2, marginTop: 1 }} type='submit' variant='contained'>Submit</Button>
+                                    <Button sx={{ marginLeft: 2, marginTop: 1 }} type='button' color='secondary' variant='contained' onClick={() => setOpen(false)}>Cancel</Button>
+                                </div>
+                            </form>
+                        </Typography>
+                    </Box>
+                </Modal>
+            </>
+        );
+    } else {
+        return null
+    }
 }

@@ -54,6 +54,7 @@ function MyStock() {
             <div className='general-container'>
                 <h1>My Stock</h1>
                 <TextField
+                autoFocus
                     id="search-bar"
                     className="text"
                     onChange={(e) => {
@@ -67,8 +68,8 @@ function MyStock() {
                 />
 
                 <div>
-                    {listView ? <Button onClick={toggleListView}>See Box View</Button> : <Button onClick={toggleListView}>See List View</Button>}
-                    <Button onClick={clickAllItems}>See All Items</Button>
+                    {listView ? <Button variant='contained' sx={{ m: 1 }} onClick={toggleListView}>See Box View</Button> : <Button variant='contained' sx={{ m: 1 }} onClick={toggleListView}>See List View</Button>}
+                    <Button variant='outlined' sx={{ m: 1 }} onClick={clickAllItems}>See All Items</Button>
                 </div>
                 {/* Set up to click on a card and go to item details page. */}
             </div>

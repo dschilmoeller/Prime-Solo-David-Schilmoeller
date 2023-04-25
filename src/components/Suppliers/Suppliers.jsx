@@ -56,6 +56,7 @@ function Suppliers(props) {
         <div>
             <h1>Suppliers</h1>
             <TextField
+            autoFocus
                 id="search-bar"
                 className="text"
                 onChange={(e) => {
@@ -71,9 +72,9 @@ function Suppliers(props) {
             <AddSupplier />
 
             {/* Set up to click on a card and go to supplier details page. */}
-            <div className='supplierContainer'>
+            <div className='supplier-container' >
                 {dataFiltered.map((d, i) => (
-                    <div key={i}>
+                    <div  key={i} >
                 {suppliers.length &&
                     suppliers.map((supplier) => {
                         if (supplier.supplier_name === d) {
@@ -82,8 +83,8 @@ function Suppliers(props) {
                         let supplierID = supplier.id;
 
                         return (
-                            <div className='itemCard' key={supplier.id}>
-                                <Card sx={{ minWidth: 400 }} onClick={() => clickSupplierDetail(supplier.id)}>
+                            <div key={supplier.id}>
+                                <Card className='itemCard' sx={{ minWidth: 400 }} onClick={() => clickSupplierDetail(supplier.id)}>
                                     <h3>{supplier.supplier_name}</h3>
                                     <h3>{formatPhoneNumber(supplier.supplier_phone)}</h3>
                                     <h4>{supplier.supplier_address}</h4>
