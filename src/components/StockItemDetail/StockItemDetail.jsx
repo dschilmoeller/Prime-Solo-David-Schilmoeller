@@ -68,8 +68,8 @@ function StockItemDetail() {
                             {<DeleteItemFromStock />}
                         </div>
                         <div className="stock-container">
-                            <div className="headerItem">{stockDetail.part_name}</div>
-                            <div className="partNumber">Part Number: {stockDetail.part_number}</div>
+                            <div className="header-item">{stockDetail.part_name}</div>
+                            <div className="part-number">Part Number: {stockDetail.part_number}</div>
                             <div className="description">{stockDetail.description}</div>
                             <div>Estimated Lead Time: {stockDetail.lead_time_weeks} weeks</div>
                             <div>Estimated Mean Time To Failure: {stockDetail.mttf_months} months</div>
@@ -80,14 +80,16 @@ function StockItemDetail() {
                             {stockDetail.stock_override ? <div>Stock Override Quantity: {stockDetail.stock_override_qty}</div> : null}
                             <div>Supplier: <a href={supplierID}>{stockDetail.supplier_name}</a></div>
                         </div>
+
                         <div className="btn-container-no-margin">
-                            <div className="btn-container-no-margin">
-                                <Button variant="outlined" sx={{ m: 1 }} onClick={backToMyStock}>Back to My Stock</Button>
-                                <Button variant="outlined" sx={{ m: 1 }} onClick={backToAll}>Back to All Items</Button>
-                                {user === 1 ? <DeleteItemFromAllItems /> : null}
-                                {user === 1 ? <EditAllItems /> : null}
+                        <div className="btn-container-no-margin">
+                            <Button variant="outlined" sx={{ m: 1 }} onClick={backToMyStock}>Back to My Stock</Button>
+                            <Button variant="outlined" sx={{ m: 1 }} onClick={backToAll}>Back to All Items</Button>
                             </div>
+                            {user === 1 ? <EditAllItems /> : null}
+                            {user === 1 ? <DeleteItemFromAllItems /> : null}
                         </div>
+
                     </div>
 
                 </>

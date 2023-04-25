@@ -54,10 +54,8 @@ export default function AddItemToStock() {
 
 
     return (
-        <div>
-            <div className='btn-container-no-margin'>
+        <>
             <Button variant="contained" onClick={handleOpen}>Add Item To My Stock</Button>
-            </div>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -95,6 +93,6 @@ export default function AddItemToStock() {
                     </form>
                 </Box>
             </Modal>
-        </div>
+        </>
     );
 }

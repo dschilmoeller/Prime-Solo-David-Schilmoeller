@@ -163,17 +163,17 @@ Container Treatments
 .stock-container {
   display: flex;
   flex-direction: column;
-  padding: .5rem;
+  padding: 1rem;
   margin: auto;
-  width: 70%
+  font-size: large;
 }
 
-.headerItem {
+.header-item {
   font-size: large;
   padding-bottom: .25rem;
 }
 
-.partNumber {
+.part-number {
   font-size: large;
   padding-bottom: .25rem;
 }

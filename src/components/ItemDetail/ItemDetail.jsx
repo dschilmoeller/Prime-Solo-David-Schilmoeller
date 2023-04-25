@@ -12,7 +12,7 @@ function ItemDetail() {
     const itemDetail = useSelector(store => store.itemDetail[0])
     const { id } = useParams()
 
-    
+
     // used to render edit button or not. NOT SECURE -> implement on backend.
     const user = useSelector(store => store.user.user_type)
     console.log(`user details`, user); // shows id of user logged in.
@@ -31,23 +31,23 @@ function ItemDetail() {
             <>
                 {/* Needs to be admin only */}
                 <div className="btn-container-no-margin">
-                {user === 1 ? <EditAllItems /> : null}
-                {user === 1 ? <DeleteItemFromAllItems /> : null}
+                    {user === 1 ? <EditAllItems /> : null}
+                    {user === 1 ? <DeleteItemFromAllItems /> : null}
                 </div>
-                <div>
-                    <h1>{itemDetail.part_name}</h1>
-                    <h2>Part Number: {itemDetail.part_number}</h2>
-                    <div>{itemDetail.description}</div>
+                <div className="stock-container">
+                    <div className="header-item">{itemDetail.part_name}</div>
+                    <div className="part-number">Part Number: {itemDetail.part_number}</div>
+                    <div className="description">{itemDetail.description}</div>
                     <div>Estimated Lead Time: {itemDetail.lead_time_weeks} weeks</div>
                     <div>Estimated Mean Time To Failure: {itemDetail.mttf_months} months</div>
                     <div>Supplier: <a href={supplierID}>{itemDetail.supplier_name}</a></div>
+                </div>
+                <div className="btn-container-no-margin">
                     <div className="btn-container-no-margin">
-                    <AddItemToStock />
+                        <AddItemToStock />
                     </div>
-                    <div className="btn-container-no-margin">
                     <div className="btn-container-no-margin">
                     <Button variant="outlined" onClick={headBack}>Back To All Items</Button>
-                    </div>
                     </div>
                 </div>
             </>

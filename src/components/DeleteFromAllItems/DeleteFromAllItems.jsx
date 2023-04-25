@@ -51,7 +51,12 @@ export default function DeleteItemFromAllItems() {
           {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}> */}
           <form onSubmit={ConfirmDelete}>
             <div>Are you sure you'd like to remove this item from the master list?</div>
-            <Button type='submit'>Submit</Button><Button>Cancel</Button>
+            
+            <Button type='submit' variant='contained'>Submit</Button>
+            
+            
+            <Button type='button' color='secondary' variant='contained' onClick={()=> setOpen(false)}>Cancel</Button>
+            
           </form>
           {/* </Typography> */}
         </Box>
