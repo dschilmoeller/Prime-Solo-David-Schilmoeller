@@ -29,16 +29,18 @@ export default function EditStockItem() {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
-    setOpen(true);
     dispatch({ type: 'GET_STOCK_ITEM_DETAILS', payload: stockDetail.mot_id })
+    setOpen(true);
+    setStockOverride(stockDetail.stock_override)
+    setStockOverrideQty(stockDetail.stock_override_qty)
+    setQtyInField(stockDetail.quantity_in_field)
+    setQtyOwned(stockDetail.quantity_owned)
     setStockOverride(stockDetail.stock_override)
     setStockOverrideQty(stockDetail.stock_override_qty)
   }
 
   const handleClose = () => setOpen(false);
 
-  // state - default should be relevant stockItemDetails
-  // doing the thing where it shows the last item selected's stock.
   const [qtyInField, setQtyInField] = useState(stockDetail.quantity_in_field)
   const [qtyOwned, setQtyOwned] = useState(stockDetail.quantity_owned)
   const [stockOverride, setStockOverride] = useState(stockDetail.stock_override)
@@ -53,6 +55,7 @@ export default function EditStockItem() {
     dispatch({ type: 'GET_STOCK_ITEM_DETAILS', payload: stockDetail.mot_id })
   }
 
+  
   return (
     <div>
       <Button color="secondary" onClick={handleOpen}>Edit Stock Item</Button>

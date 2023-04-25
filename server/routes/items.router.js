@@ -26,6 +26,7 @@ router.get("/fetchmystock", (req, res) => {
     WHERE user_id = $1
     ORDER BY part_name ASC;`;
     const sqlParams = Number(req.user.id)
+    
     pool
         .query(sqlText, [sqlParams])
         .then((result) => {
@@ -78,7 +79,7 @@ router.get('/fetchdetail/:id', (req, res) => {
     pool.query(sqlText, sqlParams)
         .then((result) => {
             res.send(result.rows)
-            // console.log(`result:`, result.rows);
+            console.log(`result:`, result.rows);
         })
         .catch((err) => {
             console.log("error getting item details:", err);

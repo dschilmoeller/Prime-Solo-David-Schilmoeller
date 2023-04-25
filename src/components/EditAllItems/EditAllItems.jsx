@@ -22,21 +22,27 @@ const style = {
 
 export default function EditAllItems() {
     const itemDetail = useSelector(store => store.itemDetail[0])
-    // console.log(`itemDetail:`, itemDetail);
+    console.log(`itemDetail:`, itemDetail);
     const dispatch = useDispatch();
     let suppliers = useSelector(store => store.suppliers)
     const itemID = useParams();
 
     useEffect(() => {
-        dispatch({ type: "GET_ITEM_DETAIL", payload: Number(itemID.id) });
         dispatch({ type: 'FETCH_SUPPLIERS' })
-    }, [dispatch]);
+    }, []);
 
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
         setOpen(true);
-        dispatch({ type: "GET_ITEM_DETAIL", payload: Number(itemID.id) });
+        dispatch({ type: "GET_ITEM_DETAIL", payload: Number(itemDetail.id) });
+        setPartName(itemDetail.part_name)
+        setPartNumber(itemDetail.part_number)
+        setDescription(itemDetail.description)
+        setEstLeadTime(itemDetail.lead_time_weeks)
+        setEstMTFF(itemDetail.mttf_months)
+        setSupplierID(itemDetail.supplier_id)
+
     }
     const handleClose = () => setOpen(false);
 
@@ -74,7 +80,7 @@ export default function EditAllItems() {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
+                <Box sx={{...style, border: 'none'}}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         Edit Item
                     </Typography>
@@ -103,7 +109,7 @@ export default function EditAllItems() {
                                     )
                                 })}
                             </select>
-                            <div class="btn-container">
+                            <div className="btn-container">
                                 <Button type='submit'>Submit</Button>
                             </div>
                         </form>

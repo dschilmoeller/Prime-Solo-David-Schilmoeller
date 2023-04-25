@@ -40,8 +40,6 @@ function App() {
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
     dispatch({ type: 'FETCH_MY_STOCK'});
-    dispatch({ type: "GET_ITEM_DETAIL", payload: 10 });
-    dispatch({ type: "GET_STOCK_ITEM_DETAILS", payload: 7 });
   }, [dispatch]);
 
   const theme = createTheme({

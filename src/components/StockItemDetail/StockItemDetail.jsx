@@ -46,9 +46,9 @@ function StockItemDetail() {
     const onHandQuant = () => {
         returnedQuant = 0
         if (user === 1 || user === 2 || user === 3) {
-            returnedQuant = Math.round((stockDetail.quantity_in_field / stockDetail.mttf_months)) * (stockDetail.lead_time_weeks / 4)
+            returnedQuant = Math.round((stockDetail.quantity_in_field / stockDetail.mttf_months)) * Math.floor((stockDetail.lead_time_weeks / 4))
         }
-        console.log(`returnedQuant for ${stockDetail.part_name}:`, returnedQuant);
+        // console.log(`returnedQuant for ${stockDetail.part_name}:`, returnedQuant);
     }
 
     // console.log(`stockItemDetail:`, stockDetail);
@@ -56,6 +56,7 @@ function StockItemDetail() {
     if (stockDetail) {
         let supplierID = `/#/suppliers/${stockDetail.supplier_id}`
         onHandQuant()
+        
 
         return (
             
