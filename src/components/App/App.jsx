@@ -13,6 +13,9 @@ import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
+import { deepOrange, deepPurple } from '@mui/material/colors';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
@@ -39,8 +42,16 @@ function App() {
     dispatch({ type: 'FETCH_MY_STOCK'});
   }, [dispatch]);
 
+  const theme = createTheme({
+    palette: {
+      primary: deepPurple,
+      secondary: deepOrange,
+    },
+  });
+
   return (
     <Router>
+      <ThemeProvider theme={theme}>
       <div>
         <Nav />
         <Switch>
@@ -153,6 +164,7 @@ function App() {
         </Switch>
         <Footer />
       </div>
+      </ThemeProvider>
     </Router>
   );
 }
