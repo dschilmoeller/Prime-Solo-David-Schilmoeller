@@ -89,7 +89,7 @@ function Suppliers(props) {
                                     <h3>{formatPhoneNumber(supplier.supplier_phone)}</h3>
                                     <h4>{supplier.supplier_address}</h4>
                                     <h4>{supplier.supplier_email}</h4>
-                                    <a href={supplierURL} >{supplier.supplier_url}</a>
+                                    <a href={supplierURL} target="_blank">{supplier.supplier_url}</a>
                                     <p>Primary Contact: {supplier.primary_contact_name} | {formatPhoneNumber(supplier.primary_contact_phone)} |
                                         <a id={supplierID}> </a><a href={mailAddress}>{supplier.primary_contact_email}</a></p>
                                 </Card>

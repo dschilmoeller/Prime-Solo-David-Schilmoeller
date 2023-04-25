@@ -74,7 +74,7 @@ function SupplierDetail() {
 
                                 <h1>{supplier.supplier_name}</h1>
                                 <h2>{supplier.supplier_address}</h2>
-                                <div><a href={supplier.supplier_url}>{supplier.supplier_url}</a></div>
+                                <div><a href={supplier.supplier_url} target="_blank">{supplier.supplier_url}</a></div>
                                 <br />
                                 <a href={mailAddressSales}>{supplier.supplier_email}</a>
                                 <div>{formatPhoneNumber(supplier.supplier_phone)}</div>
