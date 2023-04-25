@@ -73,7 +73,9 @@ export default function EditAllItems() {
 
     return (
         <>
+        <div className='btn-container-no-margin'>
             <Button variant='contained' sx={{ m: 1 }} onClick={handleOpen}>Edit Item Details</Button>
+            </div>
             <Modal
                 open={open}
                 onClose={handleClose}

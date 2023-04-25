@@ -30,8 +30,10 @@ function ItemDetail() {
         return (
             <>
                 {/* Needs to be admin only */}
+                <div className="btn-container-no-margin">
                 {user === 1 ? <EditAllItems /> : null}
                 {user === 1 ? <DeleteItemFromAllItems /> : null}
+                </div>
                 <div>
                     <h1>{itemDetail.part_name}</h1>
                     <h2>Part Number: {itemDetail.part_number}</h2>
@@ -39,10 +41,14 @@ function ItemDetail() {
                     <div>Estimated Lead Time: {itemDetail.lead_time_weeks} weeks</div>
                     <div>Estimated Mean Time To Failure: {itemDetail.mttf_months} months</div>
                     <div>Supplier: <a href={supplierID}>{itemDetail.supplier_name}</a></div>
-                    <br />
+                    <div className="btn-container-no-margin">
                     <AddItemToStock />
-                    <br />
+                    </div>
+                    <div className="btn-container-no-margin">
+                    <div className="btn-container-no-margin">
                     <Button variant="outlined" onClick={headBack}>Back To All Items</Button>
+                    </div>
+                    </div>
                 </div>
             </>
         )
