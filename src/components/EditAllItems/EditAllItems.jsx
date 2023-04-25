@@ -22,10 +22,11 @@ const style = {
 
 export default function EditAllItems() {
     const itemDetail = useSelector(store => store.itemDetail[0])
+    const stockItemDetail = useSelector(store => store.stockItemDetails[0])
     // console.log(`itemDetail:`, itemDetail);
     const dispatch = useDispatch();
     let suppliers = useSelector(store => store.suppliers)
-    
+
 
     useEffect(() => {
         dispatch({ type: 'FETCH_SUPPLIERS' })
@@ -44,6 +45,7 @@ export default function EditAllItems() {
         setSupplierID(itemDetail.supplier_id)
 
     }
+    
     const handleClose = () => setOpen(false);
 
     // state - default should be relevant stockItemDetails
@@ -64,14 +66,19 @@ export default function EditAllItems() {
         const itemID = itemDetail.id
         let updatedItemData = { itemID, partName, partNumber, description, estLeadTime, estMTTF, supplierID }
         dispatch({ type: 'UPDATE_INV_ITEM_DETAILS', payload: updatedItemData })
+        
+        dispatch({ type: 'GET_ITEM_DETAILS', payload: itemID })
         setOpen(false)
+        if (stockItemDetail) {
+            dispatch({ type: 'GET_STOCK_ITEM_DETAILS', payload: stockItemDetail.mot_id })
+        }
     }
 
-    
+if (itemDetail ) {
     return (
         <>
-        <div className='btn-container-no-margin'>
-            <Button variant='contained' sx={{ m: 1 }} onClick={handleOpen}>Edit Item Details</Button>
+            <div className='btn-container-no-margin'>
+                <Button variant='contained' sx={{ m: 1 }} onClick={handleOpen}>Edit Item Details</Button>
             </div>
             <Modal
                 open={open}
@@ -120,4 +127,7 @@ export default function EditAllItems() {
             </Modal>
         </>
     );
+                            } else {
+                                return null
+                            }
 }

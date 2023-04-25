@@ -8,7 +8,7 @@ function* editItemAgain(action) {
         
         yield axios.put(`/api/items/allitems/${urlID}`, action.payload);
         
-        // yield put({ type: 'GET_ITEM_DETAIL', payload: urlID })
+        yield put({ type: 'GET_ITEM_DETAIL', payload: urlID })
 
     } catch (err) {
         console.log("error changing inventory item", err);
