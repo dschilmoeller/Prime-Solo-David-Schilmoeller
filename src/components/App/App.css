@@ -67,6 +67,9 @@ Button
 .btn-container {
   display: flex;
   flex-direction: column;
+  padding: .5rem;
+  margin: auto;
+  width: 50%
 }
 
 /* This line makes the "Register" and "Login" buttons look like links */

@@ -93,7 +93,10 @@ export default function EditStockItem() {
               : <Button onClick={() => { setStockOverride(true) }} type="button">Activate Stock Override</Button>}
             <br /><br />
             <div className="btn-container">
-            <Button type='submit'>Submit</Button>
+            <Button type='submit' variant='contained'>Submit</Button>
+            </div>
+            <div className="btn-container">
+            <Button type='button' color='secondary' variant='contained'>Cancel</Button>
             </div>
           </form>
           {/* </Typography> */}

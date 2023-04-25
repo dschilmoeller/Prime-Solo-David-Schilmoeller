@@ -35,12 +35,13 @@ function StockItemDetail() {
 
     const user = useSelector(store => store.user.user_type)
     const stockDetail = useSelector(store => store.stockItemDetails[0])
-    
+    const itemDetail = useSelector(store => store.itemDetail[0])
+
     useEffect(() => {
         dispatch({ type: "GET_STOCK_ITEM_DETAILS", payload: id });
     }, []);
 
-    const backToMyStock = () => { history.push('/mystock') }
+    const backToMyStock = () => { history.push('/mystock') };
     const backToAll = () => { history.push('/allitems') }
 
     const onHandQuant = () => {
@@ -56,34 +57,37 @@ function StockItemDetail() {
     if (stockDetail) {
         let supplierID = `/#/suppliers/${stockDetail.supplier_id}`
         onHandQuant()
-        
 
-        return (
-            
-            <>
-                <div>
-                    {<EditStockItem />}
-                    {<DeleteItemFromStock />}
-                    <div className="stockDetailContainer">
-                        <div className="headerItem">{stockDetail.part_name}</div>
-                        <div className="partNumber">Part Number: {stockDetail.part_number}</div>
-                        <div className="description">{stockDetail.description}</div>
-                        <div>Estimated Lead Time: {stockDetail.lead_time_weeks} weeks</div>
-                        <div>Estimated Mean Time To Failure: {stockDetail.mttf_months} months</div>
-                        <div>Quantity in Field: {stockDetail.quantity_in_field}</div>
-                        <div>Quantity on Hand: {stockDetail.quantity_owned}</div>
-                        <div>Recommended Quantity on Hand: {returnedQuant}</div>
-                        {stockDetail.stock_override ? <div>Stock Override Active</div> : null}
-                        {stockDetail.stock_override ? <div>Stock Override Quantity: {stockDetail.stock_override_qty}</div> : null}
-                        <div>Supplier: <a href={supplierID}>{stockDetail.supplier_name}</a></div>
+        if (itemDetail) {
+            return (
+
+                <>
+                    <div>
+                        {<EditStockItem />}
+                        {<DeleteItemFromStock />}
+                        <div className="stockDetailContainer">
+                            <div className="headerItem">{stockDetail.part_name}</div>
+                            <div className="partNumber">Part Number: {stockDetail.part_number}</div>
+                            <div className="description">{stockDetail.description}</div>
+                            <div>Estimated Lead Time: {stockDetail.lead_time_weeks} weeks</div>
+                            <div>Estimated Mean Time To Failure: {stockDetail.mttf_months} months</div>
+                            <div>Quantity in Field: {stockDetail.quantity_in_field}</div>
+                            <div>Quantity on Hand: {stockDetail.quantity_owned}</div>
+                            <div>Recommended Quantity on Hand: {returnedQuant}</div>
+                            {stockDetail.stock_override ? <div>Stock Override Active</div> : null}
+                            {stockDetail.stock_override ? <div>Stock Override Quantity: {stockDetail.stock_override_qty}</div> : null}
+                            <div>Supplier: <a href={supplierID}>{stockDetail.supplier_name}</a></div>
+                        </div>
+                        <Button variant="outlined" sx={{ m: 1 }} onClick={backToMyStock}>Back to My Stock</Button>
+                        <Button variant="outlined" sx={{ m: 1 }} onClick={backToAll}>Back to All Items</Button>
                     </div>
-                    <Button variant="outlined" sx={{ m: 1 }} onClick={backToMyStock}>Back to My Stock</Button>
-                    <Button variant="outlined" sx={{ m: 1 }} onClick={backToAll}>Back to All Items</Button>
-                </div>
-                {user === 1 ? <DeleteItemFromAllItems /> : null}
-                {user === 1 ? <EditAllItems /> : null}
-            </>
-        )
+                    {user === 1 ? <DeleteItemFromAllItems /> : null}
+                    {user === 1 ? <EditAllItems /> : null}
+                </>
+            )
+        } else {
+            return null
+        }
     } else {
         return (
             <div>

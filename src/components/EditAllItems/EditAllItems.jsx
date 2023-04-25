@@ -22,7 +22,7 @@ const style = {
 
 export default function EditAllItems() {
     const itemDetail = useSelector(store => store.itemDetail[0])
-    console.log(`itemDetail:`, itemDetail);
+    // console.log(`itemDetail:`, itemDetail);
     const dispatch = useDispatch();
     let suppliers = useSelector(store => store.suppliers)
     const itemID = useParams();
@@ -73,14 +73,14 @@ export default function EditAllItems() {
 
     return (
         <>
-            <Button variant='contained' sx={{m: 1}} onClick={handleOpen}>Edit Item Details</Button>
+            <Button variant='contained' sx={{ m: 1 }} onClick={handleOpen}>Edit Item Details</Button>
             <Modal
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={{...style, border: 'none'}}>
+                <Box sx={{ ...style, border: 'none' }}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         Edit Item
                     </Typography>
@@ -110,7 +110,10 @@ export default function EditAllItems() {
                                 })}
                             </select>
                             <div className="btn-container">
-                                <Button type='submit'>Submit</Button>
+                                <Button type='submit' variant='contained'>Submit</Button>
+                            </div>
+                            <div className="btn-container">
+                                <Button type='button' color='secondary' variant='contained'>Cancel</Button>
                             </div>
                         </form>
                     </Typography>
