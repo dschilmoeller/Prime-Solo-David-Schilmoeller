@@ -79,7 +79,7 @@ router.get('/fetchdetail/:id', (req, res) => {
     pool.query(sqlText, sqlParams)
         .then((result) => {
             res.send(result.rows)
-            console.log(`result:`, result.rows);
+            // console.log(`result:`, result.rows);
         })
         .catch((err) => {
             console.log("error getting item details:", err);
