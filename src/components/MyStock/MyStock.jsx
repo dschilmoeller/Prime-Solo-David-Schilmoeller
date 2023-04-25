@@ -14,7 +14,7 @@ function MyStock() {
     // Make this into a reducer so it's persistent b/w reloads.
     const [listView, setListView] = useState(false)
     const toggleListView = () => { setListView(!listView) }
-    
+
 
     useEffect(() => {
         dispatch({ type: "FETCH_MY_STOCK" })
@@ -31,45 +31,50 @@ function MyStock() {
     // search functionality
     const [searchParam, setSearchParam] = useState('')
     const searchables = myStock.map(item => { return item.part_name })
-    
+
 
 
     const filterData = (query, data) => {
         if (!query) {
             return data;
         } else {
+
             return data.filter((d) => d.toLowerCase().includes(query));
+
         }
     };
 
     const dataFiltered = filterData(searchParam, searchables);
     // end search functionality
-    
+
 
 
     return (
         <div>
-            <h1>My Stock</h1>
-            <TextField
-                id="search-bar"
-                className="text"
-                onChange={(e) => {
-                    setSearchParam(e.target.value);
-                }}
-                value={searchParam}
-                label="Enter Search Term"
-                variant="outlined"
-                placeholder="Search..."
-                size="small"
-            />
+            <div className='general-container'>
+                <h1>My Stock</h1>
+                <TextField
+                    id="search-bar"
+                    className="text"
+                    onChange={(e) => {
+                        setSearchParam(e.target.value);
+                    }}
+                    value={searchParam}
+                    label="Enter Search Term"
+                    variant="outlined"
+                    placeholder="Search..."
+                    size="small"
+                />
 
-            <div>
-                {listView ? <Button onClick={toggleListView}>See Box View</Button> : <Button onClick={toggleListView}>See List View</Button>}
-                <Button onClick={clickAllItems}>See All Items</Button>
+                <div>
+                    {listView ? <Button onClick={toggleListView}>See Box View</Button> : <Button onClick={toggleListView}>See List View</Button>}
+                    <Button onClick={clickAllItems}>See All Items</Button>
+                </div>
+                {/* Set up to click on a card and go to item details page. */}
             </div>
-            {/* Set up to click on a card and go to item details page. */}
-
-            {(listView === false) ? (
+            {dataFiltered.length === 0 ? (
+                <h1>No Search Results</h1>
+            ) : (listView === false) ? (
                 <div className='stockContainer'>
                     {dataFiltered.map((d, i) => (
                         <div key={i} >
@@ -95,26 +100,26 @@ function MyStock() {
                     ))}
                     {/* End of dataFiltered.map */}
                 </div>
-            ) 
-            : // else if listView === true 
-            (<ul>
-                {dataFiltered.map((d, i) => (
-                    <div key={i}>
-                        {myStock.map((stockItem) => {
-                            if (stockItem.part_name === d) {
-                                return (
-                                    <div className='listItem' key={stockItem.mot_id}>
-                                        <li id={stockItem.mot_id} onClick={() => clickItemDetail(stockItem.mot_id)} >
-                                            Item name: {stockItem.part_name} / Part # {stockItem.part_number}
-                                        </li>
+            )
+                : // else if listView === true 
+                (<ul>
+                    {dataFiltered.map((d, i) => (
+                        <div key={i}>
+                            {myStock.map((stockItem) => {
+                                if (stockItem.part_name === d) {
+                                    return (
+                                        <div className='listItem' key={stockItem.mot_id}>
+                                            <li id={stockItem.mot_id} onClick={() => clickItemDetail(stockItem.mot_id)} >
+                                                Item name: {stockItem.part_name} / Part # {stockItem.part_number}
+                                            </li>
 
-                                    </div>
-                                )
-                            }
-                        })}
-                    </div>
-                ))}
-            </ul>)
+                                        </div>
+                                    )
+                                }
+                            })}
+                        </div>
+                    ))}
+                </ul>)
             }
         </div>
     )

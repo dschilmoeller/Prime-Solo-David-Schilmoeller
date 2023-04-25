@@ -57,6 +57,7 @@ function AllItems(props) {
 
     return (
         <div>
+            <div className='general-container'>
             <h1>All Items</h1>
             <TextField
                 id="search-bar"
@@ -77,8 +78,12 @@ function AllItems(props) {
             <div>
                 {user === 1 ? <AddItemToMasterList /> : null}
             </div>
+            </div>
             <div>
-                {listView === false ? (
+            {dataFiltered.length === 0 ? (
+                <h1>No Search Results</h1>
+            ) :
+                (listView === false) ? (
                     <div className="stockContainer">
                         {dataFiltered.map((d, i) => (
                             <div key={i} >
