@@ -85,13 +85,13 @@ function AllItems(props) {
                                 {allItemsFromStore.map((item => {
                                     if (item.part_name === d) {
                                         return (
-                                            <div className='itemCard' key={item.id}>
-                                                <Card sx={{ minWidth: 300 }} id={item.id} onClick={() => clickItemDetail(item.id, stockItems)} >
-                                                    <h3>Item name: {item.part_name}</h3>
+                                            <div  key={item.id}>
+                                                <Card className='itemCard' sx={{ minWidth: 275 }} id={item.id} onClick={() => clickItemDetail(item.id, stockItems)} >
+                                                    <h3>Name: {item.part_name}</h3>
                                                     <h3>Part# {item.part_number}</h3>
-                                                    <h4>Item Lead Time: {item.lead_time_weeks} weeks</h4>
-                                                    <h4>Mean Time To Failure: {item.mttf_months} months</h4>
-                                                    <h4>Object type: {item.object_type}</h4>
+                                                    {/* <h4>Item Lead Time: {item.lead_time_weeks} weeks</h4>
+                                                    <h4>Mean Time To Failure: {item.mttf_months} months</h4> */}
+                                                    {/* <h4>Object type: {item.object_type}</h4> */}
                                                 </Card>
                                             </div>
                                         )

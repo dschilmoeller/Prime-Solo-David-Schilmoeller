@@ -54,7 +54,7 @@ export default function EditStockItem() {
 
   return (
     <div>
-      <Button color="secondary" onClick={handleOpen}>Edit Item</Button>
+      <Button color="secondary" onClick={handleOpen}>Edit Stock Item</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -63,7 +63,7 @@ export default function EditStockItem() {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Edit Item
+            Edit Stock Item
           </Typography>
           {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}> */}
           <form onSubmit={submitEdits}>
@@ -88,7 +88,9 @@ export default function EditStockItem() {
               </>
               : <Button onClick={() => { setStockOverride(true) }} type="button">Activate Stock Override</Button>}
             <br /><br />
+            <div class="btn-container">
             <Button type='submit'>Submit</Button>
+            </div>
           </form>
           {/* </Typography> */}
         </Box>

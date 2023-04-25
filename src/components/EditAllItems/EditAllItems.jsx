@@ -103,7 +103,9 @@ const handleSupplier = (e) => {
                                     )
                                 })}
                             </select>
+                            <div class="btn-container">
                         <Button type='submit'>Submit</Button>
+                        </div>
                     </form>
                     </Typography>
                 </Box>

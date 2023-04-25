@@ -105,21 +105,9 @@ export default function EditSupplier() {
                                 <input placeholder='supplier name' size="40" value={primary_contact_email} onChange={(e) => setPrimaryContactEmail(e.target.value)} />
                             </div>
 
-                            {/*
-                        <div>Part Number
-                            <input placeholder='part number' value={partNumber} onChange={(e) => setPartNumber(e.target.value)} />
-                        </div>
-                        <div>Description
-                            <input placeholder='description' value={description} onChange={(e) => setDescription(e.target.value)} />
-                        </div>
-                        <div>Estimated Lead Time
-                            <input placeholder='est lead time' value={estLeadTime} onChange={(e) => setEstLeadTime(e.target.value)} />
-                        </div>
-                        <div>Estimated MTTF
-                            <input placeholder='est mttf' value={estMTTF} onChange={(e) => setEstMTFF(e.target.value)} selected />
-                        </div> */}
-
-                            <Button type='submit'>Submit</Button>
+                            <div class="btn-container">
+                                <Button type='submit'>Submit</Button>
+                            </div>
                         </form> : null}
                     </Typography>
                 </Box>

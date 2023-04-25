@@ -87,7 +87,9 @@ export default function AddItemToStock() {
                             </>
                             : <Button onClick={() => { setStockOverride(true) }} type="button">Activate Stock Override</Button>}
                         <br /><br />
+                        <div class="btn-container">
                         <Button type='submit'>Submit</Button>
+                        </div>
                     </form>
                 </Box>
             </Modal>

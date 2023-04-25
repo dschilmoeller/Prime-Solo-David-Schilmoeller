@@ -125,7 +125,9 @@ export default function AddItemToMasterList() {
                         </select>
 
                         <br /><br />
-                        <Button type='submit'>Submit</Button><Button type='button' onClick={handleCancel}>Cancel</Button>
+                        <div class="btn-container">
+                            <Button type='submit'>Submit</Button><Button type='button' onClick={handleCancel}>Cancel</Button>
+                        </div>
                     </form>
                 </Box>
             </Modal>

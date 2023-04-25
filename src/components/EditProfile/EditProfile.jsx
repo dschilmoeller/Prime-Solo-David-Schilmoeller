@@ -40,16 +40,18 @@ export default function EditProfile() {
     const submitEdits = () => {
         event.preventDefault();
 
-        let updatedProfile = { first_name, last_name, user_email, 
-            username, user_type, supplier_name, 
-            supplier_address, supplier_phone, supplier_url, 
-            supplier_email }
+        let updatedProfile = {
+            first_name, last_name, user_email,
+            username, user_type, supplier_name,
+            supplier_address, supplier_phone, supplier_url,
+            supplier_email
+        }
 
         dispatch({ type: 'UPDATE_USER_PROFILE', payload: updatedProfile })
         setOpen(false)
     }
 
-    
+
     return (
         <div>
             <Button onClick={handleOpen}>Edit Profile</Button>
@@ -77,30 +79,32 @@ export default function EditProfile() {
                             <div>Username
                                 <input placeholder='Username' size="47" value={username} onChange={(e) => setUserName(e.target.value)} />
                             </div>
-                            { user.user_type === '1' ? (
+                            {user.user_type === '1' ? (
                                 <>
-                                {/* Render as drop  */}
-                            <div>Account Type
-                                <input placeholder='Account Type' size="47" value={user_type} onChange={(e) => setUserType(e.target.value)} />
-                            </div> 
-                            <div>Supplier Name
-                                <input placeholder='Supplier Name' size="47" value={supplier_name} onChange={(e) => setSupplierName(e.target.value)} />
-                            </div>
-                            <div>Supplier Address
-                                <input placeholder='Supplier Address' size="47" value={supplier_address} onChange={(e) => setSupplierAddress(e.target.value)} />
-                            </div>
-                            <div>Supplier Phone
-                                <input placeholder='Supplier Phone' size="47" value={supplier_phone} onChange={(e) => setSupplierPhone(e.target.value)} />
-                            </div>
-                            <div>Supplier URL
-                                <input placeholder='Supplier URL' size="47" value={supplier_url} onChange={(e) => setSupplierURL(e.target.value)} />
-                            </div>
-                            <div>Supplier Email
-                                <input placeholder='Supplier Email' size="47" value={supplier_email} onChange={(e) => setSupplierEmail(e.target.value)} />
-                            </div>
-                            </> ) : null }
+                                    {/* Render as drop  */}
+                                    <div>Account Type
+                                        <input placeholder='Account Type' size="47" value={user_type} onChange={(e) => setUserType(e.target.value)} />
+                                    </div>
+                                    <div>Supplier Name
+                                        <input placeholder='Supplier Name' size="47" value={supplier_name} onChange={(e) => setSupplierName(e.target.value)} />
+                                    </div>
+                                    <div>Supplier Address
+                                        <input placeholder='Supplier Address' size="47" value={supplier_address} onChange={(e) => setSupplierAddress(e.target.value)} />
+                                    </div>
+                                    <div>Supplier Phone
+                                        <input placeholder='Supplier Phone' size="47" value={supplier_phone} onChange={(e) => setSupplierPhone(e.target.value)} />
+                                    </div>
+                                    <div>Supplier URL
+                                        <input placeholder='Supplier URL' size="47" value={supplier_url} onChange={(e) => setSupplierURL(e.target.value)} />
+                                    </div>
+                                    <div>Supplier Email
+                                        <input placeholder='Supplier Email' size="47" value={supplier_email} onChange={(e) => setSupplierEmail(e.target.value)} />
+                                    </div>
+                                </>) : null}
 
-                            <Button type='submit'>Submit</Button><Button type='buttton' onClick={()=>{setOpen(false)}}>Cancel</Button>
+                            <div class="btn-container">
+                                <Button type='submit'>Submit</Button><Button type='buttton' onClick={() => { setOpen(false) }}>Cancel</Button>
+                            </div>
                         </form> : null}
                     </Typography>
                 </Box>

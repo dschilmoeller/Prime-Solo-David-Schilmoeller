@@ -5,17 +5,17 @@
     padding: 1rem;
 }
 
-
 .itemCard {
-    padding: 1rem;
+    margin: .5rem;
+    padding: .5rem;
 }
 
 .itemCard:hover {
-    background-color: aquamarine;
+    background-color: #DC9023;
 }
 
 .listItem:hover {
-    background-color: aquamarine;
+    background-color: #DC9023;
 }
 
 .listItem { 

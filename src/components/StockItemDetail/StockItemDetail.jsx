@@ -23,6 +23,7 @@ import { useEffect, useState } from 'react'
 import { Button } from "@mui/material";
 
 import EditStockItem from "../EditStockItem/EditStockItem";
+import EditAllItems from "../EditAllItems/EditAllItems";
 import DeleteItemFromStock from "../DeleteItemFromStock/DeleteItemFromStock";
 import DeleteItemFromAllItems from "../DeleteFromAllItems/DeleteFromAllItems";
 
@@ -32,7 +33,7 @@ function StockItemDetail() {
     const { id } = useParams()
     let returnedQuant = 0
 
-    const user = useSelector(store => store.user.id)
+    const user = useSelector(store => store.user.user_type)
     const stockDetail = useSelector(store => store.stockItemDetails[0])
 
     const [stockoverride, setStockOverride] = useState(false)
@@ -84,6 +85,7 @@ function StockItemDetail() {
             {<EditStockItem />}{<DeleteItemFromStock />}
             <div>
             {user === 1 ? <DeleteItemFromAllItems /> : null}
+            {user === 1 ? <EditAllItems /> : null}
             </div>
                 <h1>{stockDetail.part_name}</h1>
                 <h2>Part Number: {stockDetail.part_number}</h2>

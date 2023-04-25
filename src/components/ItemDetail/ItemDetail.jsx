@@ -12,10 +12,10 @@ function ItemDetail() {
     const itemDetail = useSelector(store => store.itemDetail[0])
     const { id } = useParams()
 
-    // console.log(`user details`, user); // shows id of user logged in.
+    
     // used to render edit button or not. NOT SECURE -> implement on backend.
-    const user = useSelector(store => store.user.id)
-
+    const user = useSelector(store => store.user.user_type)
+    console.log(`user details`, user); // shows id of user logged in.
 
     const headBack = () => {
         history.push('/allitems')

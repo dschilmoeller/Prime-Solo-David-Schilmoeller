@@ -75,8 +75,8 @@ function MyStock() {
                             {myStock.map((stockItem) => {
                                 if (stockItem.part_name === d) {
                                     return (
-                                        <div className='itemCard' key={stockItem.mot_id}>
-                                            <Card sx={{ minWidth: 300 }} id={stockItem.mot_id} onClick={() => clickItemDetail(stockItem.mot_id)} >
+                                        <div  key={stockItem.mot_id}>
+                                            <Card className='itemCard' sx={{ minWidth: 300 }} id={stockItem.mot_id} onClick={() => clickItemDetail(stockItem.mot_id)} >
                                                 <h3>Item name: {stockItem.part_name}</h3>
                                                 <h3>Part# {stockItem.part_number}</h3>
                                                 {stockItem.lead_time_weeks > 4 ? <h4>Item Lead Time: {stockItem.lead_time_weeks / 4} months</h4> : <h4>Item Lead Time: {stockItem.lead_time_weeks} weeks</h4>}
