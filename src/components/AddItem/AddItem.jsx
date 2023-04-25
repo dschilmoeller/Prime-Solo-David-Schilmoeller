@@ -125,8 +125,9 @@ export default function AddItemToMasterList() {
                         </select>
 
                         <br /><br />
-                        <div class="btn-container">
-                            <Button type='submit'>Submit</Button><Button type='button' onClick={handleCancel}>Cancel</Button>
+                        <div className='confirmBtn'>
+                            <Button sx={{ marginLeft: 2, marginTop: 1 }} type='submit' variant='contained'>Add Item</Button>
+                            <Button sx={{ marginLeft: 2, marginTop: 1 }} type='button' color='secondary' variant='contained' onClick={() => setOpen(false)}>Cancel</Button>
                         </div>
                     </form>
                 </Box>

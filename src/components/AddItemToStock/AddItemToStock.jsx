@@ -79,16 +79,17 @@ export default function AddItemToStock() {
                         {stockOverride ?
                             <>
                                 <div>
-                                    <Button onClick={() => { setStockOverride(false) }} type="button">Turn off Override</Button>
+                                    <Button variant="contained" color='secondary' onClick={() => { setStockOverride(false) }} type="button">Turn off Override</Button>
                                 </div>
                                 <div>Stock Override Quantity
                                     <input placeholder='Override Qty' value={stockOverrideQty} onChange={(e) => setStockOverrideQty(e.target.value)} />
                                 </div>
                             </>
-                            : <Button onClick={() => { setStockOverride(true) }} type="button">Activate Stock Override</Button>}
+                            : <Button variant="contained" onClick={() => { setStockOverride(true) }} type="button">Activate Stock Override</Button>}
                         <br /><br />
-                        <div class="btn-container">
-                        <Button variant="contained" type='submit'>Submit</Button>
+                        <div className='confirmBtn'>
+                            <Button sx={{ marginLeft: 2, marginTop: 1 }} type='submit' variant='contained'>Add Item To My Stock</Button>
+                            <Button sx={{ marginLeft: 2, marginTop: 1 }} type='button' color='secondary' variant='contained' onClick={() => setOpen(false)}>Cancel Add Item</Button>
                         </div>
                     </form>
                 </Box>
