@@ -42,7 +42,7 @@ function ItemDetail() {
                     <br />
                     <AddItemToStock />
                     <br />
-                    <Button onClick={headBack}>Return To All Items</Button>
+                    <Button variant="outlined" onClick={headBack}>Back To All Items</Button>
                 </div>
             </>
         )

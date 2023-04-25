@@ -22,7 +22,7 @@ const style = {
 
 export default function EditStockItem() {
   const stockDetail = useSelector(store => store.stockItemDetails[0])
-  console.log(`StockDetail:`, stockDetail);
+  // console.log(`StockDetail:`, stockDetail);
 
   const dispatch = useDispatch();
 
@@ -38,6 +38,7 @@ export default function EditStockItem() {
   const handleClose = () => setOpen(false);
 
   // state - default should be relevant stockItemDetails
+  // doing the thing where it shows the last item selected's stock.
   const [qtyInField, setQtyInField] = useState(stockDetail.quantity_in_field)
   const [qtyOwned, setQtyOwned] = useState(stockDetail.quantity_owned)
   const [stockOverride, setStockOverride] = useState(stockDetail.stock_override)
@@ -88,7 +89,7 @@ export default function EditStockItem() {
               </>
               : <Button onClick={() => { setStockOverride(true) }} type="button">Activate Stock Override</Button>}
             <br /><br />
-            <div class="btn-container">
+            <div className="btn-container">
             <Button type='submit'>Submit</Button>
             </div>
           </form>

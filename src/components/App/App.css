@@ -120,3 +120,54 @@ input {
   margin: 5px;
   margin-bottom: 10px;
 }
+
+.stockContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 1rem;
+}
+
+.itemCard {
+  margin: .5rem;
+  padding: .5rem;
+}
+
+.itemCard:hover {
+  background-color: #DC9023;
+}
+
+.listItem:hover {
+  background-color: #DC9023;
+}
+
+.listItem { 
+  padding: .25rem;
+}
+
+
+/* --------------------------------------------------------------------------------
+Container Treatments
+-------------------------------------------------------------------------------- */
+
+.stockDetailContainer {
+  margin: 1rem;
+  font-family: Geneva, Tahoma, sans-serif
+}
+
+.headerItem {
+  font-size: large;
+  padding-bottom: .25rem;
+}
+
+.partNumber {
+  font-size: large;
+  padding-bottom: .25rem;
+}
+
+.description {
+  padding-bottom: .25rem;
+  padding-top: .25rem;
+  font-weight: bold;
+  
+}

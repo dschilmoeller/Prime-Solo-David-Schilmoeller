@@ -28,8 +28,8 @@ export default function EditAllItems() {
     const itemID = useParams();
 
     useEffect(() => {
-        dispatch({ type: "GET_ITEM_DETAIL", payload: Number(itemID.id)  });
-        dispatch({ type: 'FETCH_SUPPLIERS'})
+        dispatch({ type: "GET_ITEM_DETAIL", payload: Number(itemID.id) });
+        dispatch({ type: 'FETCH_SUPPLIERS' })
     }, [dispatch]);
 
     const [open, setOpen] = useState(false);
@@ -47,11 +47,11 @@ export default function EditAllItems() {
     const [estLeadTime, setEstLeadTime] = useState(itemDetail.lead_time_weeks)
     const [estMTTF, setEstMTFF] = useState(itemDetail.mttf_months)
     const [supplierID, setSupplierID] = useState(itemDetail.supplier_id)
-    
 
-const handleSupplier = (e) => {
-    setSupplierID(e.target.value)
-}
+
+    const handleSupplier = (e) => {
+        setSupplierID(e.target.value)
+    }
 
     const submitEdits = () => {
         event.preventDefault();
@@ -59,15 +59,15 @@ const handleSupplier = (e) => {
         let updatedItemData = { itemID, partName, partNumber, description, estLeadTime, estMTTF, supplierID }
         // console.log(`updated Item Data:`, updatedItemData);
         dispatch({ type: 'UPDATE_INV_ITEM_DETAILS', payload: updatedItemData })
-        
+
         setOpen(false)
-        console.log(`itemID`, itemID.id);
-        dispatch({ type: 'GET_ITEM_DETAIL', payload: Number(itemID.id)})
+        // console.log(`itemID`, itemID.id);
+        dispatch({ type: 'GET_ITEM_DETAIL', payload: Number(itemID.id) })
     }
 
     return (
-        <div>
-            <Button onClick={handleOpen}>Edit Item</Button>
+        <>
+            <Button variant='contained' sx={{m: 1}} onClick={handleOpen}>Edit Item Details</Button>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -79,37 +79,37 @@ const handleSupplier = (e) => {
                         Edit Item
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }} component={'div'}>
-                    <form onSubmit={submitEdits}>
-                        <div>Part Name
-                            <input placeholder='part name' value={partName} onChange={(e) => setPartName(e.target.value)} />
-                        </div>
-                        <div>Part Number
-                            <input placeholder='part number' value={partNumber} onChange={(e) => setPartNumber(e.target.value)} />
-                        </div>
-                        <div>Description
-                            <input placeholder='description' value={description} onChange={(e) => setDescription(e.target.value)} />
-                        </div>
-                        <div>Estimated Lead Time
-                            <input placeholder='est lead time' value={estLeadTime} onChange={(e) => setEstLeadTime(e.target.value)} />
-                        </div>
-                        <div>Estimated MTTF
-                            <input placeholder='est mttf' value={estMTTF} onChange={(e) => setEstMTFF(e.target.value)} selected />
-                        </div>
-                        <label htmlFor='suppliers'>Supplier</label>
+                        <form onSubmit={submitEdits}>
+                            <div>Part Name
+                                <input placeholder='part name' value={partName} onChange={(e) => setPartName(e.target.value)} />
+                            </div>
+                            <div>Part Number
+                                <input placeholder='part number' value={partNumber} onChange={(e) => setPartNumber(e.target.value)} />
+                            </div>
+                            <div>Description
+                                <input placeholder='description' value={description} onChange={(e) => setDescription(e.target.value)} />
+                            </div>
+                            <div>Estimated Lead Time
+                                <input placeholder='est lead time' value={estLeadTime} onChange={(e) => setEstLeadTime(e.target.value)} />
+                            </div>
+                            <div>Estimated MTTF
+                                <input placeholder='est mttf' value={estMTTF} onChange={(e) => setEstMTFF(e.target.value)} selected />
+                            </div>
+                            <label htmlFor='suppliers'>Supplier</label>
                             <select name='suppliers' defaultValue={supplierID} onChange={handleSupplier}>
                                 {suppliers.map(supplier => {
                                     return (
-                                    <option key={supplier.id} value={supplier.id} >{supplier.supplier_name}</option>
+                                        <option key={supplier.id} value={supplier.id} >{supplier.supplier_name}</option>
                                     )
                                 })}
                             </select>
                             <div class="btn-container">
-                        <Button type='submit'>Submit</Button>
-                        </div>
-                    </form>
+                                <Button type='submit'>Submit</Button>
+                            </div>
+                        </form>
                     </Typography>
                 </Box>
             </Modal>
-        </div>
+        </>
     );
 }

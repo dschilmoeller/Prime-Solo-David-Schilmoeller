@@ -34,8 +34,8 @@ export default function DeleteItemFromAllItems() {
   }
 
   return (
-    <div>
-      <Button onClick={handleOpen}>Delete Item From All Items</Button>
+    <>
+      <Button variant="contained" sx={{m: 1}} className='admin-btn' onClick={handleOpen}>Delete Item From All Items</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -54,6 +54,6 @@ export default function DeleteItemFromAllItems() {
           {/* </Typography> */}
         </Box>
       </Modal>
-    </div>
+    </>
   );
 }

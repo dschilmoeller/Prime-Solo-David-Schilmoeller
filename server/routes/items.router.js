@@ -180,6 +180,7 @@ router.get('/fetchusertypes', (req, res) => {
         })
 
 })
+
 router.put('/mystock/:id', (req, res) => {
     const sqlText = `UPDATE "my_objects_table"
     SET "quantity_in_field" = $1, "quantity_owned" = $2, "stock_override" = $3, "stock_override_qty" = $4

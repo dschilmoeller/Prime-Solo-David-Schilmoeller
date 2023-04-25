@@ -55,7 +55,7 @@ export default function AddItemToStock() {
 
     return (
         <div>
-            <Button onClick={handleOpen}>Add Item To My Stock</Button>
+            <Button variant="contained" onClick={handleOpen}>Add Item To My Stock</Button>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -88,7 +88,7 @@ export default function AddItemToStock() {
                             : <Button onClick={() => { setStockOverride(true) }} type="button">Activate Stock Override</Button>}
                         <br /><br />
                         <div class="btn-container">
-                        <Button type='submit'>Submit</Button>
+                        <Button variant="contained" type='submit'>Submit</Button>
                         </div>
                     </form>
                 </Box>
