@@ -72,6 +72,13 @@ Button
   width: 50%
 }
 
+.btn-container-no-margin {
+  display: flex;
+  flex-direction: column;
+  padding: .5rem;
+  width: 70%
+}
+
 /* This line makes the "Register" and "Login" buttons look like links */
 .btn_asLink {
   padding: 0;
@@ -153,9 +160,12 @@ input {
 Container Treatments
 -------------------------------------------------------------------------------- */
 
-.stockDetailContainer {
-  margin: 1rem;
-  font-family: Geneva, Tahoma, sans-serif
+.stock-container {
+  display: flex;
+  flex-direction: column;
+  padding: .5rem;
+  margin: auto;
+  width: 70%
 }
 
 .headerItem {

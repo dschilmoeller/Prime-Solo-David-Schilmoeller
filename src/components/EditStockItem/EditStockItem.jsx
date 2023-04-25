@@ -58,14 +58,16 @@ export default function EditStockItem() {
   
   return (
     <div>
-      <Button color="secondary" onClick={handleOpen}>Edit Stock Item</Button>
+      <div className='btn-container-no-margin'>
+      <Button variant='outlined' onClick={handleOpen}>Edit Stock Item</Button>
+      </div>
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={{ ...style, border: 'none' }}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Edit Stock Item
           </Typography>
@@ -96,7 +98,7 @@ export default function EditStockItem() {
             <Button type='submit' variant='contained'>Submit</Button>
             </div>
             <div className="btn-container">
-            <Button type='button' color='secondary' variant='contained'>Cancel</Button>
+            <Button type='button' color='secondary' variant='contained' onClick={()=> setOpen(false)}>Cancel</Button>
             </div>
           </form>
           {/* </Typography> */}

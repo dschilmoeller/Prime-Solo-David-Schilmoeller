@@ -37,7 +37,9 @@ export default function DeleteItemFromStock() {
 
   return (
     <div>
-      <Button onClick={handleOpen} color="error">Delete Item From Stock</Button>
+      <div className='btn-container-no-margin'>
+      <Button onClick={handleOpen} color="error" variant='outlined'>Delete Item From Stock</Button>
+      </div>
       <Modal
         open={open}
         onClose={handleClose}
@@ -51,7 +53,12 @@ export default function DeleteItemFromStock() {
           {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}> */}
           <form onSubmit={ConfirmDelete}>
             <div>Are you sure you'd like to remove this item from your stock?</div>
-            <Button type='submit'>Submit</Button><Button>Cancel</Button>
+            <div className="btn-container">
+            <Button type='submit' variant='contained'>Submit</Button>
+            </div>
+            <div className="btn-container">
+            <Button type='button' color='secondary' variant='contained' onClick={()=> setOpen(false)}>Cancel</Button>
+            </div>
           </form>
           {/* </Typography> */}
         </Box>
