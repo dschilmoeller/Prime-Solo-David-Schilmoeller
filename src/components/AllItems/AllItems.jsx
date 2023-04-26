@@ -14,7 +14,7 @@ function AllItems(props) {
 
     useEffect(() => {
         dispatch({ type: "FETCH_ALL_ITEMS" })
-
+        
     }, []);
 
     const allItemsFromStore = useSelector((store) => store.allItems);
@@ -39,8 +39,8 @@ function AllItems(props) {
     let cardClasses = `itemCard ${isStocked}`
 
     const checkIfStocked = (stockItems) => {
+        if (listView === false ) {
         let elements = document.querySelectorAll("#card-div")
-        console.log(`stock items;`, stockItems);
         for (let element of elements) {
             console.log(`element.class`, element.className);
             for (let item of stockItems) {
@@ -50,13 +50,19 @@ function AllItems(props) {
                 }
             }
         }
-        // for (let item of stockItems) {
-        //     console.log(`stockitem:`, stockItems);
-        //     console.log(document.querySelector("#card-div").id)
-        //         document.querySelector("#card-div").classList.add('test')
-        //     // if item.part_name === 
-        // }
+    } else if (listView === true ) {
+        let elements = document.querySelectorAll("#list-item")
+        for (let element of elements) {
+            console.log(`element.class`, element.className);
+            for (let item of stockItems) {
+                if (item.part_number === element.className) {
+                    console.log(`!`);
+                    element.classList.add('in-stock')
+                }
+            }
+        }
     }
+}
 
     const isStocked = true
 
@@ -83,8 +89,6 @@ function AllItems(props) {
 
     return (
         <div>
-            <button onClick={() => checkIfStocked(stockItems)}>Test</button>
-
             <div className='general-container'>
                 <h1>All Items</h1>
                 <TextField
@@ -103,6 +107,7 @@ function AllItems(props) {
                 <div>
                     {listView ? <Button variant='contained' sx={{ m: 1 }} onClick={toggleListView}>See Box View</Button> : <Button variant='contained' sx={{ m: 1 }} onClick={toggleListView}>See List View</Button>}
                     <Button variant='outlined' sx={{ m: 1 }} onClick={clickMyStock}>See My Stock</Button>
+                    <Button onClick={() => checkIfStocked(stockItems)}>Highlight Stocked Items</Button>
                 </div>
                 <div>
                     {user === 1 ? <AddItemToMasterList /> : null}
@@ -138,11 +143,11 @@ function AllItems(props) {
                         // else if list view === true
                         <ul>
                             {dataFiltered.map((d, i) => (
-                                <div className="text" key={i} >
+                                <div className="listItem" key={i} >
                                     {allItemsFromStore.map((item => {
                                         if (item.part_name === d) {
                                             return (
-                                                <li className='listItem' key={item.id} sx={{ minWidth: 300 }} id={item.id} onClick={() => clickItemDetail(item.id, stockItems)} >
+                                                <li className={item.part_number} key={item.id} id='list-item' sx={{ minWidth: 300 }} onClick={() => clickItemDetail(item.id, stockItems)} >
                                                     Item Name: {item.part_name} / Part # {item.part_number}
                                                 </li>
                                             )
