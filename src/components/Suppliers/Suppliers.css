@@ -1,0 +1,12 @@
+.supplier-main {
+    margin-left: 2rem;
+}
+
+.supplier-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 1rem;
+    margin: auto;
+  }
+  

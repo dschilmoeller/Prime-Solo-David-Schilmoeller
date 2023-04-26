@@ -153,6 +153,7 @@ input {
 
 .listItem:hover {
   background-color: #DC9023;
+  cursor: pointer;
 }
 
 .listItem {
@@ -169,21 +170,15 @@ Container Treatments
   padding-left: 1.5rem;
 }
 
-.supplier-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding: 1rem;
-  margin: auto;
-}
 
 .stock-container {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  padding: 1rem;
+  padding-left: 2rem;
   margin: auto;
   font-size: large;
+  
 }
 
 .header-item {

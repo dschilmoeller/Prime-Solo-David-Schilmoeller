@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Card, TextField } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import AddSupplier from '../AddSupplier/AddSupplier';
+import './Suppliers.css'
 
 function Suppliers(props) {
     const history = useHistory();
@@ -54,6 +55,7 @@ function Suppliers(props) {
 
     return (
         <div>
+            <div className='supplier-main'>
             <h1>Suppliers</h1>
             <TextField
             autoFocus
@@ -70,7 +72,7 @@ function Suppliers(props) {
             />
 
             <AddSupplier />
-
+            </div>
             {/* Set up to click on a card and go to supplier details page. */}
             <div className='supplier-container' >
                 {dataFiltered.map((d, i) => (

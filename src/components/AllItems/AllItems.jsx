@@ -52,7 +52,6 @@ function AllItems(props) {
         for (let element of elements) {
             for (let item of stockItems) {
                 if (item.part_number === element.className) {
-                    console.log(`!`);
                     element.classList.add('in-stock-line')
                 }
             }

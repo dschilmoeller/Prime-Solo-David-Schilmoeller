@@ -68,23 +68,29 @@ function SupplierDetail() {
                         let mailAddressPrimary = `mailto:${supplier.primary_contact_email}`
                         return (
                             
-                            <div key={supplier.id}>
+                            <div key={supplier.id} className="supplier-detail-container">
+                                <div className="button-box">
                                 < EditSupplier />
+                                </div>
+                                <div className="button-box">
                                 < DeleteSupplier />
+                                </div>
 
-                                <h1>{supplier.supplier_name}</h1>
-                                <h2>{supplier.supplier_address}</h2>
+                                <div class="header-item">{supplier.supplier_name}</div>
+                                <div>{supplier.supplier_address}</div>
                                 <div><a href={supplier.supplier_url} target="_blank">{supplier.supplier_url}</a></div>
-                                <br />
+                                
                                 <a href={mailAddressSales}>{supplier.supplier_email}</a>
                                 <div>{formatPhoneNumber(supplier.supplier_phone)}</div>
                                 <br />
-                                <h3>Primary Contact</h3>
+                                <div class="header-item">Primary Contact</div>
                                 <div>{supplier.primary_contact_name}</div>
                                 <a href={mailAddressPrimary}>{supplier.primary_contact_email}</a>
                                 <div>{formatPhoneNumber(supplier.primary_contact_phone)}</div>
-                                <br /> <br />
-                                <Button onClick={headBack}>Back</Button>
+                                <br />
+                                <div className="button-box">
+                                <Button variant="contained" sx={{minWidth: 200}} onClick={headBack}>Back</Button>
+                                </div>
                             </div>
                         )
                     })
@@ -92,7 +98,7 @@ function SupplierDetail() {
             </div>
 
             <br /><br />
-            <div>Items Carried:</div>
+            <div className="supplier-detail-container">Items Carried:</div>
             <ul>
                 {itemsbysupplier &&
                     itemsbysupplier.map((item) => {

@@ -38,7 +38,7 @@ export default function DeleteSupplier() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Delete Supplier</Button>
+      <Button sx={{minWidth: 200}} color="secondary" variant='contained' onClick={handleOpen}>Delete Supplier</Button>
       <Modal
         open={open}
         onClose={handleClose}
