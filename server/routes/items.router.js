@@ -55,7 +55,8 @@ router.get("/fetchsuppliers", (req, res) => {
 });
 
 router.get('/fetchProfile', (req, res) => {
-    const sqlText = `SELECT first_name, last_name, user_email, user_type FROM "user"`
+    const sqlText = `SELECT first_name, last_name, user_email, user_type_name FROM "user" 
+    JOIN user_types_table ON user_types_table.id = "user".user_type`
     pool
         .query(sqlText)
         .then((result) => {

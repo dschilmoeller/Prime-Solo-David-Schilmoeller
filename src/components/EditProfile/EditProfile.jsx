@@ -54,7 +54,7 @@ export default function EditProfile() {
 
     return (
         <div>
-            <Button onClick={handleOpen}>Edit Profile</Button>
+            <Button variant='contained' onClick={handleOpen}>Edit Profile</Button>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -102,7 +102,7 @@ export default function EditProfile() {
                                     </div>
                                 </>) : null}
 
-                            <div class="btn-container">
+                            <div className="btn-container">
                                 <Button type='submit'>Submit</Button><Button type='buttton' onClick={() => { setOpen(false) }}>Cancel</Button>
                             </div>
                         </form> : null}

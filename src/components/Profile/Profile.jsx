@@ -37,8 +37,10 @@ function Profile() {
 
     return (
         <div>
+            <div className='general-container'>
             <h2>Profile Details</h2>
             < EditProfile />
+            </div>
             <ul>
                 <li>Full Name: {profile.first_name} {profile.last_name}</li>
                 <li>Email: <a href={mailToProfile}>{profile.user_email}</a></li>
@@ -46,7 +48,12 @@ function Profile() {
                 <li>Username: {profile.username}</li>
                 {profile.supplier_company_name ? (
                     <div>
-                        <h2>Account Type: Master Administrator</h2>
+
+                        {profile.user_type === 1 ? <li>Account Type: Master Administrator</li> : null }
+                        {profile.user_type === 2 ? <li>Account Type: Supplier Administrator</li> : null }
+                        {profile.user_type === 3 ? <li>Account Type: Supplier</li> : null }
+                        {profile.user_type === 4 ? <li>Account Type: Dealer</li> : null }
+
                         <li>Supplier Corporate Name: {profile.supplier_company_name}</li>
                         <li>Supplier Address: {profile.supplier_company_address}</li>
                         <li>Supplier Phone: {formatPhoneNumber(profile.supplier_company_phone)}</li>
@@ -58,9 +65,9 @@ function Profile() {
 
             {profile.user_type === 1 ? (
                 <div>
-
+                   {allUsers ? ( 
                     <ul>
-                        <h2>All Users:</h2>
+                        <h2>User Administration Area:</h2>
                         {allUsers.map(item => {
                             if (item.username != profile.username) {
                                 return (
@@ -82,6 +89,7 @@ function Profile() {
                             }
                         })}
                     </ul>
+) : null }
                 </div>
             ) : null}
 
