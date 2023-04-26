@@ -5,6 +5,8 @@ import Modal from '@mui/material/Modal';
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 const style = {
   position: 'absolute',
@@ -38,7 +40,7 @@ export default function DeleteSupplier() {
 
   return (
     <div>
-      <Button sx={{minWidth: 200}} color="secondary" variant='contained' onClick={handleOpen}>Delete Supplier</Button>
+      <Button sx={{minWidth: 200, minHeight: 30}} color="secondary" variant='contained' startIcon={<DeleteIcon />} onClick={handleOpen}>Delete Supplier</Button>
       <Modal
         open={open}
         onClose={handleClose}

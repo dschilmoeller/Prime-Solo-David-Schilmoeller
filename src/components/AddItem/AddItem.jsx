@@ -5,6 +5,8 @@ import Modal from '@mui/material/Modal';
 import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { useHistory, useParams } from "react-router-dom";
+import CancelIcon from '@mui/icons-material/Cancel';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const style = {
     position: 'absolute',
@@ -126,8 +128,8 @@ export default function AddItemToMasterList() {
 
                         <br /><br />
                         <div className='confirmBtn'>
-                            <Button sx={{ marginLeft: 2, marginTop: 1 }} type='submit' variant='contained'>Add Item</Button>
-                            <Button sx={{ marginLeft: 2, marginTop: 1 }} type='button' color='secondary' variant='contained' onClick={() => setOpen(false)}>Cancel</Button>
+                            <Button startIcon={<AddCircleIcon />} sx={{ marginLeft: 2, marginTop: 1 }} type='submit' variant='contained' >Add Item</Button>
+                            <Button endIcon={<CancelIcon />} sx={{ marginLeft: 2, marginTop: 1 }} type='button' color='secondary' variant='contained' onClick={() => setOpen(false)}>Cancel</Button>
                         </div>
                     </form>
                 </Box>

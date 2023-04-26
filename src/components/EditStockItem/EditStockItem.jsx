@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
+import EditIcon from '@mui/icons-material/Edit';
 
 // TO DO : set up 'admin mode' allowing signficantly more modifications directly from this page.
 // Currently they can only edit items they do not have in stock.
@@ -59,7 +60,7 @@ export default function EditStockItem() {
   return (
     <div>
       <div className='btn-container-no-margin'>
-        <Button variant='outlined' onClick={handleOpen}>Edit Stock Item</Button>
+        <Button startIcon={<EditIcon />} variant='outlined' onClick={handleOpen}>Edit Stock Item</Button>
       </div>
       <Modal
         open={open}
@@ -86,13 +87,13 @@ export default function EditStockItem() {
             {stockOverride ?
               <>
                 <div>
-                  <Button variant='contained' color='secondary' onClick={() => { setStockOverride(false) }} type="button">Turn off Override</Button>
+                  <Button variant='outlined' color='secondary' onClick={() => { setStockOverride(false) }} type="button">Turn off Override</Button>
                 </div>
                 <div>Stock Override Quantity
                   <input placeholder='Override Qty' value={stockOverrideQty} onChange={(e) => setStockOverrideQty(e.target.value)} />
                 </div>
               </>
-              : <Button variant='contained' onClick={() => { setStockOverride(true) }} type="button">Activate Stock Override</Button>}
+              : <Button variant='outlined' onClick={() => { setStockOverride(true) }} type="button">Activate Stock Override</Button>}
             <div className='confirmBtn'>
               <Button sx={{ marginLeft: 2, marginTop: 1 }} type='submit' variant='contained'>Submit</Button>
               <Button sx={{ marginLeft: 2, marginTop: 1 }} type='button' color='secondary' variant='contained' onClick={() => setOpen(false)}>Cancel</Button>

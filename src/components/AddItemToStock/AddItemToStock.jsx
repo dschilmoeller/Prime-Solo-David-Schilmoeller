@@ -5,6 +5,7 @@ import Modal from '@mui/material/Modal';
 import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { useHistory, useParams } from "react-router-dom";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const style = {
     position: 'absolute',
@@ -55,7 +56,7 @@ export default function AddItemToStock() {
 
     return (
         <>
-            <Button variant="contained" onClick={handleOpen}>Add Item To My Stock</Button>
+            <Button startIcon={<AddCircleIcon />} variant="contained" onClick={handleOpen}>Add Item To My Stock</Button>
             <Modal
                 open={open}
                 onClose={handleClose}

@@ -5,6 +5,7 @@ import Modal from '@mui/material/Modal';
 import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
+import EditIcon from '@mui/icons-material/Edit';
 
 // To Do - useEffect to get ID?
 
@@ -78,7 +79,7 @@ export default function EditAllItems() {
         return (
             <>
                 <div className='btn-container-no-margin'>
-                    <Button variant='contained' sx={{ m: 1 }} onClick={handleOpen}>Edit Item Details</Button>
+                    <Button startIcon={<EditIcon />} variant='contained' sx={{ m: 1 }} onClick={handleOpen}>Edit Item Details</Button>
                 </div>
                 <Modal
                     open={open}

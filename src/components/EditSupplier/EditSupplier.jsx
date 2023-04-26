@@ -5,6 +5,7 @@ import Modal from '@mui/material/Modal';
 import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
+import EditIcon from '@mui/icons-material/Edit';
 
 const style = {
     position: 'absolute',
@@ -67,7 +68,7 @@ export default function EditSupplier() {
 
     return (
         <div>
-            <Button sx={{minWidth: 200}} variant='contained' onClick={handleOpen}>Edit Supplier</Button>
+            <Button sx={{minWidth: 200}} variant='contained' onClick={handleOpen} endIcon={<EditIcon />}>Edit Supplier</Button>
             <Modal
                 open={open}
                 onClose={handleClose}

@@ -69,7 +69,6 @@ router.get('/fetchProfile', (req, res) => {
 })
 
 router.get('/fetchdetail/:id', (req, res) => {
-    console.log(`req.body:`, req.params);
     const sqlText = `SELECT "object"."id", "part_name", "part_number", "description", "object_type_id", "mttf_months", "lead_time_weeks", "supplier_id", "supplier_name" from object 
                         JOIN suppliers ON suppliers.id = object.supplier_id
                         WHERE object.id=$1;`

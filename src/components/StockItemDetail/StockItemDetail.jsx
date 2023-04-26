@@ -21,6 +21,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from 'react'
 import { Button } from "@mui/material";
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 
 import EditStockItem from "../EditStockItem/EditStockItem";
 import EditAllItems from "../EditAllItems/EditAllItems";
@@ -83,8 +84,8 @@ function StockItemDetail() {
 
                         <div className="btn-container-no-margin">
                         <div className="btn-container-no-margin">
-                            <Button variant="outlined" sx={{ m: 1 }} onClick={backToMyStock}>Back to My Stock</Button>
-                            <Button variant="outlined" sx={{ m: 1 }} onClick={backToAll}>Back to All Items</Button>
+                            <Button startIcon={<ArrowCircleLeftIcon />} variant="outlined" sx={{ m: 1 }} onClick={backToMyStock}>Back to My Stock</Button>
+                            <Button startIcon={<ArrowCircleLeftIcon />} variant="outlined" sx={{ m: 1 }} onClick={backToAll}>Back to All Items</Button>
                             </div>
                             {user === 1 ? <EditAllItems /> : null}
                             {user === 1 ? <DeleteItemFromAllItems /> : null}

@@ -5,6 +5,7 @@ import Modal from '@mui/material/Modal';
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const style = {
   position: 'absolute',
@@ -36,7 +37,7 @@ export default function DeleteItemFromAllItems() {
   return (
     <>
     <div className='btn-container-no-margin'>
-      <Button variant="contained" sx={{m: 1}} className='admin-btn' onClick={handleOpen}>Delete Item From All Items</Button>
+      <Button endIcon={<DeleteIcon />} variant="contained" color="secondary" sx={{m: 1}} className='admin-btn' onClick={handleOpen}>Delete Item From All Items</Button>
       </div>
       <Modal
         open={open}

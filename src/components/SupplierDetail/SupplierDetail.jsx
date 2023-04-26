@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { Button } from "@mui/material";
 import EditSupplier from "../EditSupplier/EditSupplier";
 import DeleteSupplier from "../DeleteSupplier/DeleteSupplier";
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 
 import './SupplierDetail.css'
 
@@ -89,7 +90,7 @@ function SupplierDetail() {
                                 <div>{formatPhoneNumber(supplier.primary_contact_phone)}</div>
                                 <br />
                                 <div className="button-box">
-                                <Button variant="contained" sx={{minWidth: 200}} onClick={headBack}>Back</Button>
+                                <Button startIcon={<ArrowCircleLeftIcon />} variant="contained" sx={{minWidth: 200}} onClick={headBack}>Back</Button>
                                 </div>
                             </div>
                         )

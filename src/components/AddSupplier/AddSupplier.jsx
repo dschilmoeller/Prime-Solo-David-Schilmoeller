@@ -107,7 +107,10 @@ export default function AddSupplier() {
 
                         <br /><br />
                         <div class="btn-container">
-                        <Button type='submit'>Submit</Button><Button type='button' onClick={() => setOpen(false)}>Cancel</Button>
+                        <Button variant='contained' type='submit'>Submit</Button>
+                        </div>
+                        <div class="btn-container">
+                        <Button variant='contained' color='secondary' type='button' onClick={() => setOpen(false)}>Cancel</Button>
                         </div>
                     </form>
                 </Box>

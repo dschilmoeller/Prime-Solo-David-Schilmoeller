@@ -5,6 +5,8 @@ import EditAllItems from "../EditAllItems/EditAllItems";
 import AddItemToStock from "../AddItemToStock/AddItemToStock";
 import DeleteItemFromAllItems from "../DeleteFromAllItems/DeleteFromAllItems";
 import { Button } from "@mui/material";
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
+
 
 function ItemDetail() {
     const history = useHistory();
@@ -47,7 +49,7 @@ function ItemDetail() {
                         <AddItemToStock />
                     </div>
                     <div className="btn-container-no-margin">
-                    <Button variant="outlined" onClick={headBack}>Back To All Items</Button>
+                    <Button variant="outlined" onClick={headBack} startIcon={<ArrowCircleLeftIcon />}>Back To All Items</Button>
                     </div>
                 </div>
             </>
