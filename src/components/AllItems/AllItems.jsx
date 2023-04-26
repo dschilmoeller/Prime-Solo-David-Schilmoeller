@@ -36,6 +36,30 @@ function AllItems(props) {
         }
     }
 
+    let cardClasses = `itemCard ${isStocked}`
+
+    const checkIfStocked = (stockItems) => {
+        let elements = document.querySelectorAll("#card-div")
+        console.log(`stock items;`, stockItems);
+        for (let element of elements) {
+            console.log(`element.class`, element.className);
+            for (let item of stockItems) {
+                if (item.part_number === element.className) {
+                    console.log(`!`);
+                    element.classList.add('in-stock')
+                }
+            }
+        }
+        // for (let item of stockItems) {
+        //     console.log(`stockitem:`, stockItems);
+        //     console.log(document.querySelector("#card-div").id)
+        //         document.querySelector("#card-div").classList.add('test')
+        //     // if item.part_name === 
+        // }
+    }
+
+    const isStocked = true
+
     const [listView, setListView] = useState(false)
     const toggleListView = () => { setListView(!listView) }
 
@@ -55,75 +79,79 @@ function AllItems(props) {
     const dataFiltered = filterData(searchParam, searchables);
     // end search functionality
 
+
+
     return (
         <div>
+            <button onClick={() => checkIfStocked(stockItems)}>Test</button>
+
             <div className='general-container'>
-            <h1>All Items</h1>
-            <TextField
-            autoFocus
-                id="search-bar"
-                className="text"
-                onChange={(e) => {
-                    setSearchParam(e.target.value);
-                }}
-                value={searchParam}
-                label="Enter Search Term"
-                variant="outlined"
-                placeholder="Search..."
-                size="small"
-            />
-            <div>
-                {listView ? <Button variant='contained' sx={{ m: 1 }} onClick={toggleListView}>See Box View</Button> : <Button variant='contained' sx={{ m: 1 }} onClick={toggleListView}>See List View</Button>}
-                <Button variant='outlined' sx={{ m: 1 }} onClick={clickMyStock}>See My Stock</Button>
+                <h1>All Items</h1>
+                <TextField
+                    autoFocus
+                    id="search-bar"
+                    className="text"
+                    onChange={(e) => {
+                        setSearchParam(e.target.value);
+                    }}
+                    value={searchParam}
+                    label="Enter Search Term"
+                    variant="outlined"
+                    placeholder="Search..."
+                    size="small"
+                />
+                <div>
+                    {listView ? <Button variant='contained' sx={{ m: 1 }} onClick={toggleListView}>See Box View</Button> : <Button variant='contained' sx={{ m: 1 }} onClick={toggleListView}>See List View</Button>}
+                    <Button variant='outlined' sx={{ m: 1 }} onClick={clickMyStock}>See My Stock</Button>
+                </div>
+                <div>
+                    {user === 1 ? <AddItemToMasterList /> : null}
+                </div>
             </div>
             <div>
-                {user === 1 ? <AddItemToMasterList /> : null}
-            </div>
-            </div>
-            <div>
-            {dataFiltered.length === 0 ? (
-                <h1>No Search Results</h1>
-            ) :
-                (listView === false) ? (
-                    <div className="stockContainer">
-                        {dataFiltered.map((d, i) => (
-                            <div key={i} >
-                                {allItemsFromStore.map((item => {
-                                    if (item.part_name === d) {
-                                        return (
-                                            <div  key={item.id}>
-                                                <Card className='itemCard' sx={{ minWidth: 275 }} id={item.id} onClick={() => clickItemDetail(item.id, stockItems)} >
-                                                    <h3>Name: {item.part_name}</h3>
-                                                    <h3>Part# {item.part_number}</h3>
-                                                    {/* <h4>Item Lead Time: {item.lead_time_weeks} weeks</h4>
+                {dataFiltered.length === 0 ? (
+                    <h1>No Search Results</h1>
+                ) :
+                    (listView === false) ? (
+                        <div className="stockContainer">
+                            {dataFiltered.map((d, i) => (
+                                <div key={i} >
+                                    {allItemsFromStore.map((item => {
+                                        if (item.part_name === d) {
+                                            return (
+                                                <div key={item.id} >
+                                                    <Card className={cardClasses} sx={{ minWidth: 275 }} id={item.id} onClick={() => clickItemDetail(item.id, stockItems)} >
+                                                        <h3 id='card-div' key={item.part_number} className={item.part_number}>Name: {item.part_name}</h3>
+                                                        <h3>Part# {item.part_number}</h3>
+                                                        {/* <h4>Item Lead Time: {item.lead_time_weeks} weeks</h4>
                                                     <h4>Mean Time To Failure: {item.mttf_months} months</h4> */}
-                                                    {/* <h4>Object type: {item.object_type}</h4> */}
-                                                </Card>
-                                            </div>
-                                        )
-                                    }
-                                }))}
-                            </div>
-                        ))}
-                    </div>
-                ) : (
-                    // else if list view === true
-                    <ul>
-                        {dataFiltered.map((d, i) => (
-                            <div className="text" key={i} >
-                                {allItemsFromStore.map((item => {
-                                    if (item.part_name === d) {
-                                        return (
-                                            <li className='listItem' key={item.id} sx={{ minWidth: 300 }} id={item.id} onClick={() => clickItemDetail(item.id, stockItems)} >
-                                                Item Name: {item.part_name} / Part # {item.part_number}
-                                            </li>
-                                        )
-                                    }
-                                }))}
-                            </div>
-                        ))}
-                    </ul>
-                )}
+                                                        {/* <h4>Object type: {item.object_type}</h4> */}
+                                                    </Card>
+                                                </div>
+                                            )
+                                        }
+                                    }))}
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        // else if list view === true
+                        <ul>
+                            {dataFiltered.map((d, i) => (
+                                <div className="text" key={i} >
+                                    {allItemsFromStore.map((item => {
+                                        if (item.part_name === d) {
+                                            return (
+                                                <li className='listItem' key={item.id} sx={{ minWidth: 300 }} id={item.id} onClick={() => clickItemDetail(item.id, stockItems)} >
+                                                    Item Name: {item.part_name} / Part # {item.part_number}
+                                                </li>
+                                            )
+                                        }
+                                    }))}
+                                </div>
+                            ))}
+                        </ul>
+                    )}
             </div>
         </div>
     );

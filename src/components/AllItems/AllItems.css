@@ -21,3 +21,7 @@
 .listItem { 
     padding: .25rem;
 } */
+
+.in-stock {
+    background-color: aquamarine;
+}
