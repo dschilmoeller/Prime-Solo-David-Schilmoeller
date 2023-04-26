@@ -21,9 +21,9 @@ const style = {
   p: 4,
 };
 
-export default function EditStockItem() {
+export default function EditStockItem(props) {
   const stockDetail = useSelector(store => store.stockItemDetails[0])
-  // console.log(`StockDetail:`, stockDetail);
+  let returnedQuant = props.returnedQuant
 
   const dispatch = useDispatch();
 
@@ -50,8 +50,42 @@ export default function EditStockItem() {
   const submitEdits = () => {
     event.preventDefault();
     // set up defaults.
-    let updatedItemData = { qtyInField, qtyOwned, stockOverride, stockOverrideQty, mot_id: stockDetail.mot_id }
-    dispatch({ type: 'UPDATE_MY_STOCK_ITEM', payload: updatedItemData })
+    if (returnedQuant > 0) {
+      // console.log(`returned Quant:`, returnedQuant);
+      // console.log(`qtyOwned:`, qtyOwned);
+      let newQuantityToOrder = returnedQuant - qtyOwned
+      
+      // console.log(`newquanttoorder:`, newQuantityToOrder);
+
+      if (newQuantityToOrder > 0) {
+        let updatedItemData = { qtyInField, qtyOwned, stockOverride, stockOverrideQty, mot_id: stockDetail.mot_id, newQuantityToOrder }
+        console.log(`newquanttoorder:`, newQuantityToOrder);
+        dispatch({ type: 'UPDATE_MY_STOCK_ITEM', payload: updatedItemData })
+      } else {
+        let newQuantityToOrder = 0
+        let updatedItemData = { qtyInField, qtyOwned, stockOverride, stockOverrideQty, mot_id: stockDetail.mot_id, newQuantityToOrder }
+        console.log(`newquanttoorder:`, newQuantityToOrder);
+        dispatch({ type: 'UPDATE_MY_STOCK_ITEM', payload: updatedItemData })  
+      }
+    } else {
+      let newQuantityToOrder = 0
+      let updatedItemData = { qtyInField, qtyOwned, stockOverride, stockOverrideQty, mot_id: stockDetail.mot_id, newQuantityToOrder }
+      console.log(`newquanttoorder:`, newQuantityToOrder);
+      dispatch({ type: 'UPDATE_MY_STOCK_ITEM', payload: updatedItemData })
+    }
+    //   if (newQuantityToOrder > 0) {
+    //     let updatedItemData = { qtyInField, qtyOwned, stockOverride, stockOverrideQty, mot_id: stockDetail.mot_id, quantityToOrder }
+    //     dispatch({ type: 'UPDATE_MY_STOCK_ITEM', payload: updatedItemData })
+    //   } else {
+    //     let updatedItemData = { qtyInField, qtyOwned, stockOverride, stockOverrideQty, mot_id: stockDetail.mot_id, quantityToOrder }
+    //     dispatch({ type: 'UPDATE_MY_STOCK_ITEM', payload: updatedItemData })
+    //   }
+    // } else if (quantityToOrder <= 0) {
+    //   let quantityToOrder = 0
+
+
+    // }
+
     setOpen(false)
     dispatch({ type: 'GET_STOCK_ITEM_DETAILS', payload: stockDetail.mot_id })
   }

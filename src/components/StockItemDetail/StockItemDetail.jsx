@@ -33,6 +33,7 @@ function StockItemDetail() {
     const history = useHistory();
     const { id } = useParams()
     let returnedQuant;
+    let quantityToOrder;
 
     const user = useSelector(store => store.user.user_type)
     const stockDetail = useSelector(store => store.stockItemDetails[0])
@@ -53,6 +54,10 @@ function StockItemDetail() {
         if (user === 4) {
             returnedQuant = Math.round((stockDetail.quantity_in_field / stockDetail.mttf_months)) * Math.floor((stockDetail.lead_time_weeks / 8))
         }
+        
+        if (returnedQuant > stockDetail.quantity_owned) {
+            quantityToOrder = returnedQuant - stockDetail.quantity_owned 
+        }
     }
 
     // console.log(`stockItemDetail:`, stockDetail);
@@ -62,21 +67,18 @@ function StockItemDetail() {
         onHandQuant()
 
         if (itemDetail) {
-            console.log(`returned quant:`, returnedQuant);
-            console.log(`quantity owned:`, stockDetail.quantity_owned);
-            // if (returnedQuant > stockDetail.quantity_owned) {
             return (
                 <>
                     <div>
                         <div className="btn-container-no-margin">
-                            {<EditStockItem />}
+                            {<EditStockItem returnedQuant={returnedQuant} />}
                             {<DeleteItemFromStock />}
                         </div>
                         <div className="stock-container">
-                                                        
+                          
                         {returnedQuant > stockDetail.quantity_owned ? (
                             <>
-                            <div className="order-alert">Consider ordering {returnedQuant - stockDetail.quantity_owned} units to maintain recommended stock levels</div>
+                            <div className="order-alert">Consider ordering {quantityToOrder} units to maintain recommended stock levels</div>
                             <br></br>
                             </>
                             ) : 
@@ -108,11 +110,6 @@ function StockItemDetail() {
 
                 </>
             )
-            // } else {
-            //     return (
-            //         <h2>Not enough!</h2>
-            //     )
-            // }
         } else {
             return null
         }

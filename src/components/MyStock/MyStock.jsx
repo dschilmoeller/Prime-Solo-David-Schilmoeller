@@ -102,9 +102,9 @@ return (
                                             <h3>Item name: {stockItem.part_name}</h3>
                                             <h3>Part# {stockItem.part_number}</h3>
                                             <h3>Deployed: {stockItem.quantity_in_field}</h3>
-                                            <h3>On Hand: {stockItem.quantity_owned}</h3>
+                                            <h3>Reccommended Order Quantity: {stockItem.quantity_to_order}</h3>
                                             {stockItem.lead_time_weeks > 4 ? <h4>Item Lead Time: {stockItem.lead_time_weeks / 4} months</h4> : <h4>Item Lead Time: {stockItem.lead_time_weeks} weeks</h4>}
-                                            {stockItem.mttf_months > 11 ? <h4>Mean Time To Failure: {stockItem.mttf_months / 12} years</h4> : <h4>Mean Time To Failure: {stockItem.mttf_months} months</h4>}
+                                            {/* {stockItem.mttf_months > 11 ? <h4>Mean Time To Failure: {stockItem.mttf_months / 12} years</h4> : <h4>Mean Time To Failure: {stockItem.mttf_months} months</h4>} */}
                                             <h4>Object type: {stockItem.object_type}</h4>
                                         </Card>
                                     </div>
