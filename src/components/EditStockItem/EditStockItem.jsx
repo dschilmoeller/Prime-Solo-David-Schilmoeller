@@ -75,10 +75,10 @@ export default function EditStockItem() {
           {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}> */}
           <form onSubmit={submitEdits}>
             <div>Quantity in Field
-              <input placeholder='Quantity installed' value={qtyInField} onChange={(e) => setQtyInField(e.target.value)} />
+              <input placeholder='Quantity installed' type='number' value={qtyInField} onChange={(e) => setQtyInField(e.target.value)} />
             </div>
             <div>Quantity in Stock
-              <input placeholder='Quantity in stock' value={qtyOwned} onChange={(e) => setQtyOwned(e.target.value)} />
+              <input placeholder='Quantity in stock' type='number' value={qtyOwned} onChange={(e) => setQtyOwned(e.target.value)} />
             </div>
             <div>
 
@@ -90,7 +90,7 @@ export default function EditStockItem() {
                   <Button variant='outlined' color='secondary' onClick={() => { setStockOverride(false) }} type="button">Turn off Override</Button>
                 </div>
                 <div>Stock Override Quantity
-                  <input placeholder='Override Qty' value={stockOverrideQty} onChange={(e) => setStockOverrideQty(e.target.value)} />
+                  <input placeholder='Override Qty' type="number" value={stockOverrideQty} onChange={(e) => setStockOverrideQty(e.target.value)} />
                 </div>
               </>
               : <Button variant='outlined' onClick={() => { setStockOverride(true) }} type="button">Activate Stock Override</Button>}

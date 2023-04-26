@@ -17,7 +17,6 @@ function MyStock() {
     const toggleListView = () => { setListView(!listView) }
 
     const param = useParams()
-    console.log(`param`, Number(param.id));
 
     useEffect(() => {
         dispatch({ type: "FETCH_MY_STOCK" })

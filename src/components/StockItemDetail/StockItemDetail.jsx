@@ -49,8 +49,10 @@ function StockItemDetail() {
         returnedQuant = 0
         if (user === 1 || user === 2 || user === 3) {
             returnedQuant = Math.round((stockDetail.quantity_in_field / stockDetail.mttf_months)) * Math.floor((stockDetail.lead_time_weeks / 4))
+        } 
+        if (user === 4) {
+            returnedQuant = Math.round((stockDetail.quantity_in_field / stockDetail.mttf_months)) * Math.floor((stockDetail.lead_time_weeks / 8))
         }
-        // console.log(`returnedQuant for ${stockDetail.part_name}:`, returnedQuant);
     }
 
     // console.log(`stockItemDetail:`, stockDetail);
@@ -60,8 +62,10 @@ function StockItemDetail() {
         onHandQuant()
 
         if (itemDetail) {
+            console.log(`returned quant:`, returnedQuant);
+            console.log(`quantity owned:`, stockDetail.quantity_owned);
+            // if (returnedQuant > stockDetail.quantity_owned) {
             return (
-
                 <>
                     <div>
                         <div className="btn-container-no-margin">
@@ -69,6 +73,15 @@ function StockItemDetail() {
                             {<DeleteItemFromStock />}
                         </div>
                         <div className="stock-container">
+                                                        
+                        {returnedQuant > stockDetail.quantity_owned ? (
+                            <>
+                            <div className="order-alert">Consider ordering {returnedQuant - stockDetail.quantity_owned} units to maintain recommended stock levels</div>
+                            <br></br>
+                            </>
+                            ) : 
+                            null}
+
                             <div className="header-item">{stockDetail.part_name}</div>
                             <div className="part-number">Part Number: {stockDetail.part_number}</div>
                             <div className="description">{stockDetail.description}</div>
@@ -76,7 +89,7 @@ function StockItemDetail() {
                             <div>Estimated Mean Time To Failure: {stockDetail.mttf_months} months</div>
                             <div>Quantity in Field: {stockDetail.quantity_in_field}</div>
                             <div>Quantity on Hand: {stockDetail.quantity_owned}</div>
-                            <div>Recommended Quantity on Hand: {returnedQuant}</div>
+                            {user === 4 ? <div>Recommended Quantity, Dealer : {returnedQuant}</div> : <div>Recommended Quantity, Supplier: {returnedQuant}</div>}
                             {stockDetail.stock_override ? <div>Stock Override Active</div> : null}
                             {stockDetail.stock_override ? <div>Stock Override Quantity: {stockDetail.stock_override_qty}</div> : null}
                             <div>Supplier: <a href={supplierID}>{stockDetail.supplier_name}</a></div>
@@ -95,6 +108,11 @@ function StockItemDetail() {
 
                 </>
             )
+            // } else {
+            //     return (
+            //         <h2>Not enough!</h2>
+            //     )
+            // }
         } else {
             return null
         }

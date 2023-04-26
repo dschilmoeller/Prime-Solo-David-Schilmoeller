@@ -37,7 +37,7 @@ function ItemDetail() {
                     {user === 1 ? <DeleteItemFromAllItems /> : null}
                 </div>
                 <div className="stock-container">
-                    <div className="header-item">{itemDetail.part_name}</div>
+                    <div className="header-item">Name: {itemDetail.part_name}</div>
                     <div className="part-number">Part Number: {itemDetail.part_number}</div>
                     <div className="description">{itemDetail.description}</div>
                     <div>Estimated Lead Time: {itemDetail.lead_time_weeks} weeks</div>
