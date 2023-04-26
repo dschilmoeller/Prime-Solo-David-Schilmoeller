@@ -5,6 +5,7 @@ import Modal from '@mui/material/Modal';
 import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { useHistory, useParams } from "react-router-dom";
+import { MuiTelInput} from 'mui-tel-input'
 
 const style = {
     position: 'absolute',
@@ -57,7 +58,6 @@ export default function AddSupplier() {
         // history.push('/suppliers/0')
     }
 
-
     return (
         <div>
             <Button variant='contained' sx={{ m: 1 }} onClick={handleOpen}>Add Supplier</Button>
@@ -74,35 +74,36 @@ export default function AddSupplier() {
                     <form onSubmit={handleAddSupplier}>
                         <div>
                             Supplier Name
-                            <input placeholder='Supplier Name' value={supplier_name} onChange={(e) => setSupplierName(e.target.value)} />
+                            <input placeholder='Supplier Name' size="50" value={supplier_name} onChange={(e) => setSupplierName(e.target.value)} />
                         </div>
                         <div>
                             Supplier Phone
-                            <input placeholder='Supplier Phone' value={supplier_phone} onChange={(e) => setSupplierPhone(e.target.value)} />
+                            
+                            <MuiTelInput value={supplier_phone} onChange={setSupplierPhone} />
                         </div>
                         <div>
                             Supplier Address
-                            <input placeholder='Supplier Address' value={supplier_address} onChange={(e) => setSupplierAddress(e.target.value)} />
+                            <input placeholder='Supplier Address' size="50" value={supplier_address} onChange={(e) => setSupplierAddress(e.target.value)} />
                         </div>
                         <div>
                             Supplier General Email
-                            <input placeholder='Supplier General Email' value={supplier_email} onChange={(e) => setSupplierEmail(e.target.value)} />
+                            <input placeholder='Supplier General Email' size="50" value={supplier_email} onChange={(e) => setSupplierEmail(e.target.value)} />
                         </div>
                         <div>
                             Supplier URL
-                            <input placeholder='Supplier URL' value={supplier_url} onChange={(e) => setSupplierURL(e.target.value)} />
+                            <input placeholder='Supplier URL' size="50" value={supplier_url} onChange={(e) => setSupplierURL(e.target.value)} />
                         </div>
                         <div>
                             Supplier Primary Contact Name
-                            <input placeholder='Primary Contact Name' value={primary_contact_name} onChange={(e) => setPrimaryName(e.target.value)} />
+                            <input placeholder='Primary Contact Name' size="50" value={primary_contact_name} onChange={(e) => setPrimaryName(e.target.value)} />
                         </div>
                         <div>
                             Supplier Primary Contact Phone
-                            <input placeholder='Primary Contact Phone' value={primary_contact_phone} onChange={(e) => setPrimaryPhone(e.target.value)} />
+                            <MuiTelInput size="small" value={primary_contact_phone} onChange={setPrimaryPhone} />
                         </div>
                         <div>
                             Supplier Primary Contact Email
-                            <input placeholder='Primary Contact Email' value={primary_contact_email} onChange={(e) => setPrimaryEmail(e.target.value)} />
+                            <input placeholder='Primary Contact Email' size="50" value={primary_contact_email} onChange={(e) => setPrimaryEmail(e.target.value)} />
                         </div>
 
                         <br /><br />

@@ -33,7 +33,7 @@ export default function DeleteItemFromStock() {
     // send dispatch
     dispatch({ type: 'DELETE_MY_STOCK_ITEM', payload: stockDetail.mot_id})
     setOpen(false)
-    history.push('/mystock')
+    history.push('/mystock/0')
   }
 
   return (

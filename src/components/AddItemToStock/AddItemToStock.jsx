@@ -33,7 +33,7 @@ export default function AddItemToStock() {
 
     const itemDetail = useSelector(store => store.itemDetail[0])
 
-    const [qtyInField, setQtyInField] = useState(0)
+    const [qtyInField, setQtyInField] = useState('')
     const [qtyOwned, setQtyOwned] = useState(0)
     const [stockOverride, setStockOverride] = useState(false)
     const [stockOverrideQty, setStockOverrideQty] = useState(0)
@@ -50,7 +50,7 @@ export default function AddItemToStock() {
         let object_id = itemDetail.id
         let addItemDetail = {object_id, qtyInField, qtyOwned, stockOverride, stockOverrideQty}
         dispatch({ type: "ADD_ITEM_TO_STOCK", payload: addItemDetail})
-        history.push(`/mystock`)
+        history.push(`/mystock/0`)
     }
 
 
@@ -70,11 +70,11 @@ export default function AddItemToStock() {
                     <form onSubmit={handleAddItem}>
                         <div>
                             Quantity in Field
-                            <input placeholder='Quantity installed' value={qtyInField} onChange={(e) => setQtyInField(e.target.value)} />
+                            <input required placeholder='Quantity installed' type="number" value={qtyInField} onChange={(e) => setQtyInField(e.target.value)} />
                         </div>
                         <div>
                             Quantity in Stock
-                            <input placeholder='Quantity in stock' value={qtyOwned} onChange={(e) => setQtyOwned(e.target.value)} />
+                            <input placeholder='Quantity in stock' type="number" value={qtyOwned} onChange={(e) => setQtyOwned(e.target.value)} />
                         </div>
 
                         {stockOverride ?
@@ -83,7 +83,7 @@ export default function AddItemToStock() {
                                     <Button variant="contained" color='secondary' onClick={() => { setStockOverride(false) }} type="button">Turn off Override</Button>
                                 </div>
                                 <div>Stock Override Quantity
-                                    <input placeholder='Override Qty' value={stockOverrideQty} onChange={(e) => setStockOverrideQty(e.target.value)} />
+                                    <input placeholder='Override Qty' value={stockOverrideQty} type="number" onChange={(e) => setStockOverrideQty(e.target.value)} />
                                 </div>
                             </>
                             : <Button variant="contained" onClick={() => { setStockOverride(true) }} type="button">Activate Stock Override</Button>}

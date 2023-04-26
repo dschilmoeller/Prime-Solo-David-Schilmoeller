@@ -87,7 +87,7 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/mystock/">
+          <ProtectedRoute exact path="/mystock/:id">
             <MyStock />
           </ProtectedRoute>
 

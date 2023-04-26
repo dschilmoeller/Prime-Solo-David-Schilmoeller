@@ -42,7 +42,7 @@ function StockItemDetail() {
         dispatch({ type: "GET_STOCK_ITEM_DETAILS", payload: id });
     }, []);
 
-    const backToMyStock = () => { history.push('/mystock') };
+    const backToMyStock = () => { history.push('/mystock/0') };
     const backToAll = () => { history.push('/allitems') }
 
     const onHandQuant = () => {

@@ -19,7 +19,7 @@ function UserPage() {
   return (
     <div className="container">
       {/* Modal buttons - convert when time allows */}
-      <Button className="user-page-btn" sx={{ minWidth: 300, margin: 1 }} variant="contained" onClick={() => { history.push('/mystock') }}>My Stock</Button>
+      <Button className="user-page-btn" sx={{ minWidth: 300, margin: 1 }} variant="contained" onClick={() => { history.push('/mystock/0') }}>My Stock</Button>
       <Button className="user-page-btn" sx={{ minWidth: 300, margin: 1 }} variant="contained" onClick={() => { history.push('/allitems/') }}>All Items</Button>
       <Button className="user-page-btn" sx={{ minWidth: 300, margin: 1 }} variant="contained" onClick={() => { history.push('/suppliers/0') }}>Suppliers</Button>
       <Button className="user-page-btn" sx={{ minWidth: 300, margin: 1 }} variant="contained" onClick={() => { history.push('/profile/') }}>Profile Details</Button>

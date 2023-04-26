@@ -89,15 +89,15 @@ export default function AddItemToMasterList() {
                     <form onSubmit={handleAddItemToMaster}>
                         <div>
                             Part Name
-                            <input placeholder='Part Name' value={partName} onChange={(e) => setPartName(e.target.value)} />
+                            <input placeholder='Part Name' size="50" value={partName} onChange={(e) => setPartName(e.target.value)} />
                         </div>
                         <div>
                             Part Number
-                            <input placeholder='Part Number' value={partNumber} onChange={(e) => setPartNumber(e.target.value)} />
+                            <input placeholder='Part Number' size="48" value={partNumber} onChange={(e) => setPartNumber(e.target.value)} />
                         </div>
                         <div>
                             Part Description
-                            <input placeholder='Part Description' value={partDescription} onChange={(e) => setPartDescription(e.target.value)} />
+                            <input placeholder='Part Description' size="46" value={partDescription} onChange={(e) => setPartDescription(e.target.value)} />
                         </div>
                         <label htmlFor='itemType'>Item Type</label>
                         <select name='itemType' defaultValue={objectTypeID} onChange={handleItemTypeChange}>
@@ -110,11 +110,11 @@ export default function AddItemToMasterList() {
 
                         <div>
                             Part Lead Time - Weeks
-                            <input placeholder='Lead Time in weeks' value={leadTimeWeeks} onChange={(e) => setLeadTimeWeeks(e.target.value)} />
+                            <input placeholder='Lead Time in weeks' type="number" value={leadTimeWeeks} onChange={(e) => setLeadTimeWeeks(e.target.value)} />
                         </div>
                         <div>
                             Mean Time To Failure - Months
-                            <input placeholder='MTTF in Months' value={mttfMonths} onChange={(e) => setmttfMonths(e.target.value)} />
+                            <input placeholder='MTTF in Months' type="number" value={mttfMonths} onChange={(e) => setmttfMonths(e.target.value)} />
                         </div>
 
                         <label htmlFor='suppliers'>Supplier</label>
