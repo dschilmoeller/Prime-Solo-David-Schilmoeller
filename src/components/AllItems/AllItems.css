@@ -24,4 +24,10 @@
 
 .in-stock {
     background-color: #DC9023;
+    /* display: inline-block; */
+}
+
+.in-stock-line {
+    background-color: #DC9023;
+    display: inline-block;
 }

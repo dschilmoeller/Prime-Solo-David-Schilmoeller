@@ -36,13 +36,10 @@ function AllItems(props) {
         }
     }
 
-    let cardClasses = `itemCard ${isStocked}`
-
     const checkIfStocked = (stockItems) => {
         if (listView === false ) {
         let elements = document.querySelectorAll("#card-div")
         for (let element of elements) {
-            console.log(`element.class`, element.className);
             for (let item of stockItems) {
                 if (item.part_number === element.className) {
                     console.log(`!`);
@@ -53,11 +50,10 @@ function AllItems(props) {
     } else if (listView === true ) {
         let elements = document.querySelectorAll("#list-item")
         for (let element of elements) {
-            console.log(`element.class`, element.className);
             for (let item of stockItems) {
                 if (item.part_number === element.className) {
                     console.log(`!`);
-                    element.classList.add('in-stock')
+                    element.classList.add('in-stock-line')
                 }
             }
         }
@@ -125,12 +121,13 @@ function AllItems(props) {
                                         if (item.part_name === d) {
                                             return (
                                                 <div key={item.id} >
-                                                    <Card className={cardClasses} sx={{ minWidth: 275 }} id={item.id} onClick={() => clickItemDetail(item.id, stockItems)} >
+                                                    <Card className='itemCard' sx={{ minWidth: 275 }} id={item.id} onClick={() => clickItemDetail(item.id, stockItems)} >
                                                         <h3 id='card-div' key={item.part_number} className={item.part_number}>Name: {item.part_name}</h3>
                                                         <h3>Part# {item.part_number}</h3>
                                                         {/* <h4>Item Lead Time: {item.lead_time_weeks} weeks</h4>
                                                     <h4>Mean Time To Failure: {item.mttf_months} months</h4> */}
                                                         {/* <h4>Object type: {item.object_type}</h4> */}
+                                                        
                                                     </Card>
                                                 </div>
                                             )
@@ -143,12 +140,14 @@ function AllItems(props) {
                         // else if list view === true
                         <ul>
                             {dataFiltered.map((d, i) => (
-                                <div className="listItem" key={i} >
+                                <div key={i} >
                                     {allItemsFromStore.map((item => {
                                         if (item.part_name === d) {
                                             return (
                                                 <li className={item.part_number} key={item.id} id='list-item' sx={{ minWidth: 300 }} onClick={() => clickItemDetail(item.id, stockItems)} >
+                                                    <div className='listItem'>
                                                     Item Name: {item.part_name} / Part # {item.part_number}
+                                                    </div>
                                                 </li>
                                             )
                                         }
