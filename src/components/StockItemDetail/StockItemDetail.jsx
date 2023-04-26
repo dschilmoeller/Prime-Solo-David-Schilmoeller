@@ -35,6 +35,7 @@ function StockItemDetail() {
     let returnedQuant;
     let quantityToOrder;
 
+    
     const user = useSelector(store => store.user.user_type)
     const stockDetail = useSelector(store => store.stockItemDetails[0])
     const itemDetail = useSelector(store => store.itemDetail[0])
@@ -83,6 +84,8 @@ function StockItemDetail() {
                             </>
                             ) : 
                             null}
+
+                            <img src={stockDetail.img_url} width={150} />
 
                             <div className="header-item">{stockDetail.part_name}</div>
                             <div className="part-number">Part Number: {stockDetail.part_number}</div>

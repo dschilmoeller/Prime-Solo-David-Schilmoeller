@@ -40,7 +40,6 @@ function MyStock() {
     //         }
     //         console.log(`latestMotID:`, latestMotID);
     //     }
-        
     // }
 
 

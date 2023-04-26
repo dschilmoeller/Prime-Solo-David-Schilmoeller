@@ -37,6 +37,7 @@ function ItemDetail() {
                     {user === 1 ? <DeleteItemFromAllItems /> : null}
                 </div>
                 <div className="stock-container">
+                <img src={itemDetail.img_url} width={150} />
                     <div className="header-item">Name: {itemDetail.part_name}</div>
                     <div className="part-number">Part Number: {itemDetail.part_number}</div>
                     <div className="description">{itemDetail.description}</div>

@@ -20,7 +20,7 @@ function AllItems(props) {
     const allItemsFromStore = useSelector((store) => store.allItems);
     const stockItems = useSelector((store => store.myStock))
 
-    const clickMyStock = () => { history.push('/mystock') }
+    const clickMyStock = () => { history.push('/mystock/0') }
 
     const clickItemDetail = (id, stockItems) => {
         let inStock = false

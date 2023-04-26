@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 router.get("/fetchallitems", (req, res) => {
-    const sqlText = `SELECT object.id, part_name, part_number, object_type, mttf_months, lead_time_weeks, description 
+    const sqlText = `SELECT object.id, part_name, part_number, object_type, mttf_months, lead_time_weeks, description, img_url 
     FROM "object"
     JOIN "object_type_table" ON object_type_table.id = object.object_type_id
     ORDER BY part_name ASC;`;
@@ -69,8 +69,12 @@ router.get('/fetchProfile', (req, res) => {
 })
 
 router.get('/fetchdetail/:id', (req, res) => {
-    const sqlText = `SELECT "object"."id", "part_name", "part_number", "description", "object_type_id", "mttf_months", "lead_time_weeks", "supplier_id", "supplier_name" from object 
+    const sqlText = `SELECT "object"."id", "part_name", "part_number", 
+    "description", "object_type_id", "mttf_months", 
+    "lead_time_weeks", "supplier_id", "supplier_name", img_url
+                        FROM object 
                         JOIN suppliers ON suppliers.id = object.supplier_id
+                        JOIN object_type_table ON object.object_type_id = object_type_table.id
                         WHERE object.id=$1;`
 
     const sqlParams = [Number(req.params.id)]
@@ -91,6 +95,7 @@ router.get('/mystock/:id', (req, res) => {
     const sqlText = `SELECT * from my_objects_table 
                         JOIN object ON object.id = my_objects_table.object_id
                         JOIN suppliers ON suppliers.id = object.supplier_id
+                        JOIN object_type_table ON object.object_type_id = object_type_table.id
                         WHERE mot_id=$1`
 
     const sqlParams = [Number(req.params.id)]
