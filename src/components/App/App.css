@@ -167,7 +167,7 @@ Container Treatments
 -------------------------------------------------------------------------------- */
 
 .general-container {
-  padding-left: 2.5rem;
+  padding-left: 3rem;
 }
 
 
@@ -175,7 +175,7 @@ Container Treatments
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  padding-left: 2rem;
+  padding-left: 3rem;
   margin: auto;
   font-size: large;
   

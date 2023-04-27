@@ -102,7 +102,7 @@ function SupplierDetail() {
             </div>
 
             <br /><br />
-            <div className="supplier-detail-container">Items Carried:</div>
+            <div className="supplier-detail-container">Items Carried:
             <ul>
                 {itemsbysupplier &&
                     itemsbysupplier.map((item) => {
@@ -117,6 +117,7 @@ function SupplierDetail() {
                         )
                     })}
             </ul>
+            </div>
         </>
     )
 }

@@ -38,7 +38,7 @@ function Profile() {
     return (
         <div>
             <div className='general-container'>
-            <h2>Profile Details</h2>
+            <h1>Profile Details</h1>
             < EditProfile />
             </div>
             <ul className='general-container'>
