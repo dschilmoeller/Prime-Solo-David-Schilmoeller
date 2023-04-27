@@ -3,7 +3,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   margin: 0 0 30px;
   background-color: #482880;
   overflow: hidden;
@@ -37,6 +36,24 @@
   outline: 0;
 }
 
+.navName {
+  display: inline-block;
+  color: #f2f2f2;
+  background-color: #482880;
+  text-align: center;
+  padding: 24px 10px;
+  text-decoration: none;
+  font-size: 15px;
+}
+
 .navLink:hover {
   background-color: #608028;
+}
+
+.menu-nav:hover {
+  cursor: pointer;
+}
+
+.menu-nav {
+  margin: 1rem;
 }

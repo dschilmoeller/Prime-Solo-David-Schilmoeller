@@ -42,23 +42,23 @@ function Profile() {
             < EditProfile />
             </div>
             <ul>
-                <li>Full Name: {profile.first_name} {profile.last_name}</li>
-                <li>Email: <a href={mailToProfile}>{profile.user_email}</a></li>
-                {profile.user_type === 1 ? <li>Admin Status: Administrator</li> : <li>Admin Status: Not Administrator</li>}
-                <li>Username: {profile.username}</li>
+                <div className='header-item'>Full Name: {profile.first_name} {profile.last_name}</div>
+                <div className='part-number'>Email: <a href={mailToProfile}>{profile.user_email}</a></div>
+                {profile.user_type === 1 ? <div className='description'>Admin Status: Administrator</div> : <div className='description'>Admin Status: Not Administrator</div>}
+                <div className='description'>Username: {profile.username}</div>
                 {profile.supplier_company_name ? (
                     <div>
 
-                        {profile.user_type === 1 ? <li>Account Type: Master Administrator</li> : null }
-                        {profile.user_type === 2 ? <li>Account Type: Supplier Administrator</li> : null }
-                        {profile.user_type === 3 ? <li>Account Type: Supplier</li> : null }
-                        {profile.user_type === 4 ? <li>Account Type: Dealer</li> : null }
+                        {profile.user_type === 1 ? <div className='description'>Account Type: Master Administrator</div> : null }
+                        {profile.user_type === 2 ? <div className='description'>Account Type: Supplier Administrator</div> : null }
+                        {profile.user_type === 3 ? <div className='description'>Account Type: Supplier</div> : null }
+                        {profile.user_type === 4 ? <div className='description'>Account Type: Dealer</div> : null }
 
-                        <li>Supplier Corporate Name: {profile.supplier_company_name}</li>
-                        <li>Supplier Address: {profile.supplier_company_address}</li>
-                        <li>Supplier Phone: {formatPhoneNumber(profile.supplier_company_phone)}</li>
-                        <li>Supplier URL: {profile.supplier_company_url}</li>
-                        <li>Supplier Email: <a href={mailToCompany}>{profile.supplier_email}</a></li>
+                        <div>Supplier Corporate Name: {profile.supplier_company_name}</div>
+                        <div>Supplier Address: {profile.supplier_company_address}</div>
+                        <div>Supplier Phone: {formatPhoneNumber(profile.supplier_company_phone)}</div>
+                        <div>Supplier URL: {profile.supplier_company_url}</div>
+                        <div>Supplier Email: <a href={mailToCompany}>{profile.supplier_email}</a></div>
                     </div>
                 ) : null}
             </ul>

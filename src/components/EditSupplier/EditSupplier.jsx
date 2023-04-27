@@ -53,7 +53,7 @@ export default function EditSupplier() {
     //     setSupplierID(e.target.value)
     // }
 
-    const submitEdits = () => {
+    const submitEdits = (event) => {
         event.preventDefault();
         // set up defaults.
 

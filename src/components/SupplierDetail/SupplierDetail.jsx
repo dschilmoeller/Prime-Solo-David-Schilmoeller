@@ -24,7 +24,7 @@ function SupplierDetail() {
 
     useEffect(() => {
         dispatch({ type: "GET_SUPPLIER_DETAILS", payload: id });
-        console.log(`supplier details:`, supDet );
+        console.log(`supplier details:`, supDet);
         dispatch({ type: "FETCH_ITEMS_BY_SUPPLIER", payload: id })
     }, []);
 
@@ -68,31 +68,34 @@ function SupplierDetail() {
                         let mailAddressSales = `mailto:${supplier.supplier_email}`;
                         let mailAddressPrimary = `mailto:${supplier.primary_contact_email}`
                         return (
-                            
-                            <div key={supplier.id} className="supplier-detail-container">
-                                <div className="button-box">
-                                < EditSupplier />
+                            <>
+                            {user === 1 ? <></> : <></>}
+                                <div key={supplier.id} className="supplier-detail-container">
+                                    <div className="button-box">
+                                        < EditSupplier />
+                                    </div>
+                                    <div className="button-box">
+                                        < DeleteSupplier />
+                                    </div>
                                 </div>
-                                <div className="button-box">
-                                < DeleteSupplier />
-                                </div>
+                                <div className="supplier-detail-container">
+                                    <div class="header-item">{supplier.supplier_name}</div>
+                                    <div>{supplier.supplier_address}</div>
+                                    <div><a href={supplier.supplier_url} target="_blank">{supplier.supplier_url}</a></div>
 
-                                <div class="header-item">{supplier.supplier_name}</div>
-                                <div>{supplier.supplier_address}</div>
-                                <div><a href={supplier.supplier_url} target="_blank">{supplier.supplier_url}</a></div>
-                                
-                                <a href={mailAddressSales}>{supplier.supplier_email}</a>
-                                <div>{formatPhoneNumber(supplier.supplier_phone)}</div>
-                                <br />
-                                <div class="header-item">Primary Contact</div>
-                                <div>{supplier.primary_contact_name}</div>
-                                <a href={mailAddressPrimary}>{supplier.primary_contact_email}</a>
-                                <div>{formatPhoneNumber(supplier.primary_contact_phone)}</div>
-                                <br />
-                                <div className="button-box">
-                                <Button startIcon={<ArrowCircleLeftIcon />} variant="contained" sx={{minWidth: 200}} onClick={headBack}>Back</Button>
+                                    <a href={mailAddressSales}>{supplier.supplier_email}</a>
+                                    <div>{formatPhoneNumber(supplier.supplier_phone)}</div>
+                                    <br />
+                                    <div class="header-item">Primary Contact</div>
+                                    <div>{supplier.primary_contact_name}</div>
+                                    <a href={mailAddressPrimary}>{supplier.primary_contact_email}</a>
+                                    <div>{formatPhoneNumber(supplier.primary_contact_phone)}</div>
+                                    <br />
+                                    <div className="button-box">
+                                        <Button startIcon={<ArrowCircleLeftIcon />} variant="contained" sx={{ minWidth: 200 }} onClick={headBack}>Back</Button>
+                                    </div>
                                 </div>
-                            </div>
+                            </>
                         )
                     })
                 }

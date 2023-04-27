@@ -66,16 +66,20 @@ function StockItemDetail() {
     if (stockDetail) {
         let supplierID = `/#/suppliers/${stockDetail.supplier_id}`
         onHandQuant()
+        scroll(0, 0)
 
         if (itemDetail) {
             return (
                 <>
+                <div className="stock-container">
                     <div>
+                    <div className="header-item">{stockDetail.part_name}</div>
+                    <div className="part-number">Part Number: {stockDetail.part_number}</div>
                         <div className="btn-container-no-margin">
                             {<EditStockItem returnedQuant={returnedQuant} />}
                             {<DeleteItemFromStock />}
                         </div>
-                        <div className="stock-container">
+                        
                           
                         {returnedQuant > stockDetail.quantity_owned ? (
                             <>
@@ -87,8 +91,8 @@ function StockItemDetail() {
 
                             <img src={stockDetail.img_url} width={150} />
 
-                            <div className="header-item">{stockDetail.part_name}</div>
-                            <div className="part-number">Part Number: {stockDetail.part_number}</div>
+                            
+                            
                             <div className="description">{stockDetail.description}</div>
                             <div>Estimated Lead Time: {stockDetail.lead_time_weeks} weeks</div>
                             <div>Estimated Mean Time To Failure: {stockDetail.mttf_months} months</div>
