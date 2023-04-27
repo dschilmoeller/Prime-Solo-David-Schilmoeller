@@ -34,7 +34,7 @@ function Profile() {
     const handleTypeChange = (e) => {
         dispatch({ type: 'EDIT_USER_TYPE', payload: { type: e.target.value, target: e.target.id } })
     }
-
+    
     return (
         <div>
             <div className='general-container'>
@@ -65,8 +65,9 @@ function Profile() {
 
             {profile.user_type === 1 ? (
                 <div>
-                   {allUsers ? ( 
-                    <ul>
+                   
+                   {allUsers.length > 0 && userTypes.length > 0 ? ( 
+                    <ul className='general-container'>
                         <h2>User Administration Area:</h2>
                         {allUsers.map(item => {
                             if (item.username != profile.username) {
