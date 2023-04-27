@@ -1,52 +1,49 @@
-.nav {
-  /* flex box layout */
+/* .nav {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0 0 30px;
   background-color: #482880;
   overflow: hidden;
-}
+} */
 
-.nav a {
-  text-decoration: none;
-}
 
-.nav-title {
+/* .nav-title {
   font-size: 24px;
   font-weight: 700;
   color: #f2f2f2;
   padding-left: 10px;
   margin: 0;
-}
+} */
 
-.navLink {
+/* .navLink {
   display: inline-block;
   color: #f2f2f2;
   background-color: #482880;
   text-align: center;
-  padding: 24px 10px;
+  padding: 1rem 10px;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 15px; */
 
   /* these last two make the logout button in
   the nav bar look like another link */
-  border: none;
+  /* border: none;
   cursor: pointer;
   outline: 0;
-}
+} */
 
-.navName {
+/* .navName {
   display: inline-block;
   color: #f2f2f2;
   background-color: #482880;
   text-align: center;
-  padding: 24px 10px;
+  padding: 5px;
   text-decoration: none;
   font-size: 15px;
-}
+} */
 
-.navLink:hover {
+.navLink:hover, .navName:hover {
   background-color: #608028;
 }
 
@@ -55,5 +52,65 @@
 }
 
 .menu-nav {
-  margin: 1rem;
+  margin: 1rem 2.5rem;
+}
+
+.nav-holder {
+  display: flex;
+}
+
+.navbar {
+  position: relative;
+}
+
+button {
+  cursor: pointer;
+  background: transparent;;
+  border: none;
+  font-size: 20px;
+}
+
+.navbar .toggle {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  cursor: pointer;
+  background: transparent;;
+  border: none;
+}
+
+.menu-nav {
+  list-style: none;
+  position: absolute;
+  background: #482880;
+  color: #f2f2f2;
+  left: 0;
+  width: 0;
+  overflow: hidden;
+  max-width: 8rem;
+  z-index: 9;
+  font-size: 18px;
+  box-shadow: 0 10px 15px -3px rgb(46 41 51 / 8%), 0 4px 6px -2px rgb(71 63 79 / 16%);
+  transform: translateX(-100px);
+  transition: transform ease-in-out 0.2s;
+  /* transition: width ease 0.2s; */
+}
+
+.menu-nav.show-menu {
+  width: 100%;
+  transform: translateX(0px);
+}
+
+li {
+  text-align: left;
+}
+
+.menu-nav li a, .menu-nav li span {
+  display: inline-block;
+  padding: 0.5rem;
+  color: #f2f2f2;
+}
+
+ul { 
+  padding: .5rem;
 }

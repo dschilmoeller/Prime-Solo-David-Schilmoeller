@@ -1,8 +1,11 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware')
+const { rejectNonAdmin } = require('../modules/rejectnonadmin')
 
-router.get("/fetchallitems", (req, res) => {
+
+router.get("/fetchallitems", rejectUnauthenticated, (req, res) => {
     const sqlText = `SELECT object.id, part_name, part_number, object_type, mttf_months, lead_time_weeks, description, img_url 
     FROM "object"
     JOIN "object_type_table" ON object_type_table.id = object.object_type_id
@@ -19,14 +22,14 @@ router.get("/fetchallitems", (req, res) => {
         });
 });
 
-router.get("/fetchmystock", (req, res) => {
+router.get("/fetchmystock", rejectUnauthenticated, (req, res) => {
     const sqlText = `SELECT * FROM "my_objects_table"
     JOIN "object" ON object.id = my_objects_table.object_id
     JOIN "object_type_table" ON object_type_table.id = object.object_type_id
     WHERE user_id = $1
     ORDER BY quantity_to_order DESC;`;
     const sqlParams = Number(req.user.id)
-    
+
     pool
         .query(sqlText, [sqlParams])
         .then((result) => {
@@ -39,7 +42,7 @@ router.get("/fetchmystock", (req, res) => {
         });
 });
 
-router.get("/fetchsuppliers", (req, res) => {
+router.get("/fetchsuppliers", rejectUnauthenticated, (req, res) => {
     // console.log(`In fetchsuppliers`);
     const sqlText = `SELECT * FROM "suppliers" ORDER BY supplier_name ASC`
     pool
@@ -54,7 +57,7 @@ router.get("/fetchsuppliers", (req, res) => {
         });
 });
 
-router.get('/fetchProfile', (req, res) => {
+router.get('/fetchProfile', rejectUnauthenticated, (req, res) => {
     const sqlText = `SELECT first_name, last_name, user_email, user_type_name FROM "user" 
     JOIN user_types_table ON user_types_table.id = "user".user_type`
     pool
@@ -69,7 +72,7 @@ router.get('/fetchProfile', (req, res) => {
         });
 })
 
-router.get('/fetchdetail/:id', (req, res) => {
+router.get('/fetchdetail/:id', rejectUnauthenticated, (req, res) => {
     const sqlText = `SELECT "object"."id", "part_name", "part_number", 
     "description", "object_type_id", "mttf_months", 
     "lead_time_weeks", "supplier_id", "supplier_name", img_url
@@ -92,7 +95,7 @@ router.get('/fetchdetail/:id', (req, res) => {
         });
 })
 
-router.get('/mystock/:id', (req, res) => {
+router.get('/mystock/:id', rejectUnauthenticated, (req, res) => {
     const sqlText = `SELECT * from my_objects_table 
                         JOIN object ON object.id = my_objects_table.object_id
                         JOIN suppliers ON suppliers.id = object.supplier_id
@@ -112,7 +115,7 @@ router.get('/mystock/:id', (req, res) => {
         });
 })
 
-router.get('/get/fetchitemtypes/', (req, res) => {
+router.get('/get/fetchitemtypes/', rejectUnauthenticated, (req, res) => {
     const sqlText = `SELECT * FROM "object_type_table"`
     pool
         .query(sqlText)
@@ -126,7 +129,7 @@ router.get('/get/fetchitemtypes/', (req, res) => {
         });
 })
 
-router.get('/supplierdetails/:id', (req, res) => {
+router.get('/supplierdetails/:id', rejectUnauthenticated, (req, res) => {
     const sqlText = `SELECT * from "suppliers" WHERE id=$1`
     const sqlParams = [req.params.id]
     pool.query(sqlText, sqlParams)
@@ -140,7 +143,7 @@ router.get('/supplierdetails/:id', (req, res) => {
 
 })
 
-router.get('/fetchitemsbysupplier/:id', (req, res) => {
+router.get('/fetchitemsbysupplier/:id', rejectUnauthenticated, (req, res) => {
     const sqlText = `SELECT * FROM "object"
     
     WHERE "supplier_id" = $1`
@@ -157,7 +160,7 @@ router.get('/fetchitemsbysupplier/:id', (req, res) => {
         })
 })
 
-router.get('/fetchallusers', (req, res) => {
+router.get('/fetchallusers', rejectNonAdmin, (req, res) => {
     if (req.user.user_type === 1) {
         let sqlText = `select "user".id, username, user_email, user_type_name FROM "user"
         JOIN user_types_table ON user_types_table.id = "user".user_type
@@ -175,7 +178,7 @@ router.get('/fetchallusers', (req, res) => {
     }
 })
 
-router.get('/fetchusertypes', (req, res) => {
+router.get('/fetchusertypes', rejectUnauthenticated, (req, res) => {
     const sqlText = `SELECT * FROM user_types_table`
     pool.query(sqlText)
         .then((result) => {
@@ -188,7 +191,7 @@ router.get('/fetchusertypes', (req, res) => {
 
 })
 
-router.put('/mystock/:id', (req, res) => {
+router.put('/mystock/:id', rejectUnauthenticated, (req, res) => {
     console.log(`req.body.quanttoorder`, req.body.newQuantityToOrder);
     const sqlText = `UPDATE "my_objects_table"
     SET "quantity_in_field" = $1, "quantity_owned" = $2, "stock_override" = $3, "stock_override_qty" = $4, "quantity_to_order" = $7
@@ -205,7 +208,7 @@ router.put('/mystock/:id', (req, res) => {
         });
 })
 
-router.put('/allitems/:id', (req, res) => {
+router.put('/allitems/:id', rejectNonAdmin, (req, res) => {
     let b = req.body
     // console.log(`in allitems`);
     // console.log(`req.body:`, req.body);
@@ -227,7 +230,7 @@ router.put('/allitems/:id', (req, res) => {
         })
 })
 
-router.put('/setsupplierdetails/:id', (req, res) => {
+router.put('/setsupplierdetails/:id', rejectNonAdmin, (req, res) => {
 
     let b = req.body
     const sqlText = `
@@ -245,7 +248,7 @@ router.put('/setsupplierdetails/:id', (req, res) => {
         })
 })
 
-router.put('/setprofiledetails', (req, res) => {
+router.put('/setprofiledetails', rejectUnauthenticated, (req, res) => {
     let b = req.body
     const sqlText = `UPDATE "user" 
     set username =$1, first_name = $2, last_name = $3, 
@@ -267,7 +270,7 @@ router.put('/setprofiledetails', (req, res) => {
 
 })
 
-router.put('/setusertype/', (req, res) => {
+router.put('/setusertype/', rejectNonAdmin, (req, res) => {
     if (req.user.user_type === 1) {
         let sqlParams = []
         if (req.body.type === 'Master Admin') {
@@ -290,7 +293,7 @@ router.put('/setusertype/', (req, res) => {
     }
 })
 
-router.post('/addtostock/', (req, res) => {
+router.post('/addtostock/', rejectUnauthenticated, (req, res) => {
     const sqlText = `INSERT INTO "my_objects_table" 
     ("user_id", "object_id", "quantity_in_field", "quantity_owned", "stock_override", "stock_override_qty") 
     VALUES ($1, $2, $3, $4, $5, $6)`
@@ -309,7 +312,7 @@ router.post('/addtostock/', (req, res) => {
 // don't forget to make this check user type for admin status
 // not just logged in or not
 // {Adding items to master list}
-router.post('/additemtomasterlist/', (req, res) => {
+router.post('/additemtomasterlist/', rejectNonAdmin, (req, res) => {
     let b = req.body
 
     let sqlParams = [b.partName, b.partNumber, b.partDescription, b.objectTypeID, b.mttfMonths, b.leadTimeWeeks, b.supplierID]
@@ -330,7 +333,7 @@ router.post('/additemtomasterlist/', (req, res) => {
 
 // check for user type for admin status
 // {adding supplier to supplier list}
-router.post('/addsupplier', (req, res) => {
+router.post('/addsupplier', rejectNonAdmin, (req, res) => {
     let b = req.body
 
     let sqlText = `
@@ -353,7 +356,7 @@ router.post('/addsupplier', (req, res) => {
 
 })
 
-router.delete('/deletefrommystock/:id', (req, res) => {
+router.delete('/deletefrommystock/:id', rejectUnauthenticated, (req, res) => {
     let sqlText = `DELETE FROM "my_objects_table" WHERE (mot_id=$1 AND user_id=$2)`
     let sqlParams = [req.params.id, req.user.id]
     pool.query(sqlText, sqlParams)
@@ -366,7 +369,7 @@ router.delete('/deletefrommystock/:id', (req, res) => {
         })
 })
 
-router.delete('/deleteitemfromallitems/:id', (req, res) => {
+router.delete('/deleteitemfromallitems/:id', rejectNonAdmin, (req, res) => {
     let sqlText = `DELETE FROM "object" WHERE (id=$1)`
     let sqlParams = [req.params.id]
     pool.query(sqlText, sqlParams)
@@ -379,7 +382,7 @@ router.delete('/deleteitemfromallitems/:id', (req, res) => {
         })
 })
 
-router.delete('/deletesupplier/:id', (req, res) => {
+router.delete('/deletesupplier/:id', rejectNonAdmin, (req, res) => {
     const sqlText = `DELETE FROM "suppliers" WHERE (id=$1)`
     const sqlParams = [req.params.id]
 

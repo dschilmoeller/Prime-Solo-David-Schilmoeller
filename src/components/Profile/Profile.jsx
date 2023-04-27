@@ -41,7 +41,7 @@ function Profile() {
             <h2>Profile Details</h2>
             < EditProfile />
             </div>
-            <ul>
+            <ul className='general-container'>
                 <div className='header-item'>Full Name: {profile.first_name} {profile.last_name}</div>
                 <div className='part-number'>Email: <a href={mailToProfile}>{profile.user_email}</a></div>
                 {profile.user_type === 1 ? <div className='description'>Admin Status: Administrator</div> : <div className='description'>Admin Status: Not Administrator</div>}

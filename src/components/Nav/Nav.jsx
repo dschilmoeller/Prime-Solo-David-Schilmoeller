@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch} from 'react-redux';
 import MenuIcon from '@mui/icons-material/Menu';
+import { green } from '@mui/material/colors'
+import { Button } from '@mui/material';
 
 function Nav() {
   const user = useSelector((store) => store.user);
@@ -17,9 +19,9 @@ function Nav() {
 
 
   return (
-    <div className="nav">
+    // <div className="nav">
 
-      <div>
+      <div className='navbar'>
         {/* If no user is logged in, show these links */}
         {!user.id && (
           // If there's no user, show login/registration links
@@ -31,51 +33,53 @@ function Nav() {
         {/* If a user is logged in, show these links */}
         {user.id && (
           <>
-            <div className={`menu-nav${hamburgerBool ? ' show-menu' : ''}`} onClick={toggleBurger}>
-              <MenuIcon />
+            <div>
+              <MenuIcon className="toggle" sx={{ color: green[500]}} onClick={toggleBurger} />
             </div>
 
-            {hamburgerBool ? (
+            {/* {hamburgerBool ? ( */}
               <>
                 {/* <Link to="/home"> */}
-                <h2 className="navName">Stock Ticker</h2>
+                <ul className={`menu-nav${hamburgerBool ? ' show-menu' : ''}`} >
+                <li><a href="/user/"><h2 className="navName">Stock Ticker</h2></a></li>
                 {/* </Link> */}
               
-                <Link className="navLink" to="/mystock/0" onClick={toggleBurger}>
+                <li><Link className="navLink" to="/mystock/0" onClick={toggleBurger}>
                   My Stock
-                </Link>
+                </Link></li>
 
-                <Link className="navLink" to="/allitems/" onClick={toggleBurger}>
+                <li><Link className="navLink" to="/allitems/" onClick={toggleBurger}>
                   All Items
-                </Link>
+                </Link></li>
 
-                <Link className="navLink" to="/suppliers/0" onClick={toggleBurger}>
+                <li><Link className="navLink" to="/suppliers/0" onClick={toggleBurger}>
                   Suppliers
-                </Link>
+                </Link></li>
 
-                <Link className="navLink" to="/profile/" onClick={toggleBurger}>
+                <li><Link className="navLink" to="/profile/" onClick={toggleBurger}>
                   Profile Details
-                </Link>
+                </Link></li>
 
-                <Link className="navLink" to="/info" onClick={toggleBurger}>
+                <li><Link className="navLink" to="/info" onClick={toggleBurger}>
                   Info Page
-                </Link>
+                </Link></li>
 
-                <Link className="navLink" to="/about" onClick={toggleBurger}>
+                <li><Link className="navLink" to="/about" onClick={toggleBurger}>
                   About
-                </Link>
-                <button className="navLink" onClick={() => { dispatch({ type: 'LOGOUT' }), setHamburgerBool(false)}}>Logout</button>
+                </Link></li>
+
+                <li><Link to="/user" onClick={toggleBurger}>
+                <Button className="navLink" color="secondary" onClick={() => { dispatch({ type: 'LOGOUT' })}}>Logout</Button>
+                </Link></li>
+                </ul>
               </>
-            ) : null}
-
-
-            {/* <LogOutButton className="navLink" /> */}
+            {/* ) : null} */}
           </>
         )}
 
 
       </div>
-    </div>
+    // </div>
   );
 }
 

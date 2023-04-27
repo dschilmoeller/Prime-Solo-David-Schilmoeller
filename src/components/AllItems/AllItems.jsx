@@ -115,7 +115,7 @@ function AllItems(props) {
                     (listView === false) ? (
                         <div className="stockContainer">
                             {dataFiltered.map((d, i) => (
-                                <div key={i} >
+                                <div key={i}>
                                     {allItemsFromStore.map((item => {
                                         if (item.part_name === d) {
                                             return (
