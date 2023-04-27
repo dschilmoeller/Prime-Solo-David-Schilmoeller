@@ -37,7 +37,7 @@ export default function EditProfile() {
     const [supplier_url, setSupplierURL] = useState(user.supplier_company_url)
     const [supplier_email, setSupplierEmail] = useState(user.supplier_email)
 
-    const submitEdits = () => {
+    const submitEdits = (event) => {
         event.preventDefault();
 
         let updatedProfile = {
@@ -51,6 +51,23 @@ export default function EditProfile() {
         setOpen(false)
     }
 
+    const handleCancel = (event) => {
+        event.preventDefault();
+        clearFields();
+        setOpen(false)
+    }
+
+    const clearFields = () => {
+        setFirstName(user.first_name)
+        setLastName(user.last_name)
+        setUserEmail(user.user_email)
+        setUserName(user.username)
+        setSupplierName(user.supplier_company_name)
+        setSupplierAddress(user.supplier_company_address)
+        setSupplierPhone(user.supplier_company_phone)
+        setSupplierURL(user.supplier_company_url)
+        setSupplierEmail(user.supplier_email)
+    }
 
     return (
         <div>
@@ -79,12 +96,9 @@ export default function EditProfile() {
                             <div>Username
                                 <input placeholder='Username' size="47" value={username} onChange={(e) => setUserName(e.target.value)} />
                             </div>
-                            {user.user_type === '1' ? (
+                            {user.user_type === 1 ? (
                                 <>
                                     {/* Render as drop  */}
-                                    <div>Account Type
-                                        <input placeholder='Account Type' size="47" value={user_type} onChange={(e) => setUserType(e.target.value)} />
-                                    </div>
                                     <div>Supplier Name
                                         <input placeholder='Supplier Name' size="47" value={supplier_name} onChange={(e) => setSupplierName(e.target.value)} />
                                     </div>
@@ -103,7 +117,11 @@ export default function EditProfile() {
                                 </>) : null}
 
                             <div className="btn-container">
-                                <Button type='submit'>Submit</Button><Button type='buttton' onClick={() => { setOpen(false) }}>Cancel</Button>
+                                <Button variant='contained' type='submit'>Submit</Button>
+                            </div>
+                            <div className="btn-container">
+                                <Button variant='contained' color="secondary" type='buttton' onClick={handleCancel}>Cancel</Button>
+                                {/* <Button variant='contained' color="secondary" type='buttton' onClick={() => handleCancel}>Cancel</Button> */}
                             </div>
                         </form> : null}
                     </Typography>
