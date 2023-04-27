@@ -5,12 +5,16 @@ import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { HashRouter as Router, Link } from "react-router-dom";
 // import { tokens } from "../../theme";
 import Tooltip from "@mui/material/Tooltip";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
-import FoodBankIcon from "@mui/icons-material/FoodBank";
+
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import AssignmentIcon from "@mui/icons-material/Assignment";
+
+
+
+import InventoryIcon from '@mui/icons-material/Inventory';
+import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 //Function to be given props when called that determine the
 //title, link, icon, and whether it is selected or not
@@ -20,7 +24,7 @@ const Item = ({ title, to, icon, selected, setSelected, collapsed }) => {
 
   return (
     //If title is empty mui doesn't render tooltip (no tooltip if side bar is open)
-    <Tooltip title={!collapsed ? title : title} placement="right-end">
+    <Tooltip title={!collapsed ? '' : title} placement="right-end">
       <MenuItem
         active={selected === title}
         // style={{ color: colors.grey[100] }}
@@ -87,7 +91,7 @@ const Sidebar = () => {
                 ml="15px"
               >
                 {/* <Typography variant="h3" color={colors.grey[100]}> */}
-                  Kitchen Keeper
+                  Stock App
                 {/* </Typography> */}
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -128,7 +132,7 @@ const Sidebar = () => {
             <Item
               title="Dashboard"
               to="/dashboard"
-              icon={<HomeOutlinedIcon fontSize="large" />}
+              icon={<InventoryIcon fontSize="large" />}
               selected={selected}
               setSelected={setSelected}
               collapsed={isCollapsed}
@@ -136,7 +140,7 @@ const Sidebar = () => {
             <Item
               title="Menu & Inventory"
               to="/menuinventory"
-              icon={<FoodBankIcon fontSize="large" />}
+              icon={<AllInclusiveIcon fontSize="large" />}
               selected={selected}
               setSelected={setSelected}
               collapsed={isCollapsed}
@@ -144,7 +148,7 @@ const Sidebar = () => {
             <Item
               title="Orders"
               to="/orders"
-              icon={<AssignmentIcon fontSize="large" />}
+              icon={<LocalShippingIcon fontSize="large" />}
               selected={selected}
               setSelected={setSelected}
               collapsed={isCollapsed}
@@ -152,7 +156,7 @@ const Sidebar = () => {
             <Item
               title="Manage Team"
               to="/team"
-              icon={<PeopleOutlinedIcon fontSize="large" />}
+              icon={<AccountCircleIcon fontSize="large" />}
               selected={selected}
               setSelected={setSelected}
               collapsed={isCollapsed}
@@ -160,7 +164,7 @@ const Sidebar = () => {
             <Item
               title="Contacts Information"
               to="/contacts"
-              icon={<PermContactCalendarIcon fontSize="large" />}
+              icon={<ExitToAppIcon fontSize="large" />}
               selected={selected}
               setSelected={setSelected}
               collapsed={isCollapsed}
