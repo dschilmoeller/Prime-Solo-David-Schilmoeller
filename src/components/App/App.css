@@ -4,6 +4,12 @@ body,
   height: 100%;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+ }
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
@@ -19,12 +25,6 @@ img {
 Container
 -------------------------------------------------------------------------------- */
 
-.container {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 /* --------------------------------------------------------------------------------
 Button
@@ -139,7 +139,8 @@ input {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  padding: 1rem;
+  /* padding: 1rem; */
+  padding-left: 4rem;
 }
 
 .itemCard {
@@ -157,7 +158,7 @@ input {
 }
 
 .listItem {
-  padding: .1rem;
+  margin: 0rem 0rem 0rem 6.5rem;
   display: inline-block;
 }
 
@@ -165,17 +166,26 @@ input {
 /* --------------------------------------------------------------------------------
 Container Treatments
 -------------------------------------------------------------------------------- */
-
-.general-container {
-  padding-left: 3rem;
+.container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+.general-container {
+  padding-left: 5.5rem;
+}
+
+.user-admin-container {
+  padding: 1rem 1rem 1rem 6.5rem;
+}
 
 .stock-container {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  padding-left: 3rem;
+  padding-left: 5.5rem;
   margin: auto;
   font-size: large;
   
