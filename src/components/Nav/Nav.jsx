@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
+import { ProSidebar, Menu, MenuItem, MenuItemStyles } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { HashRouter as Router, Link } from "react-router-dom";
@@ -9,7 +9,6 @@ import Tooltip from "@mui/material/Tooltip";
 
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
-import { Theme } from "@mui/material";
 
 import InventoryIcon from '@mui/icons-material/Inventory';
 import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
@@ -27,6 +26,7 @@ const Item = ({ title, to, icon, selected, setSelected, collapsed }) => {
     //If title is empty mui doesn't render tooltip (no tooltip if side bar is open)
     <Tooltip title={!collapsed ? '' : title} placement="right-end">
       <MenuItem
+       
         active={selected === title}
         // style={{ color: colors.grey[100] }}
         onClick={() => setSelected(title)}
@@ -43,8 +43,6 @@ const Item = ({ title, to, icon, selected, setSelected, collapsed }) => {
 
 const Sidebar = () => {
   const dispatch = useDispatch();
-  // const theme = useTheme();
-  // const colors = tokens(theme.palette.mode);
   //collapse sidebar
   const [isCollapsed, setIsCollapsed] = useState(true);
   //show current page being viewed
@@ -60,7 +58,6 @@ const Sidebar = () => {
         !ref.current.contains(event.target)
       ) {
         setIsCollapsed(true);
-        console.log(`Click outside`);
       }
     };
     document.addEventListener('mousedown', handler);
@@ -78,21 +75,21 @@ const Sidebar = () => {
       zIndex="100"
       // styling the pro-sidebar
       sx={{
-        //   "& .pro-sidebar-inner": {
-        //     // background: `${colors.primary[900]} !important`,
-        //   },
+          "& .pro-sidebar-inner": {
+            background: `#673ab7 !important`,
+          },
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
         },
-        //   "& .pro-inner-item:hover": {
-        //     // color: `${colors.orangeAccent[500]} !important`,
-        //   },
+          "& .pro-inner-item:hover": {
+            color: '#8fce00 !important'
+          },
         "& .pro-inner-item": {
           mt: "10%",
         },
-        //   "& .pro-menu-item.active": {
-        //     // color: `${colors.orangeAccent[500]} !important`,
-        //   },
+          "& .pro-menu-item.active": {
+            color: '#ff6333 !important'
+          },
       }}
     >
       <ProSidebar collapsed={isCollapsed}>
@@ -103,7 +100,7 @@ const Sidebar = () => {
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
             style={{
               // margin: "10px 0 20px 0",
-              // color: colors.grey[100],
+              // color: '#673ab7',
             }}
           >
             {!isCollapsed && (
@@ -113,17 +110,15 @@ const Sidebar = () => {
                 alignItems="center"
               // ml="15px"
               >
-                {/* <Typography variant="h3" color={colors.grey[100]}> */}
-                Stock App
-                {/* </Typography> */}
+                <Typography variant="h5" sx={{color: '#fff'}}>
+                Stock Pik'r
+                </Typography> 
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                  <MenuOutlinedIcon />
+                  <MenuOutlinedIcon sx={{color: '#fff'}} />
                 </IconButton>
               </Box>
             )}
           </MenuItem>
-
-          {/* User image, name, title*/}
 
           {/* Menu Items */}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
