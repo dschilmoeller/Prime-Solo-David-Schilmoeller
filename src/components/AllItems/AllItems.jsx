@@ -137,7 +137,7 @@ function AllItems(props) {
                         </div>
                     ) : (
                         // else if list view === true
-                        <ul>
+                        <ul className='general-container'>
                             {dataFiltered.map((d, i) => (
                                 <div key={i} >
                                     {allItemsFromStore.map((item => {

@@ -117,7 +117,7 @@ return (
             </div>
         )
             : // else if listView === true 
-            (<ul>
+            (<ul className='general-container'>
                 {dataFiltered.map((d, i) => (
                     <div key={i}>
                         {myStock.map((stockItem) => {
