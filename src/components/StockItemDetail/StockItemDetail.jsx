@@ -55,7 +55,7 @@ function StockItemDetail() {
         if (user === 4) {
             returnedQuant = Math.round((stockDetail.quantity_in_field / stockDetail.mttf_months)) * Math.floor((stockDetail.lead_time_weeks / 6))
             if (returnedQuant === 0) {
-                returnedQuant = 1
+                returnedQuant = Math.round(stockDetail.quantity_in_field / 1000)
             }
         }
         
