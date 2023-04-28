@@ -55,7 +55,7 @@ function Suppliers(props) {
 
     return (
         <div>
-            <div className='supplier-main'>
+            <div className='general-container'>
             <h1>Suppliers</h1>
             <TextField
             autoFocus
