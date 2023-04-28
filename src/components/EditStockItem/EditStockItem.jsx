@@ -71,7 +71,7 @@ export default function EditStockItem(props) {
         dispatch({ type: 'UPDATE_MY_STOCK_ITEM', payload: updatedItemData })  
       }
       if (stockOverride === true ) {
-        newQuantityToOrder = stockOverrideQty
+        newQuantityToOrder = Number(stockOverrideQty)
         let updatedItemData = { qtyInField, qtyOwned, stockOverride, stockOverrideQty, mot_id: stockDetail.mot_id, newQuantityToOrder }
         console.log(`newquanttoorder:`, newQuantityToOrder);
         dispatch({ type: 'UPDATE_MY_STOCK_ITEM', payload: updatedItemData })  

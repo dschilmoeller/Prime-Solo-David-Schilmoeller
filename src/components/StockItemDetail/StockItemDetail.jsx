@@ -69,7 +69,7 @@ function StockItemDetail() {
     }
 
     // console.log(`stockItemDetail:`, stockDetail);
-
+    
     if (stockDetail) {
         let supplierID = `/#/suppliers/${stockDetail.supplier_id}`
         onHandQuant()

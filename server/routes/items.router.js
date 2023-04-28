@@ -192,7 +192,7 @@ router.get('/fetchusertypes', rejectUnauthenticated, (req, res) => {
 })
 
 router.put('/mystock/:id', rejectUnauthenticated, (req, res) => {
-    console.log(`req.body.quanttoorder`, req.body.newQuantityToOrder);
+    // console.log(`req.body.quanttoorder`, req.body.newQuantityToOrder);
     const sqlText = `UPDATE "my_objects_table"
     SET "quantity_in_field" = $1, "quantity_owned" = $2, "stock_override" = $3, "stock_override_qty" = $4, "quantity_to_order" = $7
     WHERE (mot_id = $5 AND user_id = $6);`
