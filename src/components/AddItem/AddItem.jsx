@@ -68,9 +68,13 @@ export default function AddItemToMasterList() {
         setObjectTypeID(e.target.value)
     }
 
-    const handleCancel = () => {
-        console.log(`In handlecancle`);
-        setOpen(false)
+    const FillInForm = () => {
+        setPartName('A Series Indoor Dome Camera')
+        setPartNumber('AND-6011')
+        setPartDescription('Indoor, Dome Style 2 MP camera with 2.8mm lens')
+        setmttfMonths(72)
+        setLeadTimeWeeks(8)
+        setSupplierID(1)
     }
 
     return (
@@ -83,7 +87,7 @@ export default function AddItemToMasterList() {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                    <Typography id="modal-modal-title" variant="h6" component="h2" onClick={FillInForm}>
                         Add Item To Master List
                     </Typography>
                     <form onSubmit={handleAddItemToMaster}>

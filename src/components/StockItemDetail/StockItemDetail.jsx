@@ -53,11 +53,18 @@ function StockItemDetail() {
             returnedQuant = Math.round((stockDetail.quantity_in_field / stockDetail.mttf_months)) * Math.floor((stockDetail.lead_time_weeks / 4))
         } 
         if (user === 4) {
-            returnedQuant = Math.round((stockDetail.quantity_in_field / stockDetail.mttf_months)) * Math.floor((stockDetail.lead_time_weeks / 8))
+            returnedQuant = Math.round((stockDetail.quantity_in_field / stockDetail.mttf_months)) * Math.floor((stockDetail.lead_time_weeks / 6))
+            if (returnedQuant === 0) {
+                returnedQuant = 1
+            }
         }
         
         if (returnedQuant > stockDetail.quantity_owned) {
             quantityToOrder = returnedQuant - stockDetail.quantity_owned 
+        }
+
+        if (stockDetail.stock_override === true) {
+            quantityToOrder = stockDetail.stock_override_qty - stockDetail.quantity_owned
         }
     }
 
@@ -81,7 +88,7 @@ function StockItemDetail() {
                         </div>
                         
                           
-                        {returnedQuant > stockDetail.quantity_owned ? (
+                        {quantityToOrder > stockDetail.quantity_owned ? (
                             <>
                             <div className="order-alert">Consider ordering {quantityToOrder} units to maintain recommended stock levels</div>
                             <br></br>
