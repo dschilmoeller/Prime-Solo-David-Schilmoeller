@@ -61,6 +61,7 @@ function StockItemDetail() {
         
         if (returnedQuant > stockDetail.quantity_owned) {
             quantityToOrder = returnedQuant - stockDetail.quantity_owned 
+            // console.log(`Quant to order:`, quantityToOrder);
         }
 
         if (stockDetail.stock_override === true) {
@@ -71,7 +72,7 @@ function StockItemDetail() {
     // console.log(`stockItemDetail:`, stockDetail);
     
     if (stockDetail) {
-        let supplierID = `/#/suppliers/${stockDetail.supplier_id}`
+        let supplierID = `/#/supplierdetail/${stockDetail.supplier_id}`
         onHandQuant()
         scroll(0, 0)
 
@@ -79,16 +80,15 @@ function StockItemDetail() {
             return (
                 <>
                 <div className="stock-container">
-                    <div>
+                    <div className="buffer-box">
                     <div className="header-item">{stockDetail.part_name}</div>
-                    <div className="part-number">Part Number: {stockDetail.part_number}</div>
+                    <div className="part-number">Part Number: <b>{stockDetail.part_number}</b></div>
                         <div className="btn-container-no-margin">
                             {<EditStockItem returnedQuant={returnedQuant} />}
                             {<DeleteItemFromStock />}
                         </div>
-                        
-                          
-                        {quantityToOrder > stockDetail.quantity_owned ? (
+                                                  
+                        {quantityToOrder > 0 ? (
                             <>
                             <div className="order-alert">Consider ordering {quantityToOrder} units to maintain recommended stock levels</div>
                             <br></br>
@@ -97,24 +97,21 @@ function StockItemDetail() {
                             null}
 
                             <img src={stockDetail.img_url} width={150} />
-
-                            
-                            
                             <div className="description">{stockDetail.description}</div>
-                            <div>Estimated Lead Time: {stockDetail.lead_time_weeks} weeks</div>
-                            <div>Estimated Mean Time To Failure: {stockDetail.mttf_months} months</div>
-                            <div>Quantity in Field: {stockDetail.quantity_in_field}</div>
-                            <div>Quantity on Hand: {stockDetail.quantity_owned}</div>
-                            {user === 4 ? <div>Recommended Quantity, Dealer : {returnedQuant}</div> : <div>Recommended Quantity, Supplier: {returnedQuant}</div>}
-                            {stockDetail.stock_override ? <div>Stock Override Active</div> : null}
-                            {stockDetail.stock_override ? <div>Stock Override Quantity: {stockDetail.stock_override_qty}</div> : null}
-                            <div>Supplier: <a href={supplierID}>{stockDetail.supplier_name}</a></div>
+                            <div className="textbox"><b>Estimated Lead Time:</b> {stockDetail.lead_time_weeks} weeks</div>
+                            <div className="textbox"><b>Estimated Mean Time To Failure:</b> {stockDetail.mttf_months} months</div>
+                            <div className="textbox"><b>Quantity in Field:</b> {stockDetail.quantity_in_field}</div>
+                            <div className="textbox"><b>Quantity on Hand:</b> {stockDetail.quantity_owned}</div>
+                            {user === 4 ? <div className="textbox"><b>Recommended Quantity, Dealer:</b> {returnedQuant}</div> : <div className="textbox"><b>Recommended Quantity, Supplier:</b> {returnedQuant}</div>}
+                            {stockDetail.stock_override ? <div className="overridebox textbox"><b>Stock Override Active</b></div> : null}
+                            {stockDetail.stock_override ? <div className="textbox"><b>Stock Override Quantity:</b> {stockDetail.stock_override_qty}</div> : null}
+                            <div className="textbox">Supplier: <a href={supplierID}>{stockDetail.supplier_name}</a></div>
                         </div>
 
                         <div className="btn-container-no-margin">
                         <div className="btn-container-no-margin">
-                            <Button startIcon={<ArrowCircleLeftIcon />} variant="outlined" sx={{ m: 1 }} onClick={backToMyStock}>Back to My Stock</Button>
-                            <Button startIcon={<ArrowCircleLeftIcon />} variant="outlined" sx={{ m: 1 }} onClick={backToAll}>Back to All Items</Button>
+                            <Button startIcon={<ArrowCircleLeftIcon />} variant="outlined" color="success" sx={{ m: 1 }} onClick={backToMyStock}>Back to My Stock</Button>
+                            <Button startIcon={<ArrowCircleLeftIcon />} variant="contained" color='success' sx={{ m: 1 }} onClick={backToAll}>Back to All Items</Button>
                             </div>
                             {user === 1 ? <EditAllItems /> : null}
                             {user === 1 ? <DeleteItemFromAllItems /> : null}

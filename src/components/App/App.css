@@ -8,6 +8,7 @@ body,
   margin: 0;
   padding: 0;
   box-sizing: border-box; 
+  font-size: 1rem;
  }
 
 body {
@@ -75,7 +76,7 @@ Button
 .btn-container-no-margin {
   display: flex;
   flex-direction: column;
-  padding: .5rem;
+  padding: 0rem;
   width: 70%
 }
 
@@ -188,11 +189,23 @@ Container Treatments
   padding-left: 5.5rem;
   margin: auto;
   font-size: large;
-  
+}
+
+.buffer-box {
+margin-top: 2rem;
+}
+
+.overridebox {
+  background-color: #e01616;
+  display: inline-block;
+}
+
+.textbox {
+  margin: .2rem 0rem;
 }
 
 .header-item {
-  font-size: large;
+  font-size: larger;
   padding-bottom: .25rem;
 }
 

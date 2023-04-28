@@ -39,7 +39,7 @@ export default function DeleteItemFromStock() {
   return (
     <div>
       <div className='btn-container-no-margin'>
-      <Button endIcon={<DeleteIcon />} onClick={handleOpen} color="error" variant='outlined'>Delete Item From Stock</Button>
+      <Button endIcon={<DeleteIcon />} sx={{ m: 1 }} onClick={handleOpen} color="error" variant='outlined'>Delete Item From Stock</Button>
       </div>
       <Modal
         open={open}

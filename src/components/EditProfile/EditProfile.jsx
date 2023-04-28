@@ -71,7 +71,7 @@ export default function EditProfile() {
 
     return (
         <div>
-            <Button variant='contained' onClick={handleOpen}>Edit Profile</Button>
+            <Button variant='contained' sx={{ m: 1 }} onClick={handleOpen}>Edit Profile</Button>
             <Modal
                 open={open}
                 onClose={handleClose}

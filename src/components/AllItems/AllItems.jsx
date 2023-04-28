@@ -120,7 +120,7 @@ function AllItems(props) {
                                         if (item.part_name === d) {
                                             return (
                                                 <div key={item.id} >
-                                                    <Card className='itemCard' sx={{ minWidth: 275 }} id={item.id} onClick={() => clickItemDetail(item.id, stockItems)} >
+                                                    <Card className='itemCard' sx={{ minWidth: 350 }} id={item.id} onClick={() => clickItemDetail(item.id, stockItems)} >
                                                         <h3 id='card-div' key={item.part_number} className={item.part_number}>Name: {item.part_name}</h3>
                                                         <h3>Part# {item.part_number}</h3>
                                                         {/* <h4>Item Lead Time: {item.lead_time_weeks} weeks</h4>

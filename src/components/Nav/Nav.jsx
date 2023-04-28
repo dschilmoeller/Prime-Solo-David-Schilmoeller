@@ -82,7 +82,7 @@ const Sidebar = () => {
           backgroundColor: "transparent !important",
         },
           "& .pro-inner-item:hover": {
-            color: '#8fce00 !important'
+            color: '#2f9d34 !important'
           },
         "& .pro-inner-item": {
           mt: "10%",

@@ -25,7 +25,7 @@ const style = {
 export default function EditStockItem(props) {
   const stockDetail = useSelector(store => store.stockItemDetails[0])
   let returnedQuant = props.returnedQuant
-  console.log(`Returned quant:`, returnedQuant);
+  // console.log(`Returned quant:`, returnedQuant);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -57,7 +57,7 @@ export default function EditStockItem(props) {
       // console.log(`returned Quant:`, returnedQuant);
       // console.log(`qtyOwned:`, qtyOwned);
       let newQuantityToOrder = returnedQuant - qtyOwned
-      
+
       // console.log(`newquanttoorder:`, newQuantityToOrder);
 
       if (newQuantityToOrder > 0) {
@@ -68,13 +68,13 @@ export default function EditStockItem(props) {
         let newQuantityToOrder = 0
         let updatedItemData = { qtyInField, qtyOwned, stockOverride, stockOverrideQty, mot_id: stockDetail.mot_id, newQuantityToOrder }
         console.log(`newquanttoorder:`, newQuantityToOrder);
-        dispatch({ type: 'UPDATE_MY_STOCK_ITEM', payload: updatedItemData })  
+        dispatch({ type: 'UPDATE_MY_STOCK_ITEM', payload: updatedItemData })
       }
-      if (stockOverride === true ) {
+      if (stockOverride === true) {
         newQuantityToOrder = Number(stockOverrideQty)
         let updatedItemData = { qtyInField, qtyOwned, stockOverride, stockOverrideQty, mot_id: stockDetail.mot_id, newQuantityToOrder }
         console.log(`newquanttoorder:`, newQuantityToOrder);
-        dispatch({ type: 'UPDATE_MY_STOCK_ITEM', payload: updatedItemData })  
+        dispatch({ type: 'UPDATE_MY_STOCK_ITEM', payload: updatedItemData })
       }
     } else {
       let newQuantityToOrder = 0
@@ -104,7 +104,7 @@ export default function EditStockItem(props) {
   return (
     <div>
       <div className='btn-container-no-margin'>
-        <Button startIcon={<EditIcon />} variant='outlined' onClick={handleOpen}>Edit Stock Item</Button>
+        <Button startIcon={<EditIcon />} sx={{ m: 1 }} variant='outlined' onClick={handleOpen}>Edit Stock Item</Button>
       </div>
       <Modal
         open={open}

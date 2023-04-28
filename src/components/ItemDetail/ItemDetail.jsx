@@ -32,29 +32,31 @@ function ItemDetail() {
         scroll(0, 0)
         return (
             <>
-            <div className="stock-container">
-                <div className="header-item">Name: {itemDetail.part_name}</div>
-                <div className="part-number">Part Number: {itemDetail.part_number}</div>
-                {/* Needs to be admin only */}
-                <div className="btn-container-no-margin">
-                    {user === 1 ? <EditAllItems /> : null}
-                    {user === 1 ? <DeleteItemFromAllItems /> : null}
-                </div>
-                
-                    <img src={itemDetail.img_url} width={150} />
+                <div className="stock-container">
+                    <div className="buffer-box">
+                        <div className="header-item">Name: {itemDetail.part_name}</div>
+                        <div className="part-number">Part Number: {itemDetail.part_number}</div>
+                        {/* Needs to be admin only */}
+                        <div className="btn-container-no-margin">
+                            {user === 1 ? <EditAllItems /> : null}
+                            {user === 1 ? <DeleteItemFromAllItems /> : null}
+                        </div>
 
-                    <div className="description">{itemDetail.description}</div>
-                    <div>Estimated Lead Time: {itemDetail.lead_time_weeks} weeks</div>
-                    <div>Estimated Mean Time To Failure: {itemDetail.mttf_months} months</div>
-                    <div>Supplier: <a href={supplierID}>{itemDetail.supplier_name}</a></div>
-                
-                <div className="btn-container-no-margin">
-                    <div className="btn-container-no-margin">
-                        <AddItemToStock />
-                    </div>
-                    <div className="btn-container-no-margin">
-                        <Button variant="outlined" onClick={headBack} startIcon={<ArrowCircleLeftIcon />}>Back To All Items</Button>
-                    </div>
+                        <img src={itemDetail.img_url} width={150} />
+
+                        <div className="description">{itemDetail.description}</div>
+                        <div className="textbox">Estimated Lead Time: {itemDetail.lead_time_weeks} weeks</div>
+                        <div className="textbox">Estimated Mean Time To Failure: {itemDetail.mttf_months} months</div>
+                        <div className="textbox">Supplier: <a href={supplierID}>{itemDetail.supplier_name}</a></div>
+
+                        <div className="btn-container-no-margin">
+                            <div className="btn-container-no-margin">
+                                <AddItemToStock />
+                            </div>
+                            <div className="btn-container-no-margin">
+                                <Button sx={{ m: 1 }} variant="outlined" onClick={headBack} startIcon={<ArrowCircleLeftIcon />}>Back To All Items</Button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </>

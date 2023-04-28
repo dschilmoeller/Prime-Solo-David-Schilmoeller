@@ -56,7 +56,7 @@ export default function AddItemToStock() {
 
     return (
         <>
-            <Button startIcon={<AddCircleIcon />} variant="contained" onClick={handleOpen}>Add Item To My Stock</Button>
+            <Button startIcon={<AddCircleIcon />} sx={{ m: 1 }} variant="contained" onClick={handleOpen}>Add Item To My Stock</Button>
             <Modal
                 open={open}
                 onClose={handleClose}

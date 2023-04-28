@@ -62,7 +62,7 @@ function SupplierDetail() {
 
     return (
         <>
-            <div>
+            <div className="general-container">
                 {supDet &&
                     supDet.map((supplier) => {
                         let mailAddressSales = `mailto:${supplier.supplier_email}`;
@@ -70,15 +70,15 @@ function SupplierDetail() {
                         return (
                             <>
                             {user === 1 ? <></> : <></>}
-                                <div key={supplier.id} className="supplier-detail-container">
-                                    <div className="button-box">
+                                <div key={supplier.id} >
+                                    <div className="edit-supplier-box">
                                         < EditSupplier />
                                     </div>
                                     <div className="button-box">
                                         < DeleteSupplier />
                                     </div>
                                 </div>
-                                <div className="supplier-detail-container">
+                                <div>
                                     <div class="header-item">{supplier.supplier_name}</div>
                                     <div>{supplier.supplier_address}</div>
                                     <div><a href={supplier.supplier_url} target="_blank">{supplier.supplier_url}</a></div>
@@ -101,18 +101,16 @@ function SupplierDetail() {
                 }
             </div>
 
-            <br /><br />
+            <br/>
             <div className="supplier-detail-container">Items Carried:
+            <br/>
             <ul>
                 {itemsbysupplier &&
                     itemsbysupplier.map((item) => {
                         const id = item.id
                         return (
-                            <div key={id} id={id}
-                                onClick={() => clickItemDetail(id, stockItems)}
-                                className="supplierItem"
-                            >
-                                <li>{item.part_name} / Part #: {item.part_number}</li>
+                            <div key={id} id={id}>
+                                <li className="supplierItem" onClick={() => clickItemDetail(id, stockItems)}>{item.part_name} / Part #: {item.part_number}</li>
                             </div>
                         )
                     })}
