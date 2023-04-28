@@ -64,10 +64,10 @@ function Profile() {
             </ul>
 
             {profile.user_type === 1 ? (
-                <div>
-                   
+
+                <div className="user-admin-container">
                    {allUsers.length > 0 && userTypes.length > 0 ? ( 
-                    <ul className='general-container'>
+                    <ul>
                         <h2>User Administration Area:</h2>
                         {allUsers.map(item => {
                             if (item.username != profile.username) {

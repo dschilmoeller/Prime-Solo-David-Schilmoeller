@@ -1,86 +1,175 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import LogOutButton from '../LogOutButton/LogOutButton';
-import './Nav.css';
-import { useSelector, useDispatch} from 'react-redux';
-import MenuIcon from '@mui/icons-material/Menu';
-import { green } from '@mui/material/colors'
-import { Button } from '@mui/material';
+import { useState, useRef, useEffect } from "react";
+import { ProSidebar, Menu, MenuItem, MenuItemStyles } from "react-pro-sidebar";
+import "react-pro-sidebar/dist/css/styles.css";
+import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { HashRouter as Router, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+// import { tokens } from "../../theme";
+import Tooltip from "@mui/material/Tooltip";
 
-function Nav() {
-  const user = useSelector((store) => store.user);
-  const dispatch = useDispatch()
-  const [hamburgerBool, setHamburgerBool] = useState(false);
-
-  const toggleBurger = () => {
-    setHamburgerBool(!hamburgerBool)
-  }
+import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
 
+import InventoryIcon from '@mui/icons-material/Inventory';
+import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+
+//Function to be given props when called that determine the
+//title, link, icon, and whether it is selected or not
+const Item = ({ title, to, icon, selected, setSelected, collapsed }) => {
+  // const theme = useTheme();
+  // const colors = tokens(theme.palette.mode);
 
   return (
-    // <div className="nav">
-
-      <div className='navbar'>
-        {/* If no user is logged in, show these links */}
-        {!user.id && (
-          // If there's no user, show login/registration links
-          <Link className="navLink" to="/login">
-            Login / Register
-          </Link>
-        )}
-
-        {/* If a user is logged in, show these links */}
-        {user.id && (
-          <>
-            <div>
-              <MenuIcon className="toggle" sx={{ color: green[500]}} onClick={toggleBurger} />
-            </div>
-
-            {/* {hamburgerBool ? ( */}
-              <>
-                {/* <Link to="/home"> */}
-                <ul className={`menu-nav${hamburgerBool ? ' show-menu' : ''}`} >
-                <li><a href="/user/"><h2 className="navName">Stock Tik'r</h2></a></li>
-                {/* </Link> */}
-              
-                <li><Link className="navLink" to="/mystock/0" onClick={toggleBurger}>
-                  My Stock
-                </Link></li>
-
-                <li><Link className="navLink" to="/allitems/" onClick={toggleBurger}>
-                  All Items
-                </Link></li>
-
-                <li><Link className="navLink" to="/suppliers/0" onClick={toggleBurger}>
-                  Suppliers
-                </Link></li>
-
-                <li><Link className="navLink" to="/profile/" onClick={toggleBurger}>
-                  Profile Details
-                </Link></li>
-
-                <li><Link className="navLink" to="/info" onClick={toggleBurger}>
-                  Info Page
-                </Link></li>
-
-                <li><Link className="navLink" to="/about" onClick={toggleBurger}>
-                  About
-                </Link></li>
-
-                <li><Link to="/user" onClick={toggleBurger}>
-                <Button className="navLink" color="secondary" onClick={() => { dispatch({ type: 'LOGOUT' })}}>Logout</Button>
-                </Link></li>
-                </ul>
-              </>
-            {/* ) : null} */}
-          </>
-        )}
-
-
-      </div>
-    // </div>
+    //If title is empty mui doesn't render tooltip (no tooltip if side bar is open)
+    <Tooltip title={!collapsed ? '' : title} placement="right-end">
+      <MenuItem
+       
+        active={selected === title}
+        // style={{ color: colors.grey[100] }}
+        onClick={() => setSelected(title)}
+        icon={icon}
+      >
+        <Typography>{title}</Typography>
+        <Router>
+          <Link to={to} />
+        </Router>
+      </MenuItem>
+    </Tooltip>
   );
-}
+};
 
-export default Nav;
+const Sidebar = () => {
+  const dispatch = useDispatch();
+  //collapse sidebar
+  const [isCollapsed, setIsCollapsed] = useState(true);
+  //show current page being viewed
+  const [selected, setSelected] = useState("Dashboard");
+
+  const ref = useRef();
+  useEffect(() => {
+    const handler = (event) => {
+      
+      if (
+        (isCollapsed === false) &&
+        ref.current &&
+        !ref.current.contains(event.target)
+      ) {
+        setIsCollapsed(true);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener('mousedown', handler);
+    };
+  }, [isCollapsed]);
+
+  return (
+    <Box
+      ref={ref}
+      position="fixed"
+      height="100vh"
+      zIndex="100"
+      // styling the pro-sidebar
+      sx={{
+          "& .pro-sidebar-inner": {
+            background: `#673ab7 !important`,
+          },
+        "& .pro-icon-wrapper": {
+          backgroundColor: "transparent !important",
+        },
+          "& .pro-inner-item:hover": {
+            color: '#8fce00 !important'
+          },
+        "& .pro-inner-item": {
+          mt: "10%",
+        },
+          "& .pro-menu-item.active": {
+            color: '#ff6333 !important'
+          },
+      }}
+    >
+      <ProSidebar collapsed={isCollapsed}>
+        <Menu iconShape="square">
+          {/* Logo and Menu Icon */}
+          <MenuItem
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
+            style={{
+              // margin: "10px 0 20px 0",
+              // color: '#673ab7',
+            }}
+          >
+            {!isCollapsed && (
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              // ml="15px"
+              >
+                <Typography variant="h5" sx={{color: '#fff'}}>
+                Stock Pik'r
+                </Typography> 
+                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+                  <MenuOutlinedIcon sx={{color: '#fff'}} />
+                </IconButton>
+              </Box>
+            )}
+          </MenuItem>
+
+          {/* Menu Items */}
+          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+            <Item
+              title="My Stock"
+              to="/mystock/0"
+              icon={<InventoryIcon fontSize="large" />}
+              selected={selected}
+              setSelected={setSelected}
+              collapsed={isCollapsed}
+            />
+            <Item
+              title="All Items"
+              to="/allitems"
+              icon={<AllInclusiveIcon fontSize="large" />}
+              selected={selected}
+              setSelected={setSelected}
+              collapsed={isCollapsed}
+            />
+            <Item
+              title="Suppliers"
+              to="/suppliers/0"
+              icon={<LocalShippingIcon fontSize="large" />}
+              selected={selected}
+              setSelected={setSelected}
+              collapsed={isCollapsed}
+            />
+            <Item
+              title="My Profile"
+              to="/profile"
+              icon={<AccountCircleIcon fontSize="large" />}
+              selected={selected}
+              setSelected={setSelected}
+              collapsed={isCollapsed}
+            />
+
+            <div onClick={() => { dispatch({ type: 'LOGOUT' }) }}>
+              <Item
+                title="Logout"
+                to="/user"
+                icon={<ExitToAppIcon fontSize="large" />}
+                selected={selected}
+                setSelected={setSelected}
+                collapsed={isCollapsed}
+              />
+            </div>
+          </Box>
+        </Menu>
+      </ProSidebar>
+    </Box>
+  );
+};
+
+export default Sidebar;
