@@ -41,7 +41,7 @@ function Nav() {
               <>
                 {/* <Link to="/home"> */}
                 <ul className={`menu-nav${hamburgerBool ? ' show-menu' : ''}`} >
-                <li><a href="/user/"><h2 className="navName">Stock Ticker</h2></a></li>
+                <li><a href="/user/"><h2 className="navName">Stock Tik'r</h2></a></li>
                 {/* </Link> */}
               
                 <li><Link className="navLink" to="/mystock/0" onClick={toggleBurger}>
