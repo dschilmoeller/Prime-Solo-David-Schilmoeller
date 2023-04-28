@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
@@ -50,28 +50,49 @@ const Sidebar = () => {
   //show current page being viewed
   const [selected, setSelected] = useState("Dashboard");
 
+  const ref = useRef();
+  useEffect(() => {
+    const handler = (event) => {
+      
+      if (
+        (isCollapsed === false) &&
+        ref.current &&
+        !ref.current.contains(event.target)
+      ) {
+        setIsCollapsed(true);
+        console.log(`Click outside`);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener('mousedown', handler);
+    };
+  }, [isCollapsed]);
+
   return (
     <Box
+      ref={ref}
       position="fixed"
       height="100vh"
       zIndex="100"
       // styling the pro-sidebar
       sx={{
-      //   "& .pro-sidebar-inner": {
-      //     // background: `${colors.primary[900]} !important`,
-      //   },
+        //   "& .pro-sidebar-inner": {
+        //     // background: `${colors.primary[900]} !important`,
+        //   },
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
         },
-      //   "& .pro-inner-item:hover": {
-      //     // color: `${colors.orangeAccent[500]} !important`,
-      //   },
+        //   "& .pro-inner-item:hover": {
+        //     // color: `${colors.orangeAccent[500]} !important`,
+        //   },
         "& .pro-inner-item": {
           mt: "10%",
         },
-      //   "& .pro-menu-item.active": {
-      //     // color: `${colors.orangeAccent[500]} !important`,
-      //   },
+        //   "& .pro-menu-item.active": {
+        //     // color: `${colors.orangeAccent[500]} !important`,
+        //   },
       }}
     >
       <ProSidebar collapsed={isCollapsed}>
@@ -90,10 +111,10 @@ const Sidebar = () => {
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
-                // ml="15px"
+              // ml="15px"
               >
                 {/* <Typography variant="h3" color={colors.grey[100]}> */}
-                  Stock App
+                Stock App
                 {/* </Typography> */}
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -103,7 +124,7 @@ const Sidebar = () => {
           </MenuItem>
 
           {/* User image, name, title*/}
-          
+
           {/* Menu Items */}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
@@ -138,16 +159,16 @@ const Sidebar = () => {
               setSelected={setSelected}
               collapsed={isCollapsed}
             />
-            
-            <div onClick={() => {dispatch({type : 'LOGOUT'})}}>
-            <Item
-              title="Logout"
-              to="/user"
-              icon={<ExitToAppIcon fontSize="large" />}
-              selected={selected}
-              setSelected={setSelected}
-              collapsed={isCollapsed}
-            />
+
+            <div onClick={() => { dispatch({ type: 'LOGOUT' }) }}>
+              <Item
+                title="Logout"
+                to="/user"
+                icon={<ExitToAppIcon fontSize="large" />}
+                selected={selected}
+                setSelected={setSelected}
+                collapsed={isCollapsed}
+              />
             </div>
           </Box>
         </Menu>
