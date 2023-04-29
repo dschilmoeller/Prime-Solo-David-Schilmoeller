@@ -103,9 +103,9 @@ export default function EditStockItem(props) {
 
   return (
     <div>
-      <div className='btn-container-no-margin'>
-        <Button startIcon={<EditIcon />} sx={{ m: 1 }} variant='outlined' onClick={handleOpen}>Edit Stock Item</Button>
-      </div>
+      {/* <div className='btn-container-no-margin'> */}
+        <Button startIcon={<EditIcon />} sx={{m: 1, width: 300}} variant='contained' onClick={handleOpen}>Edit Stock Details</Button>
+      {/* </div> */}
       <Modal
         open={open}
         onClose={handleClose}

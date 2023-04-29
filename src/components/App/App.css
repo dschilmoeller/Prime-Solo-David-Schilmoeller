@@ -176,6 +176,7 @@ Container Treatments
 
 .general-container {
   padding-left: 5.5rem;
+  padding-top: 1rem;
 }
 
 .user-admin-container {
@@ -193,6 +194,15 @@ Container Treatments
 
 .buffer-box {
 margin-top: 2rem;
+display: flex;
+flex-direction: column;
+align-items: center;
+max-width: 80%;
+margin-left: 80px
+}
+
+.buffer-box td {
+  padding-right: 1rem;
 }
 
 .overridebox {
@@ -205,7 +215,8 @@ margin-top: 2rem;
 }
 
 .header-item {
-  font-size: larger;
+  font-size: x-large;
+  font-weight: bold;
   padding-bottom: .25rem;
 }
 
@@ -219,4 +230,8 @@ margin-top: 2rem;
   padding-top: .25rem;
   font-weight: bold;
 
+}
+
+.one-margin {
+  margin: .25rem;
 }

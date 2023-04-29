@@ -78,9 +78,9 @@ export default function EditAllItems() {
     if (itemDetail) {
         return (
             <>
-                <div className='btn-container-no-margin'>
-                    <Button startIcon={<EditIcon />} variant='contained' sx={{ m: 1 }} onClick={handleOpen}>Edit Item Details</Button>
-                </div>
+                {/* <div className='btn-container-no-margin'> */}
+                    <Button startIcon={<EditIcon />} variant='contained' sx={{m: 1, width: 300}} onClick={handleOpen}>Edit Item Details</Button>
+                {/* </div> */}
                 <Modal
                     open={open}
                     onClose={handleClose}
