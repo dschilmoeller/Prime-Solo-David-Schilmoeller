@@ -47,7 +47,7 @@ function ItemDetail() {
 
 
                         <div className="one-margin">
-                            <div className="description">{itemDetail.description}</div>
+                            <p className="description">{itemDetail.description}</p>
                         </div>
                         <table>
                             <tr>
