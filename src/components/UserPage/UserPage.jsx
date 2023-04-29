@@ -17,7 +17,7 @@ function UserPage() {
   }, []);
 
   return (
-    <div className="container">
+    <div className="user-btn-container">
       {/* Modal buttons - convert when time allows */}
       <Button className="user-page-btn" sx={{ minWidth: 300, margin: 1 }} variant="contained" onClick={() => { history.push('/mystock/0') }}>My Stock</Button>
       <Button className="user-page-btn" sx={{ minWidth: 300, margin: 1 }} variant="contained" onClick={() => { history.push('/allitems/') }}>All Items</Button>
