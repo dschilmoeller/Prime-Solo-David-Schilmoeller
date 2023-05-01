@@ -88,7 +88,9 @@ return (
             {/* Set up to click on a card and go to item details page. */}
         </div>
         {dataFiltered.length === 0 ? (
+            <div className='general-container'>
             <h1>No Search Results</h1>
+            </div>
         ) : (listView === false) ? (
             <div className='stockContainer'>
                 {dataFiltered.map((d, i) => (

@@ -108,7 +108,7 @@ function AllItems(props) {
                     {user === 1 ? <AddItemToMasterList /> : null}
                 </div>
             </div>
-            <div>
+            <div className='general-container'>
                 {dataFiltered.length === 0 ? (
                     <h1>No Search Results</h1>
                 ) :
