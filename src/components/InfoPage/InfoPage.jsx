@@ -9,15 +9,16 @@ import './InfoPage.css'
 function InfoPage() {
   return (
     <div className="container">
-      
+      <br></br>
       <h3>The Problem:</h3>
-      <p className='infocontainer'>Hardware deployed in the field breaks at individually random but statistically 
-      predictable intervals. Highly variable lead times complicate efforts to retain the correct amount of stock on hand.</p>
-<br />
+      <p className='infocontainer'>Hardware deployed in the field breaks at individually random but statistically
+        predictable intervals. Highly variable lead times complicate efforts to retain the correct amount of stock on hand.</p>
+      <br />
       <p>What is a small business to do?</p>
       <img src='/media/todo.jpg' width="200px"></img>
-
-      <h2>Answer: Stock Pik'r Inventory Control Application</h2>
+      <br />
+      <h2>Answer: Stock Pik'r</h2>
+      <h2>Inventory Control Application</h2>
 
 
 
