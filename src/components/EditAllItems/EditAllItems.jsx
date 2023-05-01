@@ -103,10 +103,12 @@ export default function EditAllItems() {
                                     <input placeholder='description' value={description} onChange={(e) => setDescription(e.target.value)} />
                                 </div>
                                 <div>Estimated Lead Time
-                                    <input placeholder='est lead time' value={estLeadTime} onChange={(e) => setEstLeadTime(e.target.value)} />
+                                    <input placeholder='est lead time' type='number' value={estLeadTime} onChange={(e) => setEstLeadTime(e.target.value)} />
+                                    Weeks
                                 </div>
                                 <div>Estimated MTTF
-                                    <input placeholder='est mttf' value={estMTTF} onChange={(e) => setEstMTFF(e.target.value)} selected />
+                                    <input placeholder='est mttf' type='number' value={estMTTF} onChange={(e) => setEstMTFF(e.target.value)} selected />
+                                    Months
                                 </div>
                                 <label htmlFor='suppliers'>Supplier</label>
                                 <select name='suppliers' defaultValue={supplierID} onChange={handleSupplier}>
