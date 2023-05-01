@@ -18,13 +18,11 @@ function InfoPage() {
       <p className='infocontainer'><b>Further Complication:</b> Highly variable lead times complicate efforts to retain the correct amount of stock on hand.</p>
       <br />
       <p>What is a small business to do?</p>
-      <img src='/media/todo.jpg' width="200px"></img>
+      <br />
+      <img src='/media/todo.jpg' width="250px"></img>
       <br />
       <h2>Answer: Stock Pik'r</h2>
       <h2>Inventory Control Application</h2>
-
-
-
     </div>
   );
 }

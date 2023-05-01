@@ -27,7 +27,7 @@ function AboutPage() {
           <div className='about-container'>
             <h4>https://www.linkedin.com/in/schilmoeller/</h4>
             <br />
-            <h3>dave.schilmoeller@gmail.com</h3>z
+            <h3>dave.schilmoeller@gmail.com</h3>
           </div>
           <br />
           <br />
