@@ -11,8 +11,11 @@ function InfoPage() {
     <div className="container">
       <br></br>
       <h3>The Problem:</h3>
-      <p className='infocontainer'>Hardware deployed in the field breaks at individually random but statistically
-        predictable intervals. Highly variable lead times complicate efforts to retain the correct amount of stock on hand.</p>
+      <br />
+      <p className='infocontainer'>Hardware deployed in the field breaks at <b>individually</b> random but <b>statistically</b> predictable intervals. 
+      </p>
+      <br />
+      <p className='infocontainer'><b>Further Complication:</b> Highly variable lead times complicate efforts to retain the correct amount of stock on hand.</p>
       <br />
       <p>What is a small business to do?</p>
       <img src='/media/todo.jpg' width="200px"></img>
