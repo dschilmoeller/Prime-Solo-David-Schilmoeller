@@ -8,6 +8,7 @@ body,
   margin: 0;
   padding: 0;
   box-sizing: border-box; 
+  font-size: 1rem;
  }
 
 body {
@@ -75,7 +76,7 @@ Button
 .btn-container-no-margin {
   display: flex;
   flex-direction: column;
-  padding: .5rem;
+  padding: 0rem;
   width: 70%
 }
 
@@ -175,10 +176,12 @@ Container Treatments
 
 .general-container {
   padding-left: 5.5rem;
+  padding-top: 1rem;
 }
 
 .user-admin-container {
-  padding: 1rem 1rem 1rem 6.5rem;
+  display: flex;
+  
 }
 
 .stock-container {
@@ -188,11 +191,40 @@ Container Treatments
   padding-left: 5.5rem;
   margin: auto;
   font-size: large;
-  
+}
+
+.user-btn-container {
+display: flex;
+flex-direction: column;
+align-items: center;
+padding-top: 4rem;
+}
+
+.buffer-box {
+margin-top: 2rem;
+display: flex;
+flex-direction: column;
+align-items: center;
+max-width: 80%;
+margin-left: 80px
+}
+
+.buffer-box td {
+  padding-right: 1rem;
+}
+
+.overridebox {
+  background-color: #e01616;
+  display: inline-block;
+}
+
+.textbox {
+  margin: .2rem 0rem;
 }
 
 .header-item {
-  font-size: large;
+  font-size: x-large;
+  font-weight: bold;
   padding-bottom: .25rem;
 }
 
@@ -206,4 +238,19 @@ Container Treatments
   padding-top: .25rem;
   font-weight: bold;
 
+}
+
+.one-margin {
+  margin: .25rem;
+}
+
+#my-profile-details {
+  font-size: 1.7em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-container {
+  padding-top: 4rem;
 }

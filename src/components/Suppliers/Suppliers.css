@@ -2,7 +2,7 @@
     padding: 0rem 0rem 0rem 5.5rem;
 }
 
-h1 { 
+h1 {
     padding: .5rem
 }
 
@@ -13,5 +13,8 @@ h1 {
     padding: 1rem;
     padding-left: 5.5rem;
     margin: auto;
-  }
-  
+}
+
+.itemCard p, h3, h4 {
+    padding: .1rem;
+}

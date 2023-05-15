@@ -68,7 +68,7 @@ export default function EditSupplier() {
 
     return (
         <div>
-            <Button sx={{minWidth: 200}} variant='contained' onClick={handleOpen} endIcon={<EditIcon />}>Edit Supplier</Button>
+            <Button sx={{m: 1, width: 300}} variant='contained' onClick={handleOpen} endIcon={<EditIcon />}>Edit Supplier</Button>
             <Modal
                 open={open}
                 onClose={handleClose}

@@ -71,7 +71,7 @@ export default function EditProfile() {
 
     return (
         <div>
-            <Button variant='contained' onClick={handleOpen}>Edit Profile</Button>
+            <Button variant='contained' sx={{ m: 1, width: 400 }} onClick={handleOpen}>Edit Profile</Button>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -84,7 +84,7 @@ export default function EditProfile() {
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }} component={'div'}>
                         {user ? <form onSubmit={submitEdits}>
-                            <div>User First Name
+                            <div>First Name
                                 <input placeholder='First Name' size="47" value={first_name} onChange={(e) => setFirstName(e.target.value)} />
                             </div>
                             <div>Last Name

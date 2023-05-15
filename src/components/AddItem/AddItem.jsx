@@ -68,10 +68,14 @@ export default function AddItemToMasterList() {
         setObjectTypeID(e.target.value)
     }
 
-    const handleCancel = () => {
-        console.log(`In handlecancle`);
-        setOpen(false)
-    }
+    // const FillInForm = () => {
+    //     setPartName('A Series Indoor Dome Camera')
+    //     setPartNumber('AND-6011')
+    //     setPartDescription('Indoor, Dome Style 2 MP camera with 2.8mm lens')
+    //     setmttfMonths(72)
+    //     setLeadTimeWeeks(8)
+    //     setSupplierID(1)
+    // }
 
     return (
         <div>

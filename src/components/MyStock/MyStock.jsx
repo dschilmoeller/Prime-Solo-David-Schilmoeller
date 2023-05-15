@@ -88,7 +88,9 @@ return (
             {/* Set up to click on a card and go to item details page. */}
         </div>
         {dataFiltered.length === 0 ? (
+            <div className='general-container'>
             <h1>No Search Results</h1>
+            </div>
         ) : (listView === false) ? (
             <div className='stockContainer'>
                 {dataFiltered.map((d, i) => (
@@ -97,7 +99,7 @@ return (
                             if (stockItem.part_name === d) {
                                 return (
                                     <div key={stockItem.mot_id}>
-                                        <Card className='itemCard' sx={{ minWidth: 300 }} id={stockItem.mot_id} onClick={() => clickItemDetail(stockItem.mot_id)} >
+                                        <Card className='itemCard' sx={{ minWidth: 350 }} id={stockItem.mot_id} onClick={() => clickItemDetail(stockItem.mot_id)} >
                                             <h3>Item name: {stockItem.part_name}</h3>
                                             <h3>Part# {stockItem.part_number}</h3>
                                             <h3>Deployed: {stockItem.quantity_in_field}</h3>
@@ -117,7 +119,7 @@ return (
             </div>
         )
             : // else if listView === true 
-            (<ul>
+            (<ul className='general-container'>
                 {dataFiltered.map((d, i) => (
                     <div key={i}>
                         {myStock.map((stockItem) => {

@@ -78,9 +78,9 @@ export default function EditAllItems() {
     if (itemDetail) {
         return (
             <>
-                <div className='btn-container-no-margin'>
-                    <Button startIcon={<EditIcon />} variant='contained' sx={{ m: 1 }} onClick={handleOpen}>Edit Item Details</Button>
-                </div>
+                {/* <div className='btn-container-no-margin'> */}
+                    <Button startIcon={<EditIcon />} variant='contained' sx={{m: 1, width: 300}} onClick={handleOpen}>Edit Item Details</Button>
+                {/* </div> */}
                 <Modal
                     open={open}
                     onClose={handleClose}
@@ -103,10 +103,12 @@ export default function EditAllItems() {
                                     <input placeholder='description' value={description} onChange={(e) => setDescription(e.target.value)} />
                                 </div>
                                 <div>Estimated Lead Time
-                                    <input placeholder='est lead time' value={estLeadTime} onChange={(e) => setEstLeadTime(e.target.value)} />
+                                    <input placeholder='est lead time' type='number' value={estLeadTime} onChange={(e) => setEstLeadTime(e.target.value)} />
+                                    Weeks
                                 </div>
                                 <div>Estimated MTTF
-                                    <input placeholder='est mttf' value={estMTTF} onChange={(e) => setEstMTFF(e.target.value)} selected />
+                                    <input placeholder='est mttf' type='number' value={estMTTF} onChange={(e) => setEstMTFF(e.target.value)} selected />
+                                    Months
                                 </div>
                                 <label htmlFor='suppliers'>Supplier</label>
                                 <select name='suppliers' defaultValue={supplierID} onChange={handleSupplier}>

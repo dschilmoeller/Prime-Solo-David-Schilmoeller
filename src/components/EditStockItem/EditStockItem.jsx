@@ -5,6 +5,7 @@ import Modal from '@mui/material/Modal';
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
 import EditIcon from '@mui/icons-material/Edit';
+import { useHistory } from 'react-router';
 
 // TO DO : set up 'admin mode' allowing signficantly more modifications directly from this page.
 // Currently they can only edit items they do not have in stock.
@@ -24,8 +25,10 @@ const style = {
 export default function EditStockItem(props) {
   const stockDetail = useSelector(store => store.stockItemDetails[0])
   let returnedQuant = props.returnedQuant
+  // console.log(`Returned quant:`, returnedQuant);
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [open, setOpen] = useState(false);
 
@@ -54,7 +57,7 @@ export default function EditStockItem(props) {
       // console.log(`returned Quant:`, returnedQuant);
       // console.log(`qtyOwned:`, qtyOwned);
       let newQuantityToOrder = returnedQuant - qtyOwned
-      
+
       // console.log(`newquanttoorder:`, newQuantityToOrder);
 
       if (newQuantityToOrder > 0) {
@@ -65,7 +68,13 @@ export default function EditStockItem(props) {
         let newQuantityToOrder = 0
         let updatedItemData = { qtyInField, qtyOwned, stockOverride, stockOverrideQty, mot_id: stockDetail.mot_id, newQuantityToOrder }
         console.log(`newquanttoorder:`, newQuantityToOrder);
-        dispatch({ type: 'UPDATE_MY_STOCK_ITEM', payload: updatedItemData })  
+        dispatch({ type: 'UPDATE_MY_STOCK_ITEM', payload: updatedItemData })
+      }
+      if (stockOverride === true) {
+        newQuantityToOrder = Number(stockOverrideQty)
+        let updatedItemData = { qtyInField, qtyOwned, stockOverride, stockOverrideQty, mot_id: stockDetail.mot_id, newQuantityToOrder }
+        console.log(`newquanttoorder:`, newQuantityToOrder);
+        dispatch({ type: 'UPDATE_MY_STOCK_ITEM', payload: updatedItemData })
       }
     } else {
       let newQuantityToOrder = 0
@@ -88,14 +97,15 @@ export default function EditStockItem(props) {
 
     setOpen(false)
     dispatch({ type: 'GET_STOCK_ITEM_DETAILS', payload: stockDetail.mot_id })
+    history.push(`/stockItemDetail/${stockDetail.mot_id}`)
   }
 
 
   return (
     <div>
-      <div className='btn-container-no-margin'>
-        <Button startIcon={<EditIcon />} variant='outlined' onClick={handleOpen}>Edit Stock Item</Button>
-      </div>
+      {/* <div className='btn-container-no-margin'> */}
+        <Button startIcon={<EditIcon />} sx={{m: 1, width: 300}} variant='contained' onClick={handleOpen}>Edit Stock Details</Button>
+      {/* </div> */}
       <Modal
         open={open}
         onClose={handleClose}

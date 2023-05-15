@@ -6,14 +6,15 @@
 .supplierItem { 
     color: blue;
     text-decoration: underline;
+    display: inline-block
 }
 
 .supplier-detail-container {
-    margin-left: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.button-box {
-    margin: 0.5rem 0;
-    /* margin-top: .5rem;
-    margin-bottom: .5rem; */
+.edit-supplier-box {
+    padding-bottom: .5rem
 }

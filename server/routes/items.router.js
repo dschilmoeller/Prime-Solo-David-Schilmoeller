@@ -9,7 +9,7 @@ router.get("/fetchallitems", rejectUnauthenticated, (req, res) => {
     const sqlText = `SELECT object.id, part_name, part_number, object_type, mttf_months, lead_time_weeks, description, img_url 
     FROM "object"
     JOIN "object_type_table" ON object_type_table.id = object.object_type_id
-    ORDER BY part_name ASC;`;
+    ORDER BY part_number ASC;`;
     pool
         .query(sqlText)
         .then((result) => {
@@ -192,7 +192,7 @@ router.get('/fetchusertypes', rejectUnauthenticated, (req, res) => {
 })
 
 router.put('/mystock/:id', rejectUnauthenticated, (req, res) => {
-    console.log(`req.body.quanttoorder`, req.body.newQuantityToOrder);
+    // console.log(`req.body.quanttoorder`, req.body.newQuantityToOrder);
     const sqlText = `UPDATE "my_objects_table"
     SET "quantity_in_field" = $1, "quantity_owned" = $2, "stock_override" = $3, "stock_override_qty" = $4, "quantity_to_order" = $7
     WHERE (mot_id = $5 AND user_id = $6);`

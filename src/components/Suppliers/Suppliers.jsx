@@ -16,6 +16,7 @@ function Suppliers(props) {
     const dispatch = useDispatch();
 
     const suppliers = useSelector((store) => store.suppliers);
+    const user = useSelector(store => store.user)
 
     useEffect(() => {
         dispatch({ type: "FETCH_SUPPLIERS" })
@@ -56,51 +57,54 @@ function Suppliers(props) {
     return (
         <div>
             <div className='general-container'>
-            <h1>Suppliers</h1>
-            <TextField
-            autoFocus
-                id="search-bar"
-                className="text"
-                onChange={(e) => {
-                    setSearchParam(e.target.value);
-                }}
-                value={searchParam}
-                label="Enter Search Term"
-                variant="outlined"
-                placeholder="Search..."
-                size="small"
-            />
+                <h1>Suppliers</h1>
+                <TextField
+                    autoFocus
+                    id="search-bar"
+                    className="text"
+                    onChange={(e) => {
+                        setSearchParam(e.target.value);
+                    }}
+                    value={searchParam}
+                    label="Enter Search Term"
+                    variant="outlined"
+                    placeholder="Search..."
+                    size="small"
+                />
 
-            <AddSupplier />
+                {user.user_type === 1 ? <AddSupplier /> : null}
+
             </div>
             {/* Set up to click on a card and go to supplier details page. */}
             <div className='supplier-container' >
                 {dataFiltered.map((d, i) => (
-                    <div  key={i} >
-                {suppliers.length &&
-                    suppliers.map((supplier) => {
-                        if (supplier.supplier_name === d) {
-                        let supplierURL = supplier.supplier_url;
-                        let mailAddress = `mailto:${supplier.primary_contact_email}`;
-                        let supplierID = supplier.id;
+                    <div key={i} >
+                        {suppliers.length &&
+                            suppliers.map((supplier) => {
+                                if (supplier.supplier_name === d) {
+                                    let supplierURL = supplier.supplier_url;
+                                    let mailAddress = `mailto:${supplier.primary_contact_email}`;
+                                    let supplierID = supplier.id;
 
-                        return (
-                            <div key={supplier.id}>
-                                <Card className='itemCard' sx={{ minWidth: 400 }} onClick={() => clickSupplierDetail(supplier.id)}>
-                                    <h3>{supplier.supplier_name}</h3>
-                                    <h3>{formatPhoneNumber(supplier.supplier_phone)}</h3>
-                                    <h4>{supplier.supplier_address}</h4>
-                                    <h4>{supplier.supplier_email}</h4>
-                                    <a href={supplierURL} target="_blank">{supplier.supplier_url}</a>
-                                    <p>Primary Contact: {supplier.primary_contact_name} | {formatPhoneNumber(supplier.primary_contact_phone)} |
-                                        <a id={supplierID}> </a><a href={mailAddress}>{supplier.primary_contact_email}</a></p>
-                                </Card>
-                            </div>
-                        )}
-                    })}        
+                                    return (
+                                        <div key={supplier.id}>
+                                            <Card className='itemCard' sx={{ minWidth: 400 }} onClick={() => clickSupplierDetail(supplier.id)}>
+                                                <h3>{supplier.supplier_name}</h3>
+                                                <h3>{formatPhoneNumber(supplier.supplier_phone)}</h3>
+                                                <h4>{supplier.supplier_address}</h4>
+                                                <h4>{supplier.supplier_email}</h4>
+                                                <a href={supplierURL} target="_blank">{supplier.supplier_url}</a>
+                                                <p>Primary Contact: {supplier.primary_contact_name} 
+                                                <p>{formatPhoneNumber(supplier.primary_contact_phone)} |
+                                                    <a id={supplierID}> </a><a href={mailAddress}>{supplier.primary_contact_email}</a></p></p>
+                                            </Card>
+                                        </div>
+                                    )
+                                }
+                            })}
                     </div>
                 ))}
-                
+
             </div>
         </div>
     );

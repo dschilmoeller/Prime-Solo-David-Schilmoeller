@@ -36,9 +36,9 @@ export default function DeleteItemFromAllItems() {
 
   return (
     <>
-    <div className='btn-container-no-margin'>
-      <Button endIcon={<DeleteIcon />} variant="contained" color="secondary" sx={{m: 1}} className='admin-btn' onClick={handleOpen}>Delete Item From All Items</Button>
-      </div>
+    {/* <div className='btn-container-no-margin'> */}
+      <Button endIcon={<DeleteIcon />} variant="contained" color="secondary" sx={{m: 1, width: 300}} className='admin-btn' onClick={handleOpen}>Delete Item From All Items</Button>
+      {/* </div> */}
       <Modal
         open={open}
         onClose={handleClose}

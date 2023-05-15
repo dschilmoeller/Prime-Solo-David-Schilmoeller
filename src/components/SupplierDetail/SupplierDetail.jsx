@@ -16,7 +16,7 @@ function SupplierDetail() {
     const itemsbysupplier = useSelector(store => store.itemsbysupplier)
     const stockItems = useSelector((store => store.myStock))
     const { id } = useParams()
-    const user = useSelector(store => store.user.id)
+    const user = useSelector(store => store.user)
 
     const headBack = () => {
         history.push('/suppliers/0')
@@ -27,11 +27,6 @@ function SupplierDetail() {
         console.log(`supplier details:`, supDet);
         dispatch({ type: "FETCH_ITEMS_BY_SUPPLIER", payload: id })
     }, []);
-
-
-    const clickDeleteSupplier = () => {
-        console.log(`In clickdeletesupplier`);
-    }
 
     // courtesy of Stack Overflow:
     // https://stackoverflow.com/questions/8358084/regular-expression-to-reformat-a-us-phone-number-in-javascript
@@ -62,23 +57,16 @@ function SupplierDetail() {
 
     return (
         <>
-            <div>
-                {supDet &&
+            <div className="stock-container">
+                {supDet && user && stockItems &&
                     supDet.map((supplier) => {
                         let mailAddressSales = `mailto:${supplier.supplier_email}`;
                         let mailAddressPrimary = `mailto:${supplier.primary_contact_email}`
                         return (
                             <>
-                            {user === 1 ? <></> : <></>}
-                                <div key={supplier.id} className="supplier-detail-container">
-                                    <div className="button-box">
-                                        < EditSupplier />
-                                    </div>
-                                    <div className="button-box">
-                                        < DeleteSupplier />
-                                    </div>
-                                </div>
-                                <div className="supplier-detail-container">
+                                <div className="buffer-box">
+
+
                                     <div class="header-item">{supplier.supplier_name}</div>
                                     <div>{supplier.supplier_address}</div>
                                     <div><a href={supplier.supplier_url} target="_blank">{supplier.supplier_url}</a></div>
@@ -92,31 +80,44 @@ function SupplierDetail() {
                                     <div>{formatPhoneNumber(supplier.primary_contact_phone)}</div>
                                     <br />
                                     <div className="button-box">
-                                        <Button startIcon={<ArrowCircleLeftIcon />} variant="contained" sx={{ minWidth: 200 }} onClick={headBack}>Back</Button>
+                                        {user.user_type === 1 ? (<>
+                                            <div key={supplier.id} >
+                                                {/* <div className="edit-supplier-box"> */}
+                                                < EditSupplier />
+                                                {/* </div> */}
+                                                {/* <div className="button-box"> */}
+                                                < DeleteSupplier />
+                                                {/* </div> */}
+                                            </div>
+                                        </>) : <></>}
+                                        <Button startIcon={<ArrowCircleLeftIcon />} variant="contained" sx={{ m: 1, width: 300 }} onClick={headBack}>Back</Button>
+                                    </div>
+                                    <div>
+                                        <br />
+                                        <div>Items Carried:</div>
+                                        {itemsbysupplier &&
+                                            itemsbysupplier.map((item) => {
+                                                const id = item.id
+                                                return (
+                                                    <div key={id} id={id}>
+                                                        <div className="supplierItem" onClick={() => clickItemDetail(id, stockItems)}>{item.part_name} / Part #: {item.part_number}</div>
+                                                    </div>
+                                                )
+                                            })}
+                                        {/* </div> */}
                                     </div>
                                 </div>
+
                             </>
                         )
                     })
                 }
-            </div>
 
-            <br /><br />
-            <div className="supplier-detail-container">Items Carried:
-            <ul>
-                {itemsbysupplier &&
-                    itemsbysupplier.map((item) => {
-                        const id = item.id
-                        return (
-                            <div key={id} id={id}
-                                onClick={() => clickItemDetail(id, stockItems)}
-                                className="supplierItem"
-                            >
-                                <li>{item.part_name} / Part #: {item.part_number}</li>
-                            </div>
-                        )
-                    })}
-            </ul>
+
+                <br />
+                {/* <div className="supplier-detail-container"> */}
+
+
             </div>
         </>
     )
