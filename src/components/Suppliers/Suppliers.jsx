@@ -74,7 +74,7 @@ function Suppliers(props) {
                     size="small"
                 />
 
-                {user.user_type === 1 ? <AddSupplier /> : null}
+                {user.user_type === 1 ? <AddSupplierTypescript /> : null}
 
             </div>
             {/* Set up to click on a card and go to supplier details page. */}

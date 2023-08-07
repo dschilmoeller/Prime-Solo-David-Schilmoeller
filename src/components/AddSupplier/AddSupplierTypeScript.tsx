@@ -3,9 +3,10 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { Dialog, DialogContent, DialogTitle, Input } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useState} from 'react';
-import { useHistory, useParams } from 'react-router-dom';}
+// import { useHistory, useParams } from 'react-router-dom';}
 
 interface SupplierDetails {
     supplier_name: string;
@@ -18,22 +19,22 @@ interface SupplierDetails {
     primary_contact_email: string;
 }
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '75%',
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
+// const style = {
+//     position: 'absolute',
+//     top: '50%',
+//     left: '50%',
+//     transform: 'translate(-50%, -50%)',
+//     width: '75%',
+//     bgcolor: 'background.paper',
+//     border: '2px solid #000',
+//     boxShadow: 24,
+//     p: 4,
+// };
 
 export default function AddSupplierTypescript() {
     const dispatch = useDispatch();
-    const history = useHistory();
-    const { id } = useParams();
+    // const history = useHistory();
+    // const { id } = useParams();
 
     // specify type of state here
     const [open, setOpen] = useState<boolean>(false);
@@ -77,20 +78,25 @@ export default function AddSupplierTypescript() {
             <Button variant="contained" sx={{ m: 1 }} onClick={handleOpen}>
                 Add Supplier
             </Button>
-            <Modal
+            <Dialog
                 open={open}
                 onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                <Box >
+                {/* sx={style} */}
+                    <DialogTitle><Typography id="modal-modal-title" variant="h6" component="h2">
                         Add Supplier
-                    </Typography>
+                    </Typography></DialogTitle>
+                    <DialogContent>Test Writing
                     <form onSubmit={handleAddSupplier}>
+                    <div>
+                            Supplier Address
+                            <input placeholder='Supplier Address' value={supplier_address} onChange={(e) => setSupplierAddress(e.target.value)} />
+                        </div>
                     </form>
+                    </DialogContent>
                 </Box>
-            </Modal>
+            </Dialog>
         </div>
     );
 }
