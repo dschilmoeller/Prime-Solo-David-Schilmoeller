@@ -40,7 +40,8 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "typescript": "^5.1.6"
   },
   "browserslist": [
     ">0.2%",

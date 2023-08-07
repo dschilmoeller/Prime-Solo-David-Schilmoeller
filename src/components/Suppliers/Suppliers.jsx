@@ -10,6 +10,8 @@ import { Card, TextField } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import AddSupplier from '../AddSupplier/AddSupplier';
 import './Suppliers.css'
+// Typescript test.
+import AddSupplierTypescript from '../AddSupplier/AddSupplierTypeScript';
 
 function Suppliers(props) {
     const history = useHistory();
